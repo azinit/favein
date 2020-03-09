@@ -21,7 +21,7 @@ class WebSecurityConfig(
         http
                 .authorizeRequests()
                     .antMatchers(
-                            "/", "/signup", "/static/app/*"
+                            "/", "/signup", "/app/**"
 //                            "/welcome", "/index", ,
 //                            "/static/**/*", "/img/**", "/js/**", "/css/**"
                     ).permitAll()
@@ -29,6 +29,7 @@ class WebSecurityConfig(
                 .and()
                     .formLogin()
                     .loginPage("/login")
+                    .defaultSuccessUrl("/admin")
                     .permitAll()
                 .and()
                     .logout()
