@@ -2,17 +2,21 @@ body, html, .app {
     height: 100%;
 }
 
+.app {
+    display: flex;
+    flex-direction: column;
+}
+
 header {
-    height: 56px;
-    min-height: 56px;
+    flex-grow: 1;
 }
 
 main {
     /* FIXME: */
-    height: calc(100% - 56px - 72px);
+    /*height: calc(100% - 56px - 72px);*/
+    flex-grow: 999;
 }
 
 footer {
-    height: 72px;
-    min-width: 72px;
+    flex-grow: 1;
 }

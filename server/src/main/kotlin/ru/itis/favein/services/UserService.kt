@@ -21,6 +21,7 @@ class UserService (
 ) : UserDetailsService {
     @Throws(UsernameNotFoundException::class)
     override fun loadUserByUsername(username: String): UserDetails {
+        // FIXME: returns null...
         return userRepository.findByUsername(username)!!
     }
     // TODO: return response { success: { boolean } , error: { String } }

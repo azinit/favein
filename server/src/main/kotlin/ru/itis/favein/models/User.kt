@@ -34,4 +34,5 @@ data class User(
 
     override fun getPassword() = password
     fun isAdmin(): Boolean = roles.contains(Role.ADMIN)
+    fun getStatus(): String = roles.joinToString()
 }

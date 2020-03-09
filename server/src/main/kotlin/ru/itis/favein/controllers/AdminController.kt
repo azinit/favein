@@ -6,16 +6,20 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import ru.itis.favein.repository.LabelRepository
+import ru.itis.favein.repository.UserRepository
 
 @Controller
 @RequestMapping("/admin")
 class AdminController(
         @Autowired
-        private val repository: LabelRepository
+        private val labelRepo: LabelRepository,
+        @Autowired
+        private val userRepo: UserRepository
 ) {
     @GetMapping
     fun index(model: Model): String {
-        model.addAttribute("labels", repository.findAll())
+        model.addAttribute("labels", labelRepo.findAll())
+        model.addAttribute("users", userRepo.findAll())
         return "admin/index"
     }
 }
