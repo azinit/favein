@@ -46,8 +46,8 @@
             </#list>
         </div>
     </section>
-    <section class="jumbotron bg-white text-center shadow">
-        <h2>Dashboards</h2>
+    <section class="jumbotron bg-white shadow">
+        <h2 class="text-center">Dashboards</h2>
         <div class="dashboard-list mt-4 card-deck">
             <#list boards as board>
                 <div class="card bg-dark text-white">
@@ -63,8 +63,8 @@
             </#list>
         </div>
     </section>
-    <section class="jumbotron bg-white text-center shadow">
-        <h2>Lists</h2>
+    <section class="jumbotron bg-white shadow">
+        <h2 class="text-center">Lists</h2>
         <div class="lists-list mt-4 card-deck">
             <#list lists as list>
                 <div class="card">
@@ -75,16 +75,27 @@
                         <p class="card-text"><small class="text-muted">Author: ${list.getAuthor()}</small></p>
                     </div>
                 </div>
-<#--                <div class="card mb-3">-->
-<#--                    <img src="${list.background}" class="card-img-top" alt="...">-->
-<#--                    <div class="card-body">-->
-<#--                        <h5 class="card-title">${board.name}</h5>-->
-<#--                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
-<#--                        <p class="card-text"><small class="text-muted">Author: ${board.author.username}</small></p>-->
-<#--                    </div>-->
-<#--                </div>-->
             <#else>
                 <span>В сервисе пока нет ни одного list'а</span>
+            </#list>
+        </div>
+    </section>
+    <section class="jumbotron bg-white shadow">
+        <h2 class="text-center">Cards</h2>
+        <div class="cards-list mt-4 card-deck">
+            <#list cards as card>
+                <div class="card bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header">${card.getDashboard()}/${card.list}</div>
+                    <div class="card-body">
+                        <h5 class="card-title">${card.name}</h5>
+                        <p class="card-text">${card.getTLDR()}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">${card.getAuthor()}&nbsp;&lt;${card.getAuthor().email}&gt;</small>
+                    </div>
+                </div>
+            <#else>
+                <span>В сервисе пока нет ни одной карточки</span>
             </#list>
         </div>
     </section>
