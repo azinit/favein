@@ -29,7 +29,25 @@
                 ${label.name}
             </span>
             <#else>
-                <span>У вас пока не настроены свои метки</span>
+                <span>В сервисе пока никто не настраивал свои метки</span>
+            </#list>
+        </div>
+    </section>
+    <section class="jumbotron bg-white text-center shadow">
+        <h2>Dashboards</h2>
+        <div class="dashboard-list mt-4 card-deck">
+            <#list boards as board>
+                <div class="card mb-3">
+                    <img src="${board.background}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">${board.name}</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Author: ${board.author.username}</small></p>
+                    </div>
+                </div>
+            </span>
+            <#else>
+                <span>В сервисе пока нет ни одного dashboard'а</span>
             </#list>
         </div>
     </section>

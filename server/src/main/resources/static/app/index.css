@@ -12,8 +12,6 @@ header {
 }
 
 main {
-    /* FIXME: */
-    /*height: calc(100% - 56px - 72px);*/
     flex-grow: 999;
 }
 
