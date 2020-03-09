@@ -6,6 +6,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import ru.itis.favein.repository.*
+import ru.itis.favein.services.CardService
 
 @Controller
 @RequestMapping("/admin")
@@ -19,7 +20,9 @@ class AdminController(
         @Autowired
         private val listRepo: ListRepository,
         @Autowired
-        private val cardRepo: CardRepository
+        private val cardRepo: CardRepository,
+        @Autowired
+        private val cardService: CardService
 ) {
     @GetMapping
     fun index(model: Model): String {
@@ -28,6 +31,7 @@ class AdminController(
         model.addAttribute("boards", dashboardRepo.findAll())
         model.addAttribute("lists", listRepo.findAll())
         model.addAttribute("cards", cardRepo.findAll())
+//        model.addAttribute("card_labels", cardService.getLabels()
         return "admin/index"
     }
 }

@@ -80,7 +80,7 @@
             </#list>
         </div>
     </section>
-    <section class="jumbotron bg-white shadow">
+    <section class="jumbotron bg-white shadow d-flex align-items-center flex-column">
         <h2 class="text-center">Cards</h2>
         <div class="cards-list mt-4 card-deck">
             <#list cards as card>

@@ -1,0 +1,10 @@
+package ru.itis.favein.repository
+
+import org.springframework.data.repository.CrudRepository
+import ru.itis.favein.models.Card
+import ru.itis.favein.models.CardLabel
+import ru.itis.favein.models.Label
+
+interface CardLabelRepository: CrudRepository<CardLabel, Long> {
+    fun findByCard(card: Card): List<CardLabel>
+}
