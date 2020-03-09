@@ -22,7 +22,7 @@ class AdminController(
         @Autowired
         private val cardRepo: CardRepository,
         @Autowired
-        private val cardService: CardService
+        private val cardLabelRepo: CardLabelRepository
 ) {
     @GetMapping
     fun index(model: Model): String {
@@ -31,7 +31,7 @@ class AdminController(
         model.addAttribute("boards", dashboardRepo.findAll())
         model.addAttribute("lists", listRepo.findAll())
         model.addAttribute("cards", cardRepo.findAll())
-//        model.addAttribute("card_labels", cardService.getLabels()
+        model.addAttribute("cards_labels", cardLabelRepo.findAll())
         return "admin/index"
     }
 }

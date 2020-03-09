@@ -10,7 +10,6 @@ data class Label(
     val name: String,
     val color: String
 ) {
-    fun getLabeledColor(): String {
-        return "color: ${this.color}"
-    }
+    fun getLabeledColor(): String = "color: ${this.color}"
+    override fun toString(): String = name
 }
