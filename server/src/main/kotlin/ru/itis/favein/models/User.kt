@@ -33,6 +33,7 @@ data class User(
     override fun getUsername() = username
 
     override fun getPassword() = password
+    override fun toString(): String = username
     fun isAdmin(): Boolean = roles.contains(Role.ADMIN)
     fun getStatus(): String = roles.joinToString()
 }

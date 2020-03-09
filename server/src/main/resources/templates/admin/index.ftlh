@@ -1,7 +1,20 @@
 <#import '../includes/app.ftlh' as app />
 <#import '../includes/controls.ftlh' as controls>
 
-<@app.page>
+<#assign styles>
+    <style>
+        .card-img-overlay {
+            background-color: rgba(0, 0, 0, .4);
+        }
+        .card-img {
+            background-size: cover;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</#assign>
+
+<@app.page page_styles=styles>
     <section class="jumbotron text-center">
         <h1>Admin panel</h1>
     </section>
@@ -37,17 +50,41 @@
         <h2>Dashboards</h2>
         <div class="dashboard-list mt-4 card-deck">
             <#list boards as board>
-                <div class="card mb-3">
-                    <img src="${board.background}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">${board.name}</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Author: ${board.author.username}</small></p>
+                <div class="card bg-dark text-white">
+                    <img src="${board.background}" class="card-img" alt="...">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">${board}</h5>
+                        <p class="card-text">${board.description}</p>
+                        <p class="card-text">Author: ${board.author}</p>
                     </div>
                 </div>
-            </span>
             <#else>
                 <span>В сервисе пока нет ни одного dashboard'а</span>
+            </#list>
+        </div>
+    </section>
+    <section class="jumbotron bg-white text-center shadow">
+        <h2>Lists</h2>
+        <div class="lists-list mt-4 card-deck">
+            <#list lists as list>
+                <div class="card">
+                    <img src="${list.dashboard.background}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">${list.dashboard}/${list}</h5>
+                        <p class="card-text">${list.description}</p>
+                        <p class="card-text"><small class="text-muted">Author: ${list.getAuthor()}</small></p>
+                    </div>
+                </div>
+<#--                <div class="card mb-3">-->
+<#--                    <img src="${list.background}" class="card-img-top" alt="...">-->
+<#--                    <div class="card-body">-->
+<#--                        <h5 class="card-title">${board.name}</h5>-->
+<#--                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<#--                        <p class="card-text"><small class="text-muted">Author: ${board.author.username}</small></p>-->
+<#--                    </div>-->
+<#--                </div>-->
+            <#else>
+                <span>В сервисе пока нет ни одного list'а</span>
             </#list>
         </div>
     </section>

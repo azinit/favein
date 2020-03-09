@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import ru.itis.favein.repository.DashboardRepository
 import ru.itis.favein.repository.LabelRepository
+import ru.itis.favein.repository.ListRepository
 import ru.itis.favein.repository.UserRepository
 
 @Controller
@@ -17,13 +18,16 @@ class AdminController(
         @Autowired
         private val userRepo: UserRepository,
         @Autowired
-        private val dashboardRepo: DashboardRepository
+        private val dashboardRepo: DashboardRepository,
+        @Autowired
+        private val listRepo: ListRepository
 ) {
     @GetMapping
     fun index(model: Model): String {
         model.addAttribute("labels", labelRepo.findAll())
         model.addAttribute("users", userRepo.findAll())
         model.addAttribute("boards", dashboardRepo.findAll())
+        model.addAttribute("lists", listRepo.findAll())
         return "admin/index"
     }
 }
