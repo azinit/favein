@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 class HomeController {
     @GetMapping
     fun index(model: Model): String {
-        model.addAttribute("user", "Martis");
         return "home/index"
     }
 }
