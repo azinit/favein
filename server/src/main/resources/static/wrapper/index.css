@@ -1,0 +1,18 @@
+body, html, .wrapper {
+    height: 100%;
+}
+
+header {
+    height: 56px;
+    min-height: 56px;
+}
+
+main {
+    /* FIXME: */
+    height: calc(100% - 56px - 72px);
+}
+
+footer {
+    height: 72px;
+    min-width: 72px;
+}
