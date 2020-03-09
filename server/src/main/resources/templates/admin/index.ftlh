@@ -53,7 +53,7 @@
                     <div class="card-img-overlay">
                         <h5 class="card-title">${board}</h5>
                         <p class="card-text">${board.description}</p>
-                        <p class="card-text">Author: ${board.author}</p>
+                        <p class="card-text">${board.author}&nbsp;&lt;${board.author.email}&gt;</p>
                     </div>
                 </div>
             <#else>
@@ -70,7 +70,7 @@
                     <div class="card-body">
                         <h5 class="card-title">${list.dashboard}/${list}</h5>
                         <p class="card-text">${list.description}</p>
-                        <p class="card-text"><small class="text-muted">Author: ${list.getAuthor()}</small></p>
+                        <p class="card-text"><small class="text-muted">${list.getAuthor()}&nbsp;&lt;${list.getAuthor().email}&gt;</small></p>
                     </div>
                 </div>
             <#else>
