@@ -18,21 +18,23 @@ import java.util.stream.Collectors
 class UserService (
     @Autowired
     private val userRepository: UserRepository
-) {
-//    @Throws(UsernameNotFoundException::class)
-//    override fun loadUserByUsername(username: String): UserDetails {
-//        return userRepository.findByUsername(username)
-//    }
+) : UserDetailsService {
+    @Throws(UsernameNotFoundException::class)
+    override fun loadUserByUsername(username: String): UserDetails {
+        return userRepository.findByUsername(username)!!
+    }
     // TODO: return response { success: { boolean } , error: { String } }
     fun addUser(user: User): Boolean {
         val userFromDb: User? = userRepository.findByUsername(user.username)
         // already exists
         if (userFromDb != null) {
+            println("[${user.username}] is already registered!")
             return false
         }
         user.active = true
         user.roles = setOf(Role.USER)
         userRepository.save(user)
+        println("[${user.username}] is successfully registered!")
         return true
     }
 

@@ -1,4 +1,3 @@
-<#include 'security.ftlh'>
 <#macro page page_scripts="" page_styles="" caption="FaveIn">
     <!DOCTYPE html>
     <html lang="en">
