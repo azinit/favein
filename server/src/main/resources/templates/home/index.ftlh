@@ -1,8 +1,8 @@
-<#import '../includes/wrapper.ftlh' as wrapper>
+<#import '../includes/app.ftlh' as app>
 
-<@wrapper.page>
+<@app.page>
     <section class="jumbotron">
         <h1>It's my home page!</h1>
         <p>Hello, ${user}</p>
     </section>
-</@wrapper.page>
+</@app.page>
