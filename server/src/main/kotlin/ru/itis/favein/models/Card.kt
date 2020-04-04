@@ -19,7 +19,11 @@ data class Card(
         @JoinColumn(name = "list_id")
         val list: List,
         @ManyToMany
-        val labels: Set<Label>
+        val labels: Set<Label>,
+        @ManyToMany
+        val rates: Set<Rate>,
+        @ManyToMany
+        val comments: Set<Comment>
 ) {
     override fun toString(): String = name
     fun getAuthor(): User = list.getAuthor()

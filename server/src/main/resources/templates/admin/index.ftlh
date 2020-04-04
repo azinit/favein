@@ -6,6 +6,7 @@
         .card-img-overlay {
             background-color: rgba(0, 0, 0, .4);
         }
+
         .card-img {
             background-size: cover;
             height: 100%;
@@ -23,11 +24,11 @@
         <div class="users-list card-deck d-flex justify-content-center mt-4">
             <#list users as user>
                 <@controls.quote
-                    mt=0
-                    mb=5
-                    header=user.username
-                    body=user.email
-                    footer=user.getStatus()
+                mt=0
+                mb=5
+                header=user.username
+                body=user.email
+                footer=user.getStatus()
                 />
             <#else>
                 <div>В сервисе пока нет пользователей</div>
@@ -70,7 +71,8 @@
                     <div class="card-body">
                         <h5 class="card-title">${list.dashboard}/${list}</h5>
                         <p class="card-text">${list.description}</p>
-                        <p class="card-text"><small class="text-muted">${list.getAuthor()}&nbsp;&lt;${list.getAuthor().email}&gt;</small></p>
+                        <p class="card-text"><small class="text-muted">${list.getAuthor()}
+                                &nbsp;&lt;${list.getAuthor().email}&gt;</small></p>
                     </div>
                 </div>
             <#else>
@@ -87,8 +89,25 @@
                     <div class="card-body">
                         <h5 class="card-title">${card.name}</h5>
                         <p class="card-text">${card.getSummary()}</p>
+                        <!--Labels-->
                         <#list card.getLabels() as cardLabel>
-                            <span style="background-color: ${cardLabel.color}; font-size: 12px" class="p-1 rounded text-white ml-1">${cardLabel}</span>
+                            <span style="background-color: ${cardLabel.color}; font-size: 12px"
+                                  class="p-1 rounded text-white ml-1">${cardLabel}</span>
+                        </#list>
+                        <!--Comments-->
+                        <#list card.getComments() as cardComment>
+                            <div class="card" style="font-size: 10px">
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>${cardComment}</p>
+                                        <footer class="blockquote-footer">${cardComment.author}</footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </#list>
+                        <!--Rates-->
+                        <#list card.getRates() as cardRate>
+                            <div>☆ ${cardRate} <span class="text-muted">(${cardRate.author})</span></div>
                         </#list>
                     </div>
                     <div class="card-footer">
