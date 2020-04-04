@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>It's my home page!</h1>
-<p>Hello, ${user}</p>
-</body>
-</html>
+<#include '../includes/security.ftlh'>
+<#import '../includes/app.ftlh' as app>
+
+<@app.page>
+    <section class="jumbotron">
+        <h1>It's my home page!</h1>
+        <p>Hello, ${name}</p>
+    </section>
+</@app.page>
