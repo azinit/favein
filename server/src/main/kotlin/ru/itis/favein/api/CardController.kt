@@ -7,32 +7,29 @@ import ru.itis.favein.repository.CardRepository
 import ru.itis.favein.services.CardService
 
 @RestController
-@RequestMapping("api/card/")
+@RequestMapping("api/card")
 @CrossOrigin(origins = ["*"])
 class CardController(
         @Autowired
-        private val cardRepository: CardRepository
+        private val cardService: CardService
 ) {
-    @GetMapping("{card-id}")
-    fun read(
-            @PathVariable("card-id") cardId: Long
-    ): Card? {
-        val card = cardRepository.findById(cardId)
-        if (card.isPresent) {
-            return card.get()
-        }
-        return null
-
+    @PostMapping("/create")
+    fun create(@RequestBody card: Card): Long {
+        return cardService.create(card)
     }
 
-    fun delete(cardId: Long): Boolean {
-        return try {
-            cardRepository.deleteById(cardId)
-            true
-        } catch (e: Exception) {
-            println(e)
-            false
-        }
+    @GetMapping("/{card-id}")
+    fun read(@PathVariable("card-id") cardId: Long): Card? {
+        return cardService.read(cardId)
+    }
 
+    @PostMapping("/update")
+    fun update(@RequestBody card: Card): Boolean {
+        return cardService.update(card)
+    }
+
+    @DeleteMapping("/delete/{card-id}")
+    fun delete(@PathVariable("card-id") cardId: Long): Boolean {
+        return cardService.delete(cardId)
     }
 }

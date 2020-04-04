@@ -1,13 +1,18 @@
 package ru.itis.favein.models
 
+import lombok.AllArgsConstructor
+import lombok.Builder
+import lombok.Data
+import lombok.NoArgsConstructor
 import javax.persistence.*
 import kotlin.math.min
 
+@NoArgsConstructor
 @Entity
 data class Card(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long,
+        var id: Long = -1,
         val name: String,
         /** TL;DR */
         @Column(length = 512)
