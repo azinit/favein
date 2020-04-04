@@ -23,7 +23,7 @@
             <@controls.input label='Пароль *' name='password' placeholder="Пароль"
                 type="password" is_required=true/>
             <@controls.csrf token="${ _csrf.token }"/>
-            <@controls.button label="Зарегистрироваться"></@controls.button>
+            <@controls.button label="Зарегистрироваться" type="submit"></@controls.button>
         </form>
     </div>
 </@app.page>

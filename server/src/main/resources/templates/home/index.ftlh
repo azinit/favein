@@ -4,6 +4,6 @@
 <@app.page>
     <section class="jumbotron">
         <h1>It's my home page!</h1>
-        <p>Hello, ${name}</p>
+        <p>Hello, ${username}</p>
     </section>
 </@app.page>

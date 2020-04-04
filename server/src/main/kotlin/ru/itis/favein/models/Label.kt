@@ -6,7 +6,7 @@ import javax.persistence.*
 data class Label(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
+    val id: Long,
     val name: String,
     val color: String
 ) {

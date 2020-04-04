@@ -6,7 +6,7 @@ import javax.persistence.*
 data class Dashboard (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Int,
+    val id: Long,
     val name: String,
     val description: String = "",
     /** img-url */

@@ -7,7 +7,7 @@ import javax.persistence.*
 data class Rate(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Int,
+        val id: Long,
         @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "author_id")
         val author: User,

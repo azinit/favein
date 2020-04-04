@@ -2,11 +2,24 @@
 
 <#macro input label name placeholder=label value="" type="text" is_required=false>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">${label}:</label>
-        <div class="col-sm-6">
+        <label class="col-form-label col-3">${label}</label>
+        <div class="col">
             <input type="${type}" class="form-control" <#if is_required>required</#if>
                    name="${name}" placeholder="${placeholder}" value="${value}"
             />
+        </div>
+    </div>
+</#macro>
+
+<#macro select label name options >
+    <div class="form-group row">
+        <label class="col-form-label col-3">${label}</label>
+        <div class="col">
+            <select class="form-control" name="${name}">
+                <#list options as option>
+                    <option value="${option.id}">${option}</option>
+                </#list>
+            </select>
         </div>
     </div>
 </#macro>
@@ -15,7 +28,7 @@
     <input type="hidden" name="_csrf" value="${ token }">
 </#macro>
 
-<#macro button label type="submit">
+<#macro button label type="button">
     <div class="form-group">
         <button class="btn btn-info" type="${type}">${label}</button>
     </div>

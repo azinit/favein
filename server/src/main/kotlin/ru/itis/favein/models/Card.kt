@@ -7,7 +7,7 @@ import kotlin.math.min
 data class Card(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Int,
+        val id: Long,
         val name: String,
         /** TL;DR */
         @Column(length = 512)
