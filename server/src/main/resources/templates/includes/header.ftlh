@@ -8,7 +8,7 @@
                     <img src="/app/favicon.png" width="20" height="20" class="d-inline-block align-content-center" alt="">
                     <span class="d-inline-block">FaveIn</span>
                 </a>
-                <#if isAuth><small class="text-muted">(${name})</small></#if>
+                <#if isAuth><small class="text-muted">(${username})</small></#if>
             </div>
             <div class="collapse navbar-collapse col-6 flex-row-reverse">
                 <div class="navbar-nav">
