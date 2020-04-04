@@ -96,12 +96,10 @@
                         </#list>
                         <!--Comments-->
                         <#list card.getComments() as cardComment>
-                            <div class="card" style="font-size: 10px">
-                                <div class="card-body">
-                                    <blockquote class="blockquote mb-0">
-                                        <p>${cardComment}</p>
-                                        <footer class="blockquote-footer">${cardComment.author}</footer>
-                                    </blockquote>
+                            <div class="card" style="font-size: 12px">
+                                <div class="card-body p-2">
+                                    <div>${cardComment}</div>
+                                    <div class="blockquote-footer">${cardComment.author}, ${cardComment.createdAt}</div>
                                 </div>
                             </div>
                         </#list>
