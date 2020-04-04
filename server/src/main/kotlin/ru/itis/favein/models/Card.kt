@@ -17,12 +17,14 @@ data class Card(
         val content: String = "",
         @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "list_id")
-        val list: List
+        val list: List,
+        @ManyToMany
+        val labels: Set<Label>
 ) {
     override fun toString(): String = name
     fun getAuthor(): User = list.getAuthor()
     fun getDashboard(): Dashboard = list.dashboard
-    fun getTLDR(): String {
+    fun getSummary(): String {
         val summary = description + content
         return summary.substring(0, min(summary.length, 80)) + "..."
     }

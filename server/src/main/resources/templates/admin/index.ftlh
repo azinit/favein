@@ -86,30 +86,13 @@
                     <div class="card-header">${card.getDashboard()}/${card.list}</div>
                     <div class="card-body">
                         <h5 class="card-title">${card.name}</h5>
-                        <p class="card-text">${card.getTLDR()}</p>
+                        <p class="card-text">${card.getSummary()}</p>
+                        <#list card.getLabels() as cardLabel>
+                            <span style="background-color: ${cardLabel.color}; font-size: 12px" class="p-1 rounded text-white ml-1">${cardLabel}</span>
+                        </#list>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">${card.getAuthor()}&nbsp;&lt;${card.getAuthor().email}&gt;</small>
-                    </div>
-                </div>
-            <#else>
-                <span>В сервисе пока нет ни одной карточки</span>
-            </#list>
-        </div>
-    </section>
-    <section class="jumbotron bg-white shadow d-flex align-items-center flex-column">
-        <h2 class="text-center">Cards && Labels</h2>
-        <div class="cards-labels-list mt-4 card-deck">
-            <#list cards_labels as cl>
-                <div class="card bg-light mb-3" style="max-width: 18rem;">
-                    <div class="card-header">${cl.card.getDashboard()}/${cl.card.list}</div>
-                    <div class="card-body">
-                        <h5 class="card-title">${cl.card.name}</h5>
-                        <p class="card-text">${cl.card.getTLDR()}</p>
-                        <span style="background-color: ${cl.label.color}; font-size: 12px" class="p-1 rounded text-white ml-1">${cl.label}</span>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">${cl.card.getAuthor()}&nbsp;&lt;${cl.card.getAuthor().email}&gt;</small>
                     </div>
                 </div>
             <#else>
