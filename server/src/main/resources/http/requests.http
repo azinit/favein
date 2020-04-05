@@ -1,0 +1,33 @@
+POST http://localhost/api/cards/update
+Content-Type: application/json
+
+{
+  "id": 7,
+  "descriptiosn": "New description"
+}
+###
+
+POST http://localhost/signIn
+Content-Type: application/json
+
+{
+  "email" : "sidikov.marsel@gmail.com",
+  "password": "qwerty007"
+}
+
+###
+
+GET http://localhost/users
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwibmFtZSI6Ik1hcnNlbCIsInJvbGUiOiJVU0VSIn0.WDh1WJQiBFV3S_s68BOxKp3gZtRz7P154B4NBy5bDsM
+
+###
+
+DELETE http://localhost/users/39
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwibmFtZSI6Ik1hcnNlbCIsInJvbGUiOiJVU0VSIn0.WDh1WJQiBFV3S_s68BOxKp3gZtRz7P154B4NBy5bDsM
+
+###
+
+GET http://localhost/self
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwibmFtZSI6Ik1hcnNlbCIsInJvbGUiOiJVU0VSIn0.WDh1WJQiBFV3S_s68BOxKp3gZtRz7P154B4NBy5bDsM
+
+###

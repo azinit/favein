@@ -1,34 +1,30 @@
 package ru.itis.favein.models
 
-import lombok.AllArgsConstructor
-import lombok.Builder
-import lombok.Data
-import lombok.NoArgsConstructor
+import java.io.Serializable
 import javax.persistence.*
 import kotlin.math.min
 
-@NoArgsConstructor
 @Entity
 data class Card(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long = -1,
-        val name: String,
+        var name: String,
         /** TL;DR */
         @Column(length = 512)
-        val description: String = "",
+        var description: String = "",
         /** Base content */
         @Column(length = 4096)
-        val content: String = "",
-        @ManyToOne(fetch = FetchType.EAGER)
+        var content: String = "",
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "list_id")
-        val list: List,
+        var list: List,
         @ManyToMany
-        val labels: Set<Label>,
+        var labels: Set<Label> = emptySet(),
         @ManyToMany
-        val rates: Set<Rate>,
+        var rates: Set<Rate> = emptySet(),
         @ManyToMany
-        val comments: Set<Comment>
+        var comments: Set<Comment> = emptySet()
 ) {
     override fun toString(): String = name
     fun getAuthor(): User = list.getAuthor()

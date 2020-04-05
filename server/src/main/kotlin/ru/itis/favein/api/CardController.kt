@@ -3,19 +3,25 @@ package ru.itis.favein.api
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import ru.itis.favein.models.Card
-import ru.itis.favein.repository.CardRepository
+import ru.itis.favein.models.types.TypeCardCreate
+import ru.itis.favein.models.types.TypeCardUpdate
 import ru.itis.favein.services.CardService
 
 @RestController
-@RequestMapping("api/card")
+@RequestMapping("api/cards")
 @CrossOrigin(origins = ["*"])
 class CardController(
         @Autowired
         private val cardService: CardService
 ) {
+    @GetMapping
+    fun readList(): MutableIterable<Card> {
+        return cardService.readList()
+    }
+
     @PostMapping("/create")
-    fun create(@RequestBody card: Card): Long {
-        return cardService.create(card)
+    fun create(@RequestBody data: TypeCardCreate): Long {
+        return cardService.create(data)
     }
 
     @GetMapping("/{card-id}")
@@ -24,7 +30,7 @@ class CardController(
     }
 
     @PostMapping("/update")
-    fun update(@RequestBody card: Card): Boolean {
+    fun update(@RequestBody card: TypeCardUpdate): Boolean {
         return cardService.update(card)
     }
 
