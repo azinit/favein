@@ -2,8 +2,9 @@ POST http://localhost/api/cards/update
 Content-Type: application/json
 
 {
-  "id": 7,
-  "descriptiosn": "New description"
+  "id": 8,
+  "content": "# Card#8\n## H2\n## H2",
+  "description": "desc"
 }
 ###
 
