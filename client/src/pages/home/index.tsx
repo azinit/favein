@@ -1,0 +1,12 @@
+import React from 'react'
+import './index.scss'
+
+const HomePage = () => {
+    return (
+        <div className="page-home">
+            <h1>Hello, home</h1>
+        </div>
+    )
+}
+
+export default HomePage
