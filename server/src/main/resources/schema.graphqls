@@ -1,0 +1,27 @@
+# https://itnext.io/beginners-guide-to-graphql-with-spring-boot-69d229e87b19
+
+type Pokemon {
+    id: ID!
+    name: String!
+}
+
+input PokemonCreate {
+    name: String!
+}
+
+input PokemonUpdate {
+    id: ID!
+    name: String!
+}
+
+
+type Query {
+    pokemon(id: ID!): Pokemon
+    pokemons: [Pokemon]
+}
+
+type Mutation {
+    create(data: PokemonCreate!): Pokemon!
+    update(data: PokemonUpdate!): Pokemon
+    delete(id: ID!): Boolean
+}
