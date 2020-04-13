@@ -8,6 +8,26 @@ Content-Type: application/json
 }
 ###
 
+POST http://localhost/api/lists
+Content-Type: application/json
+
+{
+  "description": "Ockey Dockey",
+  "dashboardId": 1
+}
+
+###
+
+PUT http://localhost/api/lists/10
+Content-Type: application/json
+
+{
+  "description": "Ockey Dockey",
+  "dashboardId": 1
+}
+
+###
+
 POST http://localhost/signIn
 Content-Type: application/json
 
