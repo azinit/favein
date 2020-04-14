@@ -33,15 +33,27 @@ class CardController(
     /// start region CRUD
     @ApiOperation("Получить список карточек")
     @GetMapping
-    fun findAll(): MutableIterable<Card> {
-        return cardRepository.findAll()
+    fun findAll(
+            @ApiParam("Уникальный идентификатор списка\n(если нужно получить только карточки относящиеся к списку)")
+            @RequestParam("list-id") listId: Long?
+    ): ResponseEntity<MutableIterable<Card>> {
+        // Get all cards
+        if (listId === null) {
+            return ResponseEntity(cardRepository.findAll(), HttpStatus.OK)
+        }
+        // Get only related cards
+        val listOptional = listRepository.findById(listId)
+        if (listOptional.isPresent) {
+            return ResponseEntity(cardRepository.findByListId(listId), HttpStatus.OK)
+        }
+        return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
     @ApiOperation("Получить информацию по карточке")
-    @GetMapping("/{id}")
+    @GetMapping("/{card-id}")
     fun findById(
             @ApiParam("Уникальный идентификатор карточки", required = true)
-            @PathVariable("id") id: Long
+            @PathVariable("card-id") id: Long
     ): ResponseEntity<Card> {
         val entity = cardRepository.findById(id)
         if (entity.isPresent) {
@@ -71,10 +83,10 @@ class CardController(
     }
 
     @ApiOperation("Обновить существующую карточку")
-    @PutMapping("/{id}")
+    @PutMapping("/{card-id}")
     fun update(
             @ApiParam("Уникальный идентификатор карточки", required = true)
-            @PathVariable("id") id: Long,
+            @PathVariable("card-id") id: Long,
             @ApiParam("Обновляемая информация карточки", required = true)
             @RequestBody details: @Valid CardDTO
     ): ResponseEntity<HttpStatus> {
@@ -91,10 +103,10 @@ class CardController(
     }
 
     @ApiOperation("Удалить существующую карточку")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{card-id}")
     fun delete(
             @ApiParam("Уникальный идентификатор карточки", required = true)
-            @PathVariable("id") id: Long
+            @PathVariable("card-id") id: Long
     ): ResponseEntity<HttpStatus> {
         val entity = cardRepository.findById(id)
         if (entity.isPresent) {
@@ -105,23 +117,6 @@ class CardController(
     }
 
     /// start region List
-
-    @ApiOperation("Получить карточки, относящиеся к списку")
-    @GetMapping("/from/{list-id}")
-    fun findByListId(
-            @ApiParam("Уникальный идентификатор списка", required = true)
-            @PathVariable("list-id") listId: Long
-    ): ResponseEntity<MutableIterable<Card>> {
-        val listOptional = listRepository.findById(listId)
-        if (listOptional.isPresent) {
-            return ResponseEntity(
-                    cardRepository.findByListId(listId),
-                    HttpStatus.OK
-            )
-        }
-        return ResponseEntity(HttpStatus.NOT_FOUND)
-    }
-
     @ApiOperation("Прикрепить карточку к списку")
     @PutMapping("/{card-id}/attach-to/{list-id}")
     fun attachTo(
