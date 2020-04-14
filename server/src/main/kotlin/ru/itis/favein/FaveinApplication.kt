@@ -17,7 +17,7 @@ class SwaggerConfiguration {
     @Bean
     open fun api(): Docket = Docket(DocumentationType.SWAGGER_2)
             .select()
-            .apis(RequestHandlerSelectors.any())
+            .apis(RequestHandlerSelectors.basePackage("ru.itis.favein.api"))
             .paths(PathSelectors.any())
             .build()
 }
