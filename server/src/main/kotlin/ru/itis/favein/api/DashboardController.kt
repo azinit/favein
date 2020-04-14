@@ -77,6 +77,7 @@ class DashboardController(
             val dashboard = entity.get()
             dashboard.name = details.name
             dashboard.description = details.description
+            dashboard.background = details.background
             dashboardRepository.save(dashboard)
             return ResponseEntity(HttpStatus.OK)
         }
