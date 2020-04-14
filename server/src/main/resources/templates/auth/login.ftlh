@@ -18,7 +18,7 @@
             <@controls.input label='Логин' name='username'/>
             <@controls.input label='Пароль' name='password' type="password"/>
             <@controls.csrf token="${ _csrf.token }"/>
-            <@controls.button label="Зайти"></@controls.button>
+            <@controls.button label="Зайти" type="submit"></@controls.button>
         </form>
         <a href="/signup" class="text-info">Создать аккаунт</a>
     </div>
