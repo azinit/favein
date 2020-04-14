@@ -8,7 +8,7 @@
                 </a>
                 <span>
                 FTracker
-                <#if isAuth><small class="text-muted">(${name})</small></#if>
+                <#if isAuth><small class="text-muted">(${username})</small></#if>
             </span>
             </div>
             <nav class="navbar navbar-expand navbar-dark bg-dark col rounded-left">
