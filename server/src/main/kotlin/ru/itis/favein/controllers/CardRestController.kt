@@ -1,5 +1,6 @@
-package ru.itis.favein.api
+package ru.itis.favein.controllers
 
+import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import ru.itis.favein.models.Card
@@ -8,9 +9,9 @@ import ru.itis.favein.models.types.TypeCardUpdate
 import ru.itis.favein.services.CardService
 
 @RestController
-@RequestMapping("api/cards-service")
+@RequestMapping("deprecated-api/cards", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
-class CardServiceController(
+class CardRestController(
         @Autowired
         private val cardService: CardService
 ) {

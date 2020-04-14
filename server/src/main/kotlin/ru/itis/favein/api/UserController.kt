@@ -1,6 +1,8 @@
 package ru.itis.favein.api
 
 import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -12,21 +14,23 @@ import javax.validation.Valid
 
 
 @RestController
-@Api(value = "User API", description = "Операции с users")
-@RequestMapping("api/users")
+@Api("User API", description = "Операции с users")
+@RequestMapping("api/users", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
 class UserController(
         @Autowired
         private val userRepository: UserRepository
 ) {
-
+    @ApiOperation("Получить список пользователей")
     @GetMapping
     fun findAll(): MutableIterable<User> {
         return userRepository.findAll()
     }
 
+    @ApiOperation("Получить информацию по пользователю")
     @GetMapping("/{id}")
     fun findById(
+            @ApiParam("Уникальный идентификатор пользователя", required = true)
             @PathVariable("id") id: Long
     ): ResponseEntity<User> {
         val entity = userRepository.findById(id)
@@ -36,8 +40,10 @@ class UserController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Создать нового пользователя")
     @PostMapping
     fun create(
+            @ApiParam("Информация по создаваемому пользователю", required = true)
             @RequestBody details: @Valid UserDTO
     ): ResponseEntity<Long> {
         val user = User(
@@ -51,9 +57,12 @@ class UserController(
         return ResponseEntity(id, HttpStatus.OK)
     }
 
+    @ApiOperation("Обновить существующего пользователя")
     @PutMapping("/{id}")
     fun update(
+            @ApiParam("Уникальный идентификатор пользователя", required = true)
             @PathVariable("id") id: Long,
+            @ApiParam("Информация по обновляемому пользователю", required = true)
             @RequestBody details: @Valid UserDTO
     ): ResponseEntity<HttpStatus> {
         val entity = userRepository.findById(id)
@@ -68,8 +77,10 @@ class UserController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Удалить существующего пользователя")
     @DeleteMapping("/{id}")
     fun delete(
+            @ApiParam("Уникальный идентификатор пользователя", required = true)
             @PathVariable("id") id: Long
     ): ResponseEntity<HttpStatus> {
         val entity = userRepository.findById(id)

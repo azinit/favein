@@ -1,6 +1,8 @@
 package ru.itis.favein.api
 
 import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,8 +15,8 @@ import javax.validation.Valid
 
 
 @RestController
-@Api(value = "Dashboard API", description = "Операции с dashboards")
-@RequestMapping("api/dashboards")
+@Api("Dashboard API", description = "Операции с dashboards")
+@RequestMapping("api/dashboards", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
 class DashboardController(
         @Autowired
@@ -22,14 +24,16 @@ class DashboardController(
         @Autowired
         private val userRepository: UserRepository
 ) {
-
+    @ApiOperation("Получить все дашборды")
     @GetMapping
     fun findAll(): MutableIterable<Dashboard> {
         return dashboardRepository.findAll()
     }
 
+    @ApiOperation("Получить информацию по дашборду")
     @GetMapping("/{id}")
     fun findById(
+            @ApiParam("Уникальный идентификатор дашборда", required = true)
             @PathVariable("id") id: Long
     ): ResponseEntity<Dashboard> {
         val entity = dashboardRepository.findById(id)
@@ -39,8 +43,10 @@ class DashboardController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Создать новый дашборд")
     @PostMapping
     fun create(
+            @ApiParam("Информация создаваемого дашборда", required = true)
             @RequestBody details: @Valid DashboardDTO
     ): ResponseEntity<Long> {
         val optional = userRepository.findById(details.authorId)
@@ -58,9 +64,12 @@ class DashboardController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Обновить существующий дашборд")
     @PutMapping("/{id}")
     fun update(
+            @ApiParam("Уникальный идентификатор дашборда", required = true)
             @PathVariable("id") id: Long,
+            @ApiParam("Информация обновляемого дашборда", required = true)
             @RequestBody details: @Valid DashboardDTO
     ): ResponseEntity<HttpStatus> {
         val entity = dashboardRepository.findById(id)
@@ -74,8 +83,10 @@ class DashboardController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Удалить существующий дашборд")
     @DeleteMapping("/{id}")
     fun delete(
+            @ApiParam("Уникальный идентификатор дашборда", required = true)
             @PathVariable("id") id: Long
     ): ResponseEntity<HttpStatus> {
         val entity = dashboardRepository.findById(id)

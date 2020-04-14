@@ -1,6 +1,8 @@
 package ru.itis.favein.api
 
 import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -26,8 +28,8 @@ import javax.validation.Valid
 
 
 @RestController
-@Api(value = "List API", description = "Операции со списком карточек")
-@RequestMapping("api/lists")
+@Api("List API", description = "Операции со списком карточек")
+@RequestMapping("api/lists", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
 class ListController(
         @Autowired
@@ -35,22 +37,16 @@ class ListController(
         @Autowired
         private val dashboardRepository: DashboardRepository
 ) {
-
-//    @ApiOperation(value = "View a list of available languages", response = Iterable::class)
-//    @ApiResponses(value = [
-//        ApiResponse(code = 200, message = "Successfully retrieved list"),
-//        ApiResponse(code = 401, message = "You are not authorized to view the resource"),
-//        ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
-//        ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
-//    ])
-
+    @ApiOperation("Получить все списки")
     @GetMapping
     fun findAll(): MutableIterable<List> {
         return listRepository.findAll()
     }
 
+    @ApiOperation("Получить информацию по списку")
     @GetMapping("/{id}")
     fun findById(
+            @ApiParam("Уникальный идентификатор списка", required = true)
             @PathVariable("id") id: Long
     ): ResponseEntity<List> {
         val entity = listRepository.findById(id)
@@ -60,8 +56,10 @@ class ListController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Создать новый список")
     @PostMapping
     fun create(
+            @ApiParam("Информация создаваемого списка", required = true)
             @RequestBody details: @Valid ListDTO
     ): ResponseEntity<Long> {
         val optional = dashboardRepository.findById(details.dashboardId)
@@ -78,9 +76,12 @@ class ListController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Обновить существующий список")
     @PutMapping("/{id}")
     fun update(
+            @ApiParam("Уникальный идентификатор списка", required = true)
             @PathVariable("id") id: Long,
+            @ApiParam("Информация обновляемого списка", required = true)
             @RequestBody details: @Valid ListDTO
     ): ResponseEntity<HttpStatus> {
         val entity = listRepository.findById(id)
@@ -94,8 +95,10 @@ class ListController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Удалить существующий список")
     @DeleteMapping("/{id}")
     fun delete(
+            @ApiParam("Уникальный идентификатор списка", required = true)
             @PathVariable("id") id: Long
     ): ResponseEntity<HttpStatus> {
         val entity = listRepository.findById(id)
@@ -106,9 +109,12 @@ class ListController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Прикрепить список к дашбоарду")
     @PutMapping("/{list-id}/attach-to/{dashboard-id}")
     fun attachTo(
+            @ApiParam("Уникальный идентификатор списка", required = true)
             @PathVariable("list-id") listId: Long,
+            @ApiParam("Уникальный идентификатор дашборда", required = true)
             @PathVariable("dashboard-id") dashboardId: Long
     ): ResponseEntity<HttpStatus> {
         val listOptional = listRepository.findById(listId)

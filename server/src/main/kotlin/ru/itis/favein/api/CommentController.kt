@@ -1,6 +1,8 @@
 package ru.itis.favein.api
 
 import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,8 +15,8 @@ import javax.validation.Valid
 
 
 @RestController
-@Api(value = "Comments API", description = "Операции с комментариями")
-@RequestMapping("api/comments")
+@Api("Comments API", description = "Операции с комментариями")
+@RequestMapping("api/comments", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
 class CommentController(
         @Autowired
@@ -22,14 +24,16 @@ class CommentController(
         @Autowired
         private val userRepository: UserRepository
 ) {
-
+    @ApiOperation("Получить список комментариев")
     @GetMapping
     fun findAll(): MutableIterable<Comment> {
         return commentRepository.findAll()
     }
 
+    @ApiOperation("Получить информацию по комментарию")
     @GetMapping("/{id}")
     fun findById(
+            @ApiParam("Уникальный идентификатор комментария", required = true)
             @PathVariable("id") id: Long
     ): ResponseEntity<Comment> {
         val entity = commentRepository.findById(id)
@@ -39,8 +43,10 @@ class CommentController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Создать новый комментарий")
     @PostMapping
     fun create(
+            @ApiParam("Информация по создаваемому комментарию", required = true)
             @RequestBody details: @Valid CommentDTO
     ): ResponseEntity<Long> {
         val optional = userRepository.findById(details.authorId)
@@ -56,9 +62,12 @@ class CommentController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Обновить существующий комментарий")
     @PutMapping("/{id}")
     fun update(
+            @ApiParam("Уникальный идентификатор комментария", required = true)
             @PathVariable("id") id: Long,
+            @ApiParam("Обновляемая информация комментария", required = true)
             @RequestBody details: @Valid CommentDTO
     ): ResponseEntity<HttpStatus> {
         val entity = commentRepository.findById(id)
@@ -71,8 +80,10 @@ class CommentController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Удалить существующий комментарий")
     @DeleteMapping("/{id}")
     fun delete(
+            @ApiParam("Уникальный идентификатор комментария", required = true)
             @PathVariable("id") id: Long
     ): ResponseEntity<HttpStatus> {
         val entity = commentRepository.findById(id)

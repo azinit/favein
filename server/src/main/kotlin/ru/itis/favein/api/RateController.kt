@@ -1,6 +1,8 @@
 package ru.itis.favein.api
 
 import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,8 +15,8 @@ import javax.validation.Valid
 
 
 @RestController
-@Api(value = "Rates API", description = "Операции с оценками")
-@RequestMapping("api/rates")
+@Api("Rates API", description = "Операции с оценками")
+@RequestMapping("api/rates", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
 class RateController(
         @Autowired
@@ -22,14 +24,16 @@ class RateController(
         @Autowired
         private val userRepository: UserRepository
 ) {
-
+    @ApiOperation("Получить список оценок")
     @GetMapping
     fun findAll(): MutableIterable<Rate> {
         return rateRepository.findAll()
     }
 
+    @ApiOperation("Получить информацию по оценке")
     @GetMapping("/{id}")
     fun findById(
+            @ApiParam("Уникальный идентификатор оценки", required = true)
             @PathVariable("id") id: Long
     ): ResponseEntity<Rate> {
         val entity = rateRepository.findById(id)
@@ -39,8 +43,10 @@ class RateController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Создать новую оценку")
     @PostMapping
     fun create(
+            @ApiParam("Информация по создаваемой оценке", required = true)
             @RequestBody details: @Valid RateDTO
     ): ResponseEntity<Long> {
         val optional = userRepository.findById(details.authorId)
@@ -56,9 +62,12 @@ class RateController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Обновить существующую оценку")
     @PutMapping("/{id}")
     fun update(
+            @ApiParam("Уникальный идентификатор оценки", required = true)
             @PathVariable("id") id: Long,
+            @ApiParam("Информация по редактируемой оценке", required = true)
             @RequestBody details: @Valid RateDTO
     ): ResponseEntity<HttpStatus> {
         val entity = rateRepository.findById(id)
@@ -71,8 +80,10 @@ class RateController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
+    @ApiOperation("Удалить существующую оценку")
     @DeleteMapping("/{id}")
     fun delete(
+            @ApiParam("Уникальный идентификатор оценки", required = true)
             @PathVariable("id") id: Long
     ): ResponseEntity<HttpStatus> {
         val entity = rateRepository.findById(id)
