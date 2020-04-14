@@ -50,7 +50,9 @@ class ListController(
     }
 
     @GetMapping("/{id}")
-    fun findById(@PathVariable("id") id: Long): ResponseEntity<List> {
+    fun findById(
+            @PathVariable("id") id: Long
+    ): ResponseEntity<List> {
         val entity = listRepository.findById(id)
         if (entity.isPresent) {
             return ResponseEntity(entity.get(), HttpStatus.OK)
@@ -59,11 +61,17 @@ class ListController(
     }
 
     @PostMapping
-    fun create(@RequestBody details: @Valid ListDTO): ResponseEntity<Long> {
+    fun create(
+            @RequestBody details: @Valid ListDTO
+    ): ResponseEntity<Long> {
         val optional = dashboardRepository.findById(details.dashboardId)
         if (optional.isPresent) {
             val dashboard = optional.get()
-            val list = List(name = details.name, description = details.description, dashboard = dashboard)
+            val list = List(
+                    name = details.name,
+                    description = details.description,
+                    dashboard = dashboard
+            )
             val (id) = listRepository.save(list)
             return ResponseEntity(id, HttpStatus.OK)
         }
@@ -71,13 +79,15 @@ class ListController(
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable("id") id: Long, @RequestBody details: @Valid ListDTO): ResponseEntity<HttpStatus> {
+    fun update(
+            @PathVariable("id") id: Long,
+            @RequestBody details: @Valid ListDTO
+    ): ResponseEntity<HttpStatus> {
         val entity = listRepository.findById(id)
         if (entity.isPresent) {
             val list = entity.get()
             list.name = details.name
             list.description = details.description
-            // TODO: set list.dashboard by separate entrypoint
             listRepository.save(list)
             return ResponseEntity(HttpStatus.OK)
         }
@@ -85,10 +95,29 @@ class ListController(
     }
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable("id") id: Long): ResponseEntity<HttpStatus> {
-        val entity = listRepository.findById((id))
+    fun delete(
+            @PathVariable("id") id: Long
+    ): ResponseEntity<HttpStatus> {
+        val entity = listRepository.findById(id)
         if (entity.isPresent) {
             listRepository.deleteById(id)
+            return ResponseEntity(HttpStatus.OK)
+        }
+        return ResponseEntity(HttpStatus.NOT_FOUND)
+    }
+
+    @PutMapping("/{list-id}/attach-to/{dashboard-id}")
+    fun attachTo(
+            @PathVariable("list-id") listId: Long,
+            @PathVariable("dashboard-id") dashboardId: Long
+    ): ResponseEntity<HttpStatus> {
+        val listOptional = listRepository.findById(listId)
+        val dashboardOptional = dashboardRepository.findById(dashboardId)
+        if (listOptional.isPresent && dashboardOptional.isPresent) {
+            val list = listOptional.get()
+            val dashboard = dashboardOptional.get()
+            list.dashboard = dashboard
+            listRepository.save(list)
             return ResponseEntity(HttpStatus.OK)
         }
         return ResponseEntity(HttpStatus.NOT_FOUND)

@@ -9,7 +9,7 @@ import javax.persistence.*
 data class User(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long = 0,
+        val id: Long = -1,
         // credentials
         private var username: String,
         private var password: String,
@@ -29,6 +29,7 @@ data class User(
     override fun isCredentialsNonExpired(): Boolean = true
     override fun isAccountNonExpired(): Boolean = true
     override fun isAccountNonLocked(): Boolean = true
+
     // https://stackoverflow.com/questions/32970923/resolving-accidental-override-errors-in-kotlin
     override fun getUsername() = username
 
@@ -37,3 +38,9 @@ data class User(
     fun isAdmin(): Boolean = roles.contains(Role.ADMIN)
     fun getStatus(): String = roles.joinToString()
 }
+
+data class UserDTO(
+        val username: String,
+        val email: String,
+        val password: String = ""
+)

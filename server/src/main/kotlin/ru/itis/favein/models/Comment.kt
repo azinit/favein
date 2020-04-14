@@ -7,13 +7,18 @@ import javax.persistence.*
 data class Comment(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long,
+        val id: Long = -1,
         @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "author_id")
-        val author: User,
+        var author: User,
         @Column(length = 4096)
-        val content: String = "",
-        val createdAt: LocalDateTime
+        var content: String = "",
+        var createdAt: LocalDateTime = LocalDateTime.now()
 ) {
     override fun toString(): String = content
 }
+
+data class CommentDTO(
+        var content: String = "",
+        var authorId: Long
+)

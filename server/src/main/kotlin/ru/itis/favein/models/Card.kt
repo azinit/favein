@@ -1,6 +1,5 @@
 package ru.itis.favein.models
 
-import java.io.Serializable
 import javax.persistence.*
 import kotlin.math.min
 
@@ -34,3 +33,10 @@ data class Card(
         return summary.substring(0, min(summary.length, 80)) + "..."
     }
 }
+
+data class CardDTO(
+        var name: String = "",
+        var description: String = "",
+        var content: String = "",
+        var listId: Long
+)
