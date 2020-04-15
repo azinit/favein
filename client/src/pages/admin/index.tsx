@@ -4,6 +4,7 @@ import Comment from '../../components/comment'
 import Rate from '../../components/rate'
 import Label from '../../components/label'
 import User from '../../components/user'
+import Card from '../../components/card/item'
 import API from '../../fetch'
 
 const AdminPage = () => {
@@ -11,12 +12,14 @@ const AdminPage = () => {
     const [rates, setRates] = useState<IRate[]>([])
     const [labels, setLabels] = useState<ILabel[]>([])
     const [users, setUsers] = useState<IUser[]>([])
+    const [cards, setCards] = useState<ICard[]>([])
 
     useEffect(() => {
         API.comments.readList().then(response => setComments(response.data))
         API.rates.readList().then(response => setRates(response.data))
         API.labels.readList().then(response => setLabels(response.data))
         API.users.readList().then(response => setUsers(response.data))
+        API.cards.readList().then(response => setCards(response.data))
     }, [])
     return (
         <div>
@@ -31,6 +34,9 @@ const AdminPage = () => {
             </DemoSection>
             <DemoSection title="Users">
                 {users.map(user => <User key={user.id} user={user} />)}
+            </DemoSection>
+            <DemoSection title="Cards" className="flex-wrap">
+                {cards.map(card => <Card key={card.id} card={card} />)}
             </DemoSection>
         </div>
     )
