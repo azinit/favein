@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import DemoSection from './demo-section'
 import Comment from '../../components/comment'
-import API from '../../fetch'
 import Rate from '../../components/rate'
+import Label from '../../components/label'
+import API from '../../fetch'
 
 const AdminPage = () => {
     const [comments, setComments] = useState<IComment[]>([])
     const [rates, setRates] = useState<IRate[]>([])
+    const [labels, setLabels] = useState<ILabel[]>([])
 
     useEffect(() => {
-        API.comments.readList()
-            .then(response => {
-                setComments(response.data)
-            })
-        API.rates.readList()
-            .then(response => {
-                setRates(response.data)
-            })
+        API.comments.readList().then(response => setComments(response.data))
+        API.rates.readList().then(response => setRates(response.data))
+        API.labels.readList().then(response => setLabels(response.data))
     }, [])
     return (
         <div>
@@ -36,6 +33,16 @@ const AdminPage = () => {
                         <Rate
                             key={rate.id}
                             rate={rate}
+                        />
+                    ))}
+                </>
+            </DemoSection>
+            <DemoSection title="Labels">
+                <>
+                    {labels.map(label => (
+                        <Label
+                            key={label.id}
+                            label={label}
                         />
                     ))}
                 </>
