@@ -1,0 +1,31 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+// @import "~bootstrap-slider/dist/css/bootstrap-slider.css";
+
+.favein-app {
+    .user,
+    .rate,
+    .comment,
+    .label,
+    .card-sheet,
+    .card-item {
+        margin: 10px;
+    }
+
+    .list {
+        margin-top: 60px;
+    }
+
+    .headline {
+        overflow: hidden;
+        &:after {
+            content: "";
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            margin-left: 24px;
+            margin-right: -100%;
+            border-bottom: 1px solid #000;
+            vertical-align: middle;
+        }
+    }
+}
