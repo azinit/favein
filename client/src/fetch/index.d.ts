@@ -11,8 +11,10 @@ declare type ICRUDService<T, D = T> = {
     delete: (id: number) => APIResponse<boolean>;
 }
 
-declare type ICommentsService = ICRUDService<IComment, ICommentDTO>
+declare type ICommentsService = ICRUDService<IComment, ICommentDTO>;
+declare type IRatesService = ICRUDService<IRate, IRateDTO>;
 
 declare type IFetchService = {
     comments: ICommentsService;
+    rates: IRatesService;
 }

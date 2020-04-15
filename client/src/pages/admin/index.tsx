@@ -2,36 +2,41 @@ import React, { useEffect, useState } from 'react'
 import DemoSection from './demo-section'
 import Comment from '../../components/comment'
 import API from '../../fetch'
+import Rate from '../../components/rate'
 
 const AdminPage = () => {
     const [comments, setComments] = useState<IComment[]>([])
+    const [rates, setRates] = useState<IRate[]>([])
 
     useEffect(() => {
         API.comments.readList()
             .then(response => {
-                console.log(response)
                 setComments(response.data)
             })
-            .catch(console.error)
-        API.comments.read(1)
+        API.rates.readList()
             .then(response => {
+                setRates(response.data)
                 console.log(response)
             })
-            .catch(console.error)
     }, [])
     return (
         <div>
-            <DemoSection>
-                <div>
-                    Hello... its me...
-                </div>
-            </DemoSection>
             <DemoSection title="Comments">
                 <>
                     {comments.map(comment => (
                         <Comment
                             key={comment.id}
                             comment={comment}
+                        />
+                    ))}
+                </>
+            </DemoSection>
+            <DemoSection title="Rates">
+                <>
+                    {rates.map(rate => (
+                        <Rate
+                            key={rate.id}
+                            rate={rate}
                         />
                     ))}
                 </>
