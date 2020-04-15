@@ -19,12 +19,12 @@ const Dashboard = (props: Props) => {
                 <BCard.Subtitle className="text-secondary text-center mb-4">{author.username} ({author.email})</BCard.Subtitle>
                 <BCard.Text>
                     {description &&
-                        <div className="summary mb-4 border border-secondary rounded p-4">
+                        <div className="summary mb-4 border border-secondary bg-secondary text-white rounded p-4">
                             {description}
                         </div>
                     }
                     <BCard.Img src={background} alt="Dashboard background" className="background" height={200}/>
-                    {lists.filter(l => l.dashboard.id == id).map(l => (
+                    {lists.filter(l => l.dashboard.id === id).map(l => (
                         <List
                             key={l.id}
                             list={l}

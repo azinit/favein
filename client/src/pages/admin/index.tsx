@@ -43,10 +43,10 @@ const AdminPage = () => {
                 {users.map(user => <User key={user.id} user={user} />)}
             </DemoSection>
             <DemoSection title="Cards Sheets" className="flex-wrap">
-                {cards.map(card => <CardSheet key={card.id} card={card} />)}
+                {cards.slice(1, 4).map(card => <CardSheet key={card.id} card={card} />)}
             </DemoSection>
             <DemoSection title="Lists" className="flex-wrap">
-                {lists.slice(2, 4).map(list => (
+                {lists.slice(1, 4).map(list => (
                     <List
                         key={list.id}
                         list={list}
