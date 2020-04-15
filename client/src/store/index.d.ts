@@ -5,7 +5,7 @@ declare type IUserDTO = {
     password: string;
     username: string;
 }
-declare type IUser = UserDTO & {
+declare type IUser = IUserDTO & {
     id: number;
     accountNonExpired: boolean;
     accountNonLocked: boolean;
@@ -38,7 +38,7 @@ declare type ILabelDTO = {
     name: string;
     color: string;
 }
-declare type ILabel = LabelDTO & {
+declare type ILabel = ILabelDTO & {
     id: number;
 }
 /// start region `Dashboard`
