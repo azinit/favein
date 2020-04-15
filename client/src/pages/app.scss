@@ -1,2 +1,11 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 // @import "~bootstrap-slider/dist/css/bootstrap-slider.css";
+
+.favein-app {
+    .user,
+    .rate,
+    .comment,
+    .label {
+        margin: 10px;
+    }
+}
