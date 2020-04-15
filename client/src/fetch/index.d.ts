@@ -13,8 +13,18 @@ declare type ICRUDService<T, D = T> = {
 
 declare type ICommentsService = ICRUDService<IComment, ICommentDTO>;
 declare type IRatesService = ICRUDService<IRate, IRateDTO>;
+declare type ILabelsService = ICRUDService<ILabel, ILabelDTO>;
+declare type IUsersService = ICRUDService<IUser, IUserDTO>;
+declare type IDashboardsService = ICRUDService<IDashboard, IDashboardDTO>;
+declare type IListsService = ICRUDService<IList, IListDTO>;
+declare type ICardsService = ICRUDService<ICard, ICardDTO>;
 
 declare type IFetchService = {
     comments: ICommentsService;
     rates: IRatesService;
+    labels: ILabelsService;
+    users: IUsersService;
+    dashboards: IDashboardsService;
+    lists: IListsService;
+    cards: ICardsService;
 }
