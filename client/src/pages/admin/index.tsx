@@ -8,26 +8,16 @@ import User from '../../components/user'
 import CardSheet from '../../components/card/sheet'
 import List from '../../components/list'
 import Dashboard from '../../components/dashboard'
-import API from '../../fetch'
+import { fetchAll } from '../../fetch'
 
 const AdminPage = () => {
-    const [comments, setComments] = useState<IComment[]>([])
-    const [rates, setRates] = useState<IRate[]>([])
-    const [labels, setLabels] = useState<ILabel[]>([])
-    const [users, setUsers] = useState<IUser[]>([])
-    const [cards, setCards] = useState<ICard[]>([])
-    const [lists, setLists] = useState<IList[]>([])
-    const [dashboards, setDashboards] = useState<IDashboard[]>([])
+    const [state, setState] = useState<Partial<TotalData>>({})
+    const { comments = [], rates = [], labels = [], users = [], cards = [], lists = [], dashboards = [] } = state;
 
     useEffect(() => {
-        API.comments.readList().then(response => setComments(response.data))
-        API.rates.readList().then(response => setRates(response.data))
-        API.labels.readList().then(response => setLabels(response.data))
-        API.users.readList().then(response => setUsers(response.data))
-        API.cards.readList().then(response => setCards(response.data))
-        API.lists.readList().then(response => setLists(response.data))
-        API.dashboards.readList().then(response => setDashboards(response.data))
+        fetchAll().then(r => setState(r))
     }, [])
+
     return (
         <div>
             <DemoSection title="Comments">

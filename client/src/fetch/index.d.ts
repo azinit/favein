@@ -28,3 +28,13 @@ declare type IFetchService = {
     lists: IListsService;
     cards: ICardsService;
 }
+
+declare type TotalData = {
+    comments: IComment[];
+    rates: IRate[];
+    labels: ILabel[];
+    users: IUser[];
+    cards: ICard[];
+    lists: IList[];
+    dashboards: IDashboard[];
+}
