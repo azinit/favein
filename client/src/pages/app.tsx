@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import Loader from '../components/loader'
 import './app.scss'
 
 const HomePage = React.lazy(() => import('./home'))
@@ -10,7 +11,7 @@ function App() {
   return (
     <div className="favein-app">
       <BrowserRouter>
-        <React.Suspense fallback={<div>Загрузка...</div>}>
+        <React.Suspense fallback={<Loader className="overlay" />}>
           <Switch>
             <Route path="/home" component={HomePage} />
             <Route path="/profile" component={ProfilePage} />
