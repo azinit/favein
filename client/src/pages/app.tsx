@@ -14,9 +14,9 @@ function App() {
         <React.Suspense fallback={<Loader className="overlay" />}>
           <Switch>
             <Route path="/home" component={HomePage} />
-            <Route path="/profile" component={ProfilePage} />
+            <Route path="/profile/:id" component={ProfilePage} />
             <Route path="/admin" component={AdminPage} />
-            <Redirect to="home" />
+            <Redirect to="admin" />
           </Switch>
         </React.Suspense>
       </BrowserRouter>

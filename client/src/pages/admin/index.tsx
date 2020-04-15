@@ -45,7 +45,7 @@ const AdminPage = () => {
                 ))}
             </DemoSection>
             <DemoSection title="Dashboards" className="flex-column w-100">
-                <Tabs defaultActiveKey={2} id="dashboards-tabs">
+                <Tabs id="profile-dashboards-tabs">
                     {dashboards.map(dashboard => (
                         <Tab eventKey={dashboard.id} title={dashboard.name}>
                             <Dashboard
