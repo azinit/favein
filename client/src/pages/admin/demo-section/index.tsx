@@ -3,7 +3,7 @@ import { Jumbotron } from 'react-bootstrap'
 
 type Props = {
     title?: string;
-    children: React.ReactChild;
+    children: React.ReactChild | React.ReactNode;
 }
 
 const DemoSection = ({ title = "", children }: Props) => (
