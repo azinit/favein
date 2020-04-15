@@ -15,8 +15,8 @@ const Rate = (props: Props) => {
                 {author.username}
             </div>
             <div className="rate-stars">
-                {[...Array(value)].map((_, i) => <StarFill />)}
-                {[...Array(empty)].map((_, i) => <Star />)}
+                {[...Array(value)].map((_, i) => <StarFill key={`1-${i}`} />)}
+                {[...Array(empty)].map((_, i) => <Star key={`0-${i}`} />)}
             </div>
         </div>
     )
