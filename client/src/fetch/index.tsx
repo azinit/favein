@@ -1,9 +1,8 @@
-import CommentsService from "./comments";
-import RatesService from "./rates";
+import { configureCRUDService } from "./helpers";
 
 const Fetch: IFetchService = {
-    comments: CommentsService,
-    rates: RatesService
+    comments: configureCRUDService('comments'),
+    rates: configureCRUDService('rates')
 }
 
 export default Fetch;
