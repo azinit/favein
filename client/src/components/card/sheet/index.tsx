@@ -8,10 +8,10 @@ type Props = {
     card: ICard;
 }
 
-const Card = (props: Props) => {
+const CardSheet = (props: Props) => {
     const { author, content, comments, dashboard, description, id, labels, list, name, rates } = props.card
     return (
-        <BCard className="fave-card" style={{ width: '100%' }}>
+        <BCard className="card-sheet" style={{ width: '100%' }}>
             <Breadcrumb>
                 <Breadcrumb.Item href="#">{dashboard.name}</Breadcrumb.Item>
                 <Breadcrumb.Item href="#">{list.name}</Breadcrumb.Item>
@@ -50,4 +50,4 @@ const Card = (props: Props) => {
     )
 }
 
-export default Card
+export default CardSheet
