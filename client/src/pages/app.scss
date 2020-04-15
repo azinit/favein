@@ -6,7 +6,22 @@
     .rate,
     .comment,
     .label,
-    .card-sheet {
+    .card-sheet,
+    .card-item {
         margin: 10px;
+    }
+
+    .headline {
+        overflow: hidden;
+        &:after {
+            content: "";
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            margin-left: 24px;
+            margin-right: -100%;
+            border-bottom: 1px solid #000;
+            vertical-align: middle;
+        }
     }
 }

@@ -5,6 +5,7 @@ import Rate from '../../components/rate'
 import Label from '../../components/label'
 import User from '../../components/user'
 import CardSheet from '../../components/card/sheet'
+import CardItem from '../../components/card/item'
 import API from '../../fetch'
 
 const AdminPage = () => {
@@ -37,6 +38,9 @@ const AdminPage = () => {
             </DemoSection>
             <DemoSection title="Cards Sheets" className="flex-wrap">
                 {cards.map(card => <CardSheet key={card.id} card={card} />)}
+            </DemoSection>
+            <DemoSection title="Cards Items" className="flex-wrap">
+                {cards.map(card => <CardItem key={card.id} card={card} />)}
             </DemoSection>
         </div>
     )
