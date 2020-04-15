@@ -1,8 +1,7 @@
 import React from 'react'
-import { Card as BCard, ListGroup } from 'react-bootstrap'
+import { Card as BCard } from 'react-bootstrap'
 import { ChatSquare } from 'react-bootstrap-icons'
 import Label from '../../label'
-import Comment from '../../comment'
 import Rate from '../../rate'
 
 type Props = {

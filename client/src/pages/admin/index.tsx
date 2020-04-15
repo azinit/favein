@@ -5,7 +5,7 @@ import Rate from '../../components/rate'
 import Label from '../../components/label'
 import User from '../../components/user'
 import CardSheet from '../../components/card/sheet'
-import CardItem from '../../components/card/item'
+import List from '../../components/list'
 import API from '../../fetch'
 
 const AdminPage = () => {
@@ -14,6 +14,7 @@ const AdminPage = () => {
     const [labels, setLabels] = useState<ILabel[]>([])
     const [users, setUsers] = useState<IUser[]>([])
     const [cards, setCards] = useState<ICard[]>([])
+    const [lists, setLists] = useState<IList[]>([])
 
     useEffect(() => {
         API.comments.readList().then(response => setComments(response.data))
@@ -21,6 +22,7 @@ const AdminPage = () => {
         API.labels.readList().then(response => setLabels(response.data))
         API.users.readList().then(response => setUsers(response.data))
         API.cards.readList().then(response => setCards(response.data))
+        API.lists.readList().then(response => setLists(response.data))
     }, [])
     return (
         <div>
@@ -39,8 +41,14 @@ const AdminPage = () => {
             <DemoSection title="Cards Sheets" className="flex-wrap">
                 {cards.map(card => <CardSheet key={card.id} card={card} />)}
             </DemoSection>
-            <DemoSection title="Cards Items" className="flex-wrap">
-                {cards.map(card => <CardItem key={card.id} card={card} />)}
+            <DemoSection title="Lists" className="flex-wrap">
+                {lists.slice(2, 4).map(list => (
+                    <List
+                        key={list.id}
+                        list={list}
+                        cards={cards.filter(c => c.list.id == list.id)}
+                    />
+                ))}
             </DemoSection>
         </div>
     )
