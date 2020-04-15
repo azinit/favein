@@ -16,7 +16,6 @@ const AdminPage = () => {
         API.rates.readList()
             .then(response => {
                 setRates(response.data)
-                console.log(response)
             })
     }, [])
     return (
