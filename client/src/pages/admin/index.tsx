@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
+import { connect } from 'react-redux'
 import DemoSection from './demo-section'
 import Comment from '../../components/comment'
 import Rate from '../../components/rate'
@@ -9,13 +10,28 @@ import CardSheet from '../../components/card/sheet'
 import List from '../../components/list'
 import Dashboard from '../../components/dashboard'
 import { fetchAll } from '../../fetch'
+import { readList } from '../../store/card/service'
 
-const AdminPage = () => {
+type Props = {
+    onReadCards: Function;
+}
+
+const AdminPage = (props: Props) => {
+    const { onReadCards } = props
     const [state, setState] = useState<Partial<TotalData>>({})
-    const { comments = [], rates = [], labels = [], users = [], cards = [], lists = [], dashboards = [] } = state;
+    const {
+        comments = [],
+        rates = [],
+        labels = [],
+        users = [],
+        cards = [],
+        lists = [],
+        dashboards = []
+    } = state;
 
     useEffect(() => {
         fetchAll().then(r => setState(r))
+        onReadCards()
     }, [])
 
     return (
@@ -61,4 +77,11 @@ const AdminPage = () => {
     )
 }
 
-export default AdminPage
+const mapStateToProps = (state: IGlobalState) => ({
+})
+
+const mapDispatchToProps = (dispatch: any) => ({
+    onReadCards: () => dispatch(readList())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminPage)

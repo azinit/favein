@@ -79,3 +79,17 @@ declare type ICard = Omit<ICardDTO, 'listId'> & {
     labels: ILabel[];
     rates: IRate[];
 }
+
+/// start region `store`
+declare type EntryState<T> = {
+    entries: T[];
+    current?: T;
+    data: Partial<T>;
+}
+declare type CardEntryState = EntryState<ICard>;
+
+declare type IGlobalState = {
+    cards: CardEntryState;
+}
+
+declare type GlobalStateGetter = () => IGlobalState;
