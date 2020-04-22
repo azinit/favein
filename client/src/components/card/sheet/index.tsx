@@ -1,8 +1,8 @@
 import React from 'react'
 import { Card as BCard, Breadcrumb } from 'react-bootstrap'
-import Label from '../../label'
-import Comment from '../../comment'
-import Rate from '../../rate'
+import Label from 'components/label'
+import Comment from 'components/comment'
+import Rate from 'components/rate'
 
 type Props = {
     card: ICard;

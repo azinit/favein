@@ -1,5 +1,5 @@
 declare type APIResponse<T> = Promise<
-    import('../../node_modules/axios').AxiosResponse<T>
+    import('axios').AxiosResponse<T>
 >
 
 declare type ICRUDService<T, D = T> = {

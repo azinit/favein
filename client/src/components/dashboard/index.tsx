@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card as BCard } from 'react-bootstrap'
-import List from '../list'
+import List from 'components/list'
 import './index.scss'
 
 type Props = {

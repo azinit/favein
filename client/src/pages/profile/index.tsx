@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { Card, Jumbotron, Tabs, Tab } from 'react-bootstrap'
-import { fetchAll } from '../../fetch'
-import Loader from '../../components/loader'
-import User from '../../components/user'
-import Dashboard from '../../components/dashboard'
+import { fetchAll } from 'fetch'
+import Loader from 'components/loader'
+import User from 'components/user'
+import Dashboard from 'components/dashboard'
 
 type Params = {
     id: string;

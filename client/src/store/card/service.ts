@@ -1,5 +1,5 @@
 import { updateEntries } from './slice'
-import API from '../../fetch'
+import API from 'fetch'
 
 // export const create = () => (dispatch: any, getState: () => IGlobalState) => {
 //     // const { data, entries, current } = getState().cards;

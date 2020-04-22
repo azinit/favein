@@ -1,5 +1,5 @@
 import React from 'react'
-import CardItem from '../card/item'
+import CardItem from 'components/card/item'
 import './index.scss'
 
 type Props = {

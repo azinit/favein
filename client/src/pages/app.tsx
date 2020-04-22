@@ -1,9 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import Loader from '../components/loader'
+import Loader from 'components/loader'
 import './app.scss'
-import { store } from '../store';
+import { store } from 'store';
 
 const HomePage = React.lazy(() => import('./home'))
 const ProfilePage = React.lazy(() => import('./profile'))

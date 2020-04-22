@@ -1,8 +1,8 @@
 import React from 'react'
 import { Card as BCard } from 'react-bootstrap'
 import { ChatSquare } from 'react-bootstrap-icons'
-import Label from '../../label'
-import Rate from '../../rate'
+import Label from 'components/label'
+import Rate from 'components/rate'
 
 type Props = {
     card: ICard;
