@@ -13,7 +13,7 @@ type Params = {
 type Props = RouteComponentProps<Params> & {
 }
 
-const ProfilePage = (props: Props) => {
+const UserPage = (props: Props) => {
     const { match } = props
     const { params: { id } } = match;
     const [state, setState] = useState<Partial<TotalData>>({})
@@ -66,4 +66,4 @@ const ProfilePage = (props: Props) => {
     )
 }
 
-export default ProfilePage
+export default UserPage
