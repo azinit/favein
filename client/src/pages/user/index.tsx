@@ -1,8 +1,9 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Card, Jumbotron, Tabs, Tab } from 'react-bootstrap'
+import { Jumbotron, CardDeck, Container } from 'react-bootstrap'
 import Dashboard from 'components/dashboard'
+import DashboardItem from 'components/dashboard/item'
 
 type Params = {
     id: string;
@@ -23,25 +24,23 @@ const UserPage = (props: Props) => {
         return <div>Такого пользователя не существует</div>
     }
     return (
-        <Jumbotron className="bg-white">
-            <Card>
+        <div className="user-page">
+            <Jumbotron className="bg-white p-0 mt-4">
                 <h1 className="text-center">{user.username}'s dashboards</h1>
-                <Card.Body>
-                    <Tabs id="dashboards-tabs">
-                        {userDashboards.map(dashboard => (
-                            <Tab key={dashboard.id} eventKey={dashboard.id} title={dashboard.name}>
-                                <Dashboard
-                                    dashboard={dashboard}
-                                    lists={lists}
-                                    cards={cards}
-                                />
-                            </Tab>
+            </Jumbotron>
+            <Jumbotron className="bg-white p-2">
+                <Container>
+                    <CardDeck className="justify-content-center">
+                        {[...userDashboards, ...userDashboards, ...userDashboards, ...userDashboards, ...userDashboards].map(dashboard => (
+                            <DashboardItem
+                                dashboard={dashboard}
+                            />
                         ))}
-                    </Tabs>
-                    {(userDashboards.length === 0) && <div>У пользователя нет еще ни одного дашборда</div>}
-                </Card.Body>
-            </Card>
-        </Jumbotron>
+                        {(userDashboards.length === 0) && <div>У пользователя нет еще ни одного дашборда</div>}
+                    </CardDeck>
+                </Container>
+            </Jumbotron>
+        </div>
     )
 }
 
