@@ -1,16 +1,33 @@
 .dashboard-item {
     height: 250px;
     width: 300px;
-    flex: unset!important;
-    margin-bottom: 15px!important;
+    flex: unset !important;
+    margin-bottom: 15px !important;
 
     .card-img-overlay {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.6);
+        transition: opacity 0.2s;
     }
 
     .card-img {
         background-size: cover;
         height: 100%;
         object-fit: cover;
+    }
+
+    &:hover, &.hover {
+        .card-img-overlay {
+            opacity: 0.7;
+            cursor: pointer;
+        }
+        .card-img {
+            // TODO:
+            // overflow: hidden;
+            // width: 300px;
+            // height: 250px;
+            // max-height: 250px;
+            // max-width: 300px;
+            // transform: scale(1.25);
+        }
     }
 }
