@@ -19,6 +19,7 @@ declare type SharedState = {
 
 declare type IGlobalState = {
     cards: CardEntryState;
+    shared: SharedState;
 }
 
 declare type GlobalStateGetter = () => IGlobalState;

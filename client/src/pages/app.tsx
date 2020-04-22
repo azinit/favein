@@ -1,9 +1,10 @@
-import React from 'react';
-import { Provider } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import { store } from 'store';
+import { updateState } from 'store/shared/slice';
 import Loader from 'components/loader'
 import Header from 'components/header'
+import { fetchAll } from 'api'
 import './app.scss'
 
 const HomePage = React.lazy(() => import('./home'))
@@ -16,23 +17,27 @@ const UsersPage = React.lazy(() => import('./users'))
 // TODO: withRouting
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    fetchAll().then(r => dispatch(updateState(r)))
+  }, [])
+
   return (
-    <Provider store={store}>
-      <div className="favein-app">
-        <Header/>
-        <BrowserRouter>
-          <React.Suspense fallback={<Loader className="overlay" />}>
-            <Switch>
-              <Route path="/home" component={HomePage} />
-              <Route path="/admin" component={AdminPage} />
-              <Route path="/users/:id" component={UserPage} />
-              <Route path="/users" component={UsersPage} />
-              <Redirect to="admin" />
-            </Switch>
-          </React.Suspense>
-        </BrowserRouter>
-      </div>
-    </Provider>
+    <div className="favein-app">
+      <Header />
+      <BrowserRouter>
+        <React.Suspense fallback={<Loader className="overlay" />}>
+          <Switch>
+            <Route path="/home" component={HomePage} />
+            <Route path="/admin" component={AdminPage} />
+            <Route path="/users/:id" component={UserPage} />
+            <Route path="/users" component={UsersPage} />
+            <Redirect to="admin" />
+          </Switch>
+        </React.Suspense>
+      </BrowserRouter>
+    </div>
   );
 }
 

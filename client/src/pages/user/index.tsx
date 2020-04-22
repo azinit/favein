@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { Card, Jumbotron, Tabs, Tab } from 'react-bootstrap'
-import { fetchAll } from 'api'
-import Loader from 'components/loader'
-import User from 'components/user'
 import Dashboard from 'components/dashboard'
 
 type Params = {
@@ -16,29 +14,10 @@ type Props = RouteComponentProps<Params> & {
 const UserPage = (props: Props) => {
     const { match } = props
     const { params: { id } } = match;
-    const [state, setState] = useState<Partial<TotalData>>({})
-    const [loading, setLoading] = useState(true)
-    const {
-        comments = [],
-        rates = [],
-        labels = [],
-        users = [],
-        cards = [],
-        lists = [],
-        dashboards = []
-    } = state;
+    const { users, dashboards, lists, cards } = useSelector((state: IGlobalState) => state.shared)
 
     const user = users.find(u => u.id === +id)
     const userDashboards = dashboards.filter(d => d.author.id === +id)
-
-    useEffect(() => {
-        fetchAll().then(r => setState(r))
-        setLoading(false)
-    }, [])
-
-    if (loading) {
-        return <Loader className="overlay" />
-    }
 
     if (user === undefined) {
         return <div>Такого пользователя не существует</div>
