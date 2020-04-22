@@ -7,7 +7,7 @@ import Header from 'components/header'
 import './app.scss'
 
 const HomePage = React.lazy(() => import('./home'))
-const ProfilePage = React.lazy(() => import('./profile'))
+const UserPage = React.lazy(() => import('./user'))
 const AdminPage = React.lazy(() => import('./admin'))
 const UsersPage = React.lazy(() => import('./users'))
 
@@ -24,8 +24,8 @@ function App() {
           <React.Suspense fallback={<Loader className="overlay" />}>
             <Switch>
               <Route path="/home" component={HomePage} />
-              <Route path="/profile/:id" component={ProfilePage} />
               <Route path="/admin" component={AdminPage} />
+              <Route path="/users/:id" component={UserPage} />
               <Route path="/users" component={UsersPage} />
               <Redirect to="admin" />
             </Switch>

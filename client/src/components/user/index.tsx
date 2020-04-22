@@ -13,7 +13,7 @@ const User = (props: Props) => {
             <Card className="user">
                 <Card.Header>
                     <PersonFill className="mr-2" />
-                    <Link to={`/profile/${id}`}>{username}</Link>
+                    <Link to={`/users/${id}`}>{username}</Link>
                 </Card.Header>
                 <Card.Body>
                     <Card.Title>{email} </Card.Title>
