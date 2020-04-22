@@ -5,7 +5,7 @@ declare type APIResponse<T> = Promise<
 declare type ICRUDService<T, D = T> = {
     api: string;
     readList: () => APIResponse<T[]>;
-    create: (details: D) => APIResponse<boolean>;
+    create: (details: D) => APIResponse<number>;
     read: (id: number) => APIResponse<T>;
     update: (details: D) => APIResponse<boolean>;
     delete: (id: number) => APIResponse<boolean>;

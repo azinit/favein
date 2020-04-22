@@ -21,29 +21,31 @@ const CardSheet = (props: Props) => {
                 <BCard.Title className="text-center">{name}</BCard.Title>
                 <BCard.Subtitle className="text-secondary text-center mb-4">{author.username} ({author.email})</BCard.Subtitle>
                 <BCard.Text>
-                    {labels &&
-                        <div className="labels d-flex justify-content-center mb-4">
-                            {labels.map(l => <Label key={l.id} label={l} />)}
+                    <div>
+                        {labels && (
+                            <div className="labels d-flex justify-content-center mb-4">
+                                {labels.map(l => <Label key={l.id} label={l} />)}
+                            </div>
+                        )}
+                        {description && (
+                            <div className="summary mb-4 border border-secondary rounded p-4">
+                                {description}
+                            </div>
+                        )}
+                        <div className="content mb-4">
+                            {content}
                         </div>
-                    }
-                    {description &&
-                        <div className="summary mb-4 border border-secondary rounded p-4">
-                            {description}
-                        </div>
-                    }
-                    <div className="content mb-4">
-                        {content}
+                        {rates && (
+                            <div className="rates d-flex mb-4">
+                                {rates.map(r => <Rate key={r.id} rate={r} />)}
+                            </div>
+                        )}
+                        {comments && (
+                            <div className="comments d-flex">
+                                {comments.map(c => <Comment key={c.id} comment={c} />)}
+                            </div>
+                        )}
                     </div>
-                    {rates &&
-                        <div className="rates d-flex mb-4">
-                            {rates.map(r => <Rate key={r.id} rate={r} />)}
-                        </div>
-                    }
-                    {comments &&
-                        <div className="comments d-flex">
-                            {comments.map(c => <Comment key={c.id} comment={c} />)}
-                        </div>
-                    }
                 </BCard.Text>
             </BCard.Body>
         </BCard>
