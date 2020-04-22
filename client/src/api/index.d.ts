@@ -19,7 +19,7 @@ declare type IDashboardsService = ICRUDService<IDashboard, IDashboardDTO>;
 declare type IListsService = ICRUDService<IList, IListDTO>;
 declare type ICardsService = ICRUDService<ICard, ICardDTO>;
 
-declare type IFetchService = {
+declare type APIService = {
     comments: ICommentsService;
     rates: IRatesService;
     labels: ILabelsService;

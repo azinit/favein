@@ -9,7 +9,7 @@ import User from 'components/user'
 import CardSheet from 'components/card/sheet'
 import List from 'components/list'
 import Dashboard from 'components/dashboard'
-import { fetchAll } from 'fetch'
+import { fetchAll } from 'api'
 import { readList } from 'store/card/service'
 
 type Props = {

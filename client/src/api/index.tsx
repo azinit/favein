@@ -1,6 +1,6 @@
 import { configureCRUDService } from "./helpers";
 
-const Fetch: IFetchService = {
+const API: APIService = {
     comments: configureCRUDService('comments'),
     rates: configureCRUDService('rates'),
     labels: configureCRUDService('labels'),
@@ -12,15 +12,15 @@ const Fetch: IFetchService = {
 
 export const fetchAll = () => {
     return new Promise<TotalData>(async (resolve, reject) => {
-        const comments = (await Fetch.comments.readList()).data;
-        const rates = (await Fetch.rates.readList()).data;
-        const labels = (await Fetch.labels.readList()).data;
-        const users = (await Fetch.users.readList()).data;
-        const cards = (await Fetch.cards.readList()).data;
-        const lists = (await Fetch.lists.readList()).data;
-        const dashboards = (await Fetch.dashboards.readList()).data;
+        const comments = (await API.comments.readList()).data;
+        const rates = (await API.rates.readList()).data;
+        const labels = (await API.labels.readList()).data;
+        const users = (await API.users.readList()).data;
+        const cards = (await API.cards.readList()).data;
+        const lists = (await API.lists.readList()).data;
+        const dashboards = (await API.dashboards.readList()).data;
         resolve({ comments, rates, labels, users, cards, lists, dashboards })
     })
 }
 
-export default Fetch;
+export default API;

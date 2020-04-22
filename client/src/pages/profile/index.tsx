@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { Card, Jumbotron, Tabs, Tab } from 'react-bootstrap'
-import { fetchAll } from 'fetch'
+import { fetchAll } from 'api'
 import Loader from 'components/loader'
 import User from 'components/user'
 import Dashboard from 'components/dashboard'
