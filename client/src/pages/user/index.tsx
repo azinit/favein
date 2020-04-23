@@ -2,7 +2,7 @@ import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Jumbotron, CardDeck, Container } from 'react-bootstrap'
-import Dashboard from 'components/dashboard'
+import AddDashboard from 'components/dashboard/add'
 import DashboardItem from 'components/dashboard/item'
 
 type Params = {
@@ -16,6 +16,7 @@ const UserPage = (props: Props) => {
     const { match } = props
     const { params: { id } } = match;
     const { users, dashboards, lists, cards } = useSelector((state: IGlobalState) => state.shared.entries)
+    const { current } = useSelector((state: IGlobalState) => state.shared.auth)
 
     const user = users.find(u => u.id === +id)
     const userDashboards = dashboards.filter(d => d.author.id === +id)
@@ -37,6 +38,7 @@ const UserPage = (props: Props) => {
                             />
                         ))}
                         {(userDashboards.length === 0) && <div>У пользователя нет еще ни одного дашборда</div>}
+                        {(current.id === +id) && <AddDashboard />}
                     </CardDeck>
                 </Container>
             </Jumbotron>
