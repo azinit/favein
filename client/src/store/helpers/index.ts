@@ -45,6 +45,9 @@ const createGenericSlice = <
                     ...action.payload
                 }
             },
+            resetDTODetails(state: EntryState<T, D>) {
+                state.data = {}
+            },
             ...reducers
         }
     })
@@ -91,3 +94,5 @@ export const configureEntitySlice = <T, D>(name: string) => {
 
 // return slice;
 // }
+
+// FIXME: unknown types

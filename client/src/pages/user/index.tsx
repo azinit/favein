@@ -34,6 +34,7 @@ const UserPage = (props: Props) => {
                     <CardDeck className="justify-content-center">
                         {[...userDashboards, ...userDashboards, ...userDashboards, ...userDashboards, ...userDashboards].map(dashboard => (
                             <DashboardItem
+                                // key={dashboard.id}
                                 dashboard={dashboard}
                             />
                         ))}

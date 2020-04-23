@@ -24,8 +24,11 @@ declare type SharedState = {
 }
 
 declare type IGlobalState = {
-    cards: CardEntryState;
     shared: SharedState;
+    dashboards: EntryState<IDashboard, IDashboardDTO>;
+    lists: EntryState<IList, IListDTO>;
+    cards: EntryState<ICard, ICardDTO>;
+    rates: EntryState<IRate, IRateDTO>;
 }
 
 declare type GlobalStateGetter = () => IGlobalState;
