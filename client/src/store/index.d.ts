@@ -8,13 +8,18 @@ declare type EntryState<T> = {
 }
 declare type CardEntryState = EntryState<ICard>;
 declare type SharedState = {
-    comments: IComment[];
-    rates: IRate[];
-    labels: ILabel[];
-    dashboards: IDashboard[];
-    lists: IList[];
-    cards: ICard[];
-    users: IUser[];
+    auth: {
+        current: IUser;
+    }
+    entries: {
+        comments: IComment[];
+        rates: IRate[];
+        labels: ILabel[];
+        dashboards: IDashboard[];
+        lists: IList[];
+        cards: ICard[];
+        users: IUser[];
+    }
 }
 
 declare type IGlobalState = {

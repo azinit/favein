@@ -15,7 +15,7 @@ type Props = RouteComponentProps<Params> & {
 const UserPage = (props: Props) => {
     const { match } = props
     const { params: { id } } = match;
-    const { users, dashboards, lists, cards } = useSelector((state: IGlobalState) => state.shared)
+    const { users, dashboards, lists, cards } = useSelector((state: IGlobalState) => state.shared.entries)
 
     const user = users.find(u => u.id === +id)
     const userDashboards = dashboards.filter(d => d.author.id === +id)

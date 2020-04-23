@@ -1,13 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export const sharedState: SharedState = {
-    comments: [],
-    rates: [],
-    labels: [],
-    dashboards: [],
-    lists: [],
-    cards: [],
-    users: [],
+    auth: {
+        current: {
+            id: 1,
+            username: 'admin',
+            password: 'admin',
+            email: 'admin@gmail.com',
+            roles: ['ADMIN', 'USER'],
+            enabled: true,
+            admin: true,
+            active: true,
+            accountNonLocked: true,
+            accountNonExpired: true
+        }
+    },
+    entries: {
+        comments: [],
+        rates: [],
+        labels: [],
+        dashboards: [],
+        lists: [],
+        cards: [],
+        users: [],
+    }
 }
 
 const sharedSlice = createSlice({
