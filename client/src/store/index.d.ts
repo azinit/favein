@@ -1,10 +1,11 @@
 /// <reference types="./schema" />
+/// <reference types="./helpers" />
 
 /// start region `store`
-declare type EntryState<T> = {
+declare interface EntryState<T, D = T> {
     entries: T[];
     current?: T;
-    data: Partial<T>;
+    data: Partial<D>;
 }
 declare type CardEntryState = EntryState<ICard>;
 declare type SharedState = {
