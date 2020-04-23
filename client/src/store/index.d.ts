@@ -7,6 +7,8 @@ declare interface EntryState<T, D = T> {
     current?: T;
     data: Partial<D>;
 }
+
+declare type IBLModel = IComment | IRate | ILabel | IDashboard | IList | ICard | IUser
 declare type CardEntryState = EntryState<ICard>;
 declare type SharedState = {
     auth: {

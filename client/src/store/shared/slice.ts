@@ -36,10 +36,19 @@ const sharedSlice = createSlice({
                 ...action.payload
             }
             return state;
+        },
+        addEntry(state: SharedState, action: PayloadAction<{
+            key: keyof typeof sharedState.entries;
+            payload: IBLModel;
+        }>) {
+            const { key, payload } = action.payload
+            // FIXME: impl!!! refactor!!!
+            state.entries[key].push(payload as any)
+            return state;
         }
     }
 })
 
-export const { updateState } = sharedSlice.actions
+export const { updateState, addEntry } = sharedSlice.actions
 
 export const sharedReducer = sharedSlice.reducer

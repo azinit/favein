@@ -32,7 +32,7 @@ const UserPage = (props: Props) => {
             <Jumbotron className="bg-white p-2">
                 <Container>
                     <CardDeck className="justify-content-center">
-                        {[...userDashboards, ...userDashboards, ...userDashboards, ...userDashboards, ...userDashboards].map(dashboard => (
+                        {userDashboards.map(dashboard => (
                             <DashboardItem
                                 // key={dashboard.id}
                                 dashboard={dashboard}
