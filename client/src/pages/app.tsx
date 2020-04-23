@@ -11,6 +11,7 @@ const HomePage = React.lazy(() => import('./home'))
 const UserPage = React.lazy(() => import('./user'))
 const AdminPage = React.lazy(() => import('./admin'))
 const UsersPage = React.lazy(() => import('./users'))
+const DashboardPage = React.lazy(() => import('./dashboard'))
 
 // TODO: withAuth
 // TODO: withStore
@@ -33,6 +34,7 @@ function App() {
             <Route path="/admin" component={AdminPage} />
             <Route path="/users/:id" component={UserPage} />
             <Route path="/users" component={UsersPage} />
+            <Route path="/dashboards/:id" component={DashboardPage} />
             <Redirect to="admin" />
           </Switch>
         </React.Suspense>

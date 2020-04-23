@@ -34,8 +34,9 @@ const UserPage = (props: Props) => {
                     <CardDeck className="justify-content-center">
                         {userDashboards.map(dashboard => (
                             <DashboardItem
-                                // key={dashboard.id}
+                                key={dashboard.id}
                                 dashboard={dashboard}
+                                showAuthor={false}
                             />
                         ))}
                         {(userDashboards.length === 0) && <div>У пользователя нет еще ни одного дашборда</div>}
