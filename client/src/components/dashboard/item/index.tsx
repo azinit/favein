@@ -29,7 +29,7 @@ const DashboardItem = (props: Props) => {
     }
 
     const onSave = () => {
-
+        setState('preview')
     }
     const onEdit = () => {
         setState('edit')
