@@ -3,9 +3,11 @@
         padding: 10px;
         color: #fff;
         background-color: transparent;
+        border-color: transparent;
+        border-bottom-color: #fff;
 
         &:disabled {
-            border-color: transparent;
+            border-bottom-color: transparent;
         }
     }
 }

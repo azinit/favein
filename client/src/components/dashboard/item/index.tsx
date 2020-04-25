@@ -23,6 +23,7 @@ const DashboardItem = (props: Props) => {
 
     const isPreview = state === 'preview'
     const isEditing = state === 'edit'
+    const isCreating = state === 'create'
 
     const onChange: OnChange = (e) => {
 
@@ -48,7 +49,7 @@ const DashboardItem = (props: Props) => {
             <Card.Img src={background} alt={`${author.username}/${name}`} />
             <Link to={`/dashboards/${id}`} className="dashboard-link">
                 <Card.ImgOverlay>
-                    <Card.Title>
+                    <Card.Title className="dashboard-name">
                         <Input
                             name="name"
                             value={name}

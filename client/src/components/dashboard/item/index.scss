@@ -21,6 +21,11 @@
         opacity: 0;
         transition: opacity 0.2s;
     }
+    .dashboard-name {
+        input {
+            font-size: 1.25rem!important;
+        }
+    }
     .dashboard-link {
         color: unset;
         text-decoration: none;
