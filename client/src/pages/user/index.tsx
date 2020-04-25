@@ -20,6 +20,7 @@ const UserPage = (props: Props) => {
 
     const user = users.find(u => u.id === +id)
     const userDashboards = dashboards.filter(d => d.author.id === +id)
+    const isCurrentUser = current.id === +id
 
     if (user === undefined) {
         return <div>Такого пользователя не существует</div>
@@ -37,10 +38,11 @@ const UserPage = (props: Props) => {
                                 key={dashboard.id}
                                 dashboard={dashboard}
                                 showAuthor={false}
+                                showActions={isCurrentUser}
                             />
                         ))}
                         {(userDashboards.length === 0) && <div>У пользователя нет еще ни одного дашборда</div>}
-                        {(current.id === +id) && <AddDashboard />}
+                        {isCurrentUser && <AddDashboard />}
                     </CardDeck>
                 </Container>
             </Jumbotron>

@@ -26,7 +26,7 @@ export const create = <D = any>(name: keyof IGlobalState & keyof APIService) => 
         console.log(storePayload)
         dispatch(resetDTODetails())
         dispatch(addEntry({
-            key: 'dashboards',
+            key: name,
             payload: storePayload
         }))
     }
