@@ -36,3 +36,5 @@ declare type IGlobalState = {
 
 declare type GlobalStateGetter = () => IGlobalState;
 declare type EntityName = keyof IGlobalState & keyof APIService;
+declare type MutationState = 'preview' | 'edit' | 'create';
+declare type OnChange<T = HTMLInputElement> = (e: React.ChangeEvent<T>) => void;
