@@ -17,6 +17,10 @@ const DashboardItem = (props: Props) => {
     const { author, background, description, id, name } = dashboard
     const dispatch = useDispatch()
 
+    const onEdit = () => {
+        console.log('EDIT: impl')
+    }
+
     const onDelete = () => {
         dispatch(deleteEntity('dashboards', id))
     }
@@ -33,7 +37,7 @@ const DashboardItem = (props: Props) => {
                     )}
                 </Card.ImgOverlay>
             </Link>
-            {showActions && <DashboardActions onDelete={onDelete} />}
+            {showActions && <DashboardActions onDelete={onDelete} onEdit={onEdit} />}
         </Card>
     )
 }
