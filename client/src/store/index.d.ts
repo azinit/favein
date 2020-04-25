@@ -8,7 +8,8 @@ declare interface EntryState<T, D = T> {
     data: Partial<D>;
 }
 
-declare type IBLModel = IComment | IRate | ILabel | IDashboard | IList | ICard | IUser
+declare type IBLModel = IComment | IRate | ILabel | IDashboard | IList | ICard | IUser;
+declare type IBLModelDTO = ICommentDTO | IRateDTO | ILabelDTO | IDashboardDTO | IListDTO | ICardDTO | IUserDTO;
 declare type CardEntryState = EntryState<ICard>;
 declare type SharedState = {
     auth: {
@@ -34,3 +35,4 @@ declare type IGlobalState = {
 }
 
 declare type GlobalStateGetter = () => IGlobalState;
+declare type EntityName = keyof IGlobalState & keyof APIService;

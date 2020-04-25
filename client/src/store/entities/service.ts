@@ -1,9 +1,15 @@
 import { Dispatch } from "react";
 import { sliceMap } from '.'
-import { addEntry } from '../shared/slice'
+import { addEntry, deleteEntry } from '../shared/slice'
 import API from 'api'
 
-export const create = <D = any>(name: keyof IGlobalState & keyof APIService) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
+const resolvePayload = (modelName: EntityName, state: IGlobalState) => {
+    switch (modelName) {
+        case 'cards':
+             
+    }
+}
+export const create = <D = any>(name: EntityName) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
     const state = getState()
     const { data } = state[name]
     const { auth } = state.shared
@@ -32,4 +38,17 @@ export const create = <D = any>(name: keyof IGlobalState & keyof APIService) => 
     }
     // TODO: reset data
     // TODO: add to dashboards list
+}
+
+export const deleteEntity = (name: EntityName, id: number) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
+    if (window.confirm('Вы действительно хотите продолжить удаление? Отменить операцию будет нельзя!')) {
+        const response = await API[name].delete(id)
+        if (response.status === 200) {
+            dispatch(deleteEntry({
+                key: name,
+                payload: id
+            }))
+        }
+    }
+    
 }

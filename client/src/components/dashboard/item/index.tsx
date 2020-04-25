@@ -1,6 +1,8 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { deleteEntity } from 'store/entities/service'
 import './index.scss'
 import DashboardActions from './dashboard-actions'
 
@@ -13,6 +15,12 @@ type Props = {
 const DashboardItem = (props: Props) => {
     const { dashboard, showAuthor = true, showActions = false } = props
     const { author, background, description, id, name } = dashboard
+    const dispatch = useDispatch()
+
+    const onDelete = () => {
+        dispatch(deleteEntity('dashboards', id))
+    }
+
     return (
         <Card className="dashboard dashboard-item" bg="dark" text="white">
             <Card.Img src={background} alt={`${author.username}/${name}`} />
@@ -25,7 +33,7 @@ const DashboardItem = (props: Props) => {
                     )}
                 </Card.ImgOverlay>
             </Link>
-            {showActions && <DashboardActions />}
+            {showActions && <DashboardActions onDelete={onDelete} />}
         </Card>
     )
 }

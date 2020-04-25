@@ -45,10 +45,22 @@ const sharedSlice = createSlice({
             // FIXME: impl!!! refactor!!!
             state.entries[key].push(payload as any)
             return state;
+        },
+        deleteEntry(state: SharedState, action: PayloadAction<{
+            key: keyof typeof sharedState.entries;
+            payload: number;
+        }>) {
+            const { key, payload } = action.payload
+            state.entries[key] = (state.entries[key] as any[]).filter(e => e.id !== payload)
+            return state;
         }
     }
 })
 
-export const { updateState, addEntry } = sharedSlice.actions
+export const {
+    updateState,
+    addEntry,
+    deleteEntry
+} = sharedSlice.actions
 
 export const sharedReducer = sharedSlice.reducer
