@@ -1,13 +1,17 @@
-.input-control {
+.text-field {
     .form-control {
         padding: 10px;
         color: #fff;
         background-color: transparent;
         border-color: transparent;
-        border-bottom-color: #fff;
+        border-bottom-color: rgb(146, 146, 146);
 
         &:disabled {
             border-bottom-color: transparent;
+        }
+        &:focus {
+            box-shadow: none;
+            border-bottom-color: rgb(220, 220, 220);
         }
     }
 }

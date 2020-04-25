@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { dashboardsSlice } from 'store/entities'
 import { deleteEntity } from 'store/entities/service'
-import Input from 'components/input'
+import TextField from 'components/text-field'
 import DashboardActions from './dashboard-actions'
 import './index.scss'
 
@@ -24,6 +24,8 @@ const DashboardItem = (props: Props) => {
     const isPreview = state === 'preview'
     const isEditing = state === 'edit'
     const isCreating = state === 'create'
+
+    const link = isEditing ? '#' : `/dashboards/${id}`
 
     const onChange: OnChange = (e) => {
 
@@ -47,10 +49,10 @@ const DashboardItem = (props: Props) => {
     return (
         <Card className="dashboard dashboard-item" bg="dark" text="white">
             <Card.Img src={background} alt={`${author.username}/${name}`} />
-            <Link to={`/dashboards/${id}`} className="dashboard-link">
+            <Link to={link} className="dashboard-link">
                 <Card.ImgOverlay>
                     <Card.Title className="dashboard-name">
-                        <Input
+                        <TextField
                             name="name"
                             value={name}
                             onChange={onChange}
@@ -58,7 +60,7 @@ const DashboardItem = (props: Props) => {
                         />
                     </Card.Title>
                     <Card.Text>
-                        <Input
+                        <TextField
                             name="description"
                             value={description}
                             onChange={onChange}

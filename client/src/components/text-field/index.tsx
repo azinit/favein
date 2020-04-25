@@ -12,7 +12,7 @@ type Props = FormControlProps & {
     className?: string;
 }
 
-const Input = (props: Props) => {
+const TextField = (props: Props) => {
     const {
         value,
         name,
@@ -27,7 +27,7 @@ const Input = (props: Props) => {
     const isEditing = mutationState == "edit"
     const isPreview = mutationState == "preview"
     return (
-        <Form.Group className={cn('input-control', `field_${name}`, mutationState, className)}>
+        <Form.Group className={cn('text-field', `field_${name}`, mutationState, className)}>
             {label && (
                 <Form.Label
                     children={label}
@@ -45,4 +45,4 @@ const Input = (props: Props) => {
     )
 }
 
-export default Input
+export default TextField
