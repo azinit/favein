@@ -1,0 +1,11 @@
+.input-control {
+    .form-control {
+        padding: 2px;
+        color: #fff;
+        background-color: transparent;
+
+        &:disabled {
+            border-color: transparent;
+        }
+    }
+}
