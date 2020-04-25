@@ -14,8 +14,8 @@ const DashboardActions = (props: Props) => {
     const buttons = [
         { id: 1, onClick: onEdit, className: 'edit', component: <PencilSquare /> },
         { id: 2, onClick: onDelete, className: 'delete', component: <Trash /> },
-        { id: 3, onClick: onCancel, className: 'cancel', component: <X /> },
-        { id: 4, onClick: onSave, className: 'save', component: <FileEarmarkCheck /> },
+        { id: 3, onClick: onSave, className: 'save', component: <FileEarmarkCheck /> },
+        { id: 4, onClick: onCancel, className: 'cancel', component: <X /> },
     ]
     return (
         <div className="dashboard-actions" style={{ width: '100%' }}>

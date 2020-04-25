@@ -21,7 +21,14 @@ const DashboardItem = (props: Props) => {
     const [state, setState] = useState<MutationState>("preview")
     const dispatch = useDispatch()
 
+    const isPreview = state === 'preview'
+    const isEditing = state === 'edit'
+
     const onChange: OnChange = (e) => {
+
+    }
+
+    const onSave = () => {
 
     }
     const onEdit = () => {
@@ -29,7 +36,7 @@ const DashboardItem = (props: Props) => {
         console.log('EDIT: impl')
     }
     const onCancel = () => {
-        setState('edit')
+        setState('preview')
     }
 
     const onDelete = () => {
@@ -64,8 +71,10 @@ const DashboardItem = (props: Props) => {
             </Link>
             {showActions && (
                 <DashboardActions
-                    onDelete={onDelete}
-                    onEdit={onEdit}
+                    onDelete={isPreview ? onDelete : undefined}
+                    onEdit={isPreview ? onEdit : undefined}
+                    onCancel={isEditing ? onCancel : undefined}
+                    onSave={isEditing ? onSave : undefined}
                 />
             )}
         </Card>
