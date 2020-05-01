@@ -23,7 +23,7 @@ const AdminPage = (props: Props) => {
     }, [])
 
     return (
-        <div>
+        <div className='page page-admin'>
             <DemoSection title="Comments">
                 {comments.map(comment => <Comment key={comment.id} comment={comment} />)}
             </DemoSection>

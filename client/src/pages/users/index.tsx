@@ -10,7 +10,7 @@ const UsersPage = () => {
     }, [])
 
     return (
-        <div>
+        <div className='page page-users'>
             <section className="jumbotron text-center">
                 <h2>Пользователи</h2>
             </section>

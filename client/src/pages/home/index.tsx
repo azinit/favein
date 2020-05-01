@@ -4,7 +4,7 @@ import './index.scss'
 
 const HomePage = () => {
     return (
-        <div className="page-home">
+        <div className="page page-home">
             <h1>Hello, home</h1>
         </div>
     )

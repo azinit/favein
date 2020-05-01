@@ -26,7 +26,7 @@ const UserPage = (props: Props) => {
         return <div>Такого пользователя не существует</div>
     }
     return (
-        <div className="user-page">
+        <div className="page page-user">
             <Jumbotron className="bg-white p-0 mt-4">
                 <h1 className="text-center">{user.username}'s dashboards</h1>
             </Jumbotron>
