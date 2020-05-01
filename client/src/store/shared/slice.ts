@@ -15,7 +15,7 @@ export const sharedState: SharedState = {
             accountNonExpired: true
         }
     },
-    entries: {
+    entities: {
         comments: [],
         rates: [],
         labels: [],
@@ -38,20 +38,20 @@ const sharedSlice = createSlice({
             return state;
         },
         addEntity(state: SharedState, action: PayloadAction<{
-            key: keyof typeof sharedState.entries;
+            key: keyof typeof sharedState.entities;
             payload: IBLModel;
         }>) {
             const { key, payload } = action.payload
             // FIXME: impl!!! refactor!!!
-            state.entries[key].push(payload as any)
+            state.entities[key].push(payload as any)
             return state;
         },
         deleteEntity(state: SharedState, action: PayloadAction<{
-            key: keyof typeof sharedState.entries;
+            key: keyof typeof sharedState.entities;
             payload: number;
         }>) {
             const { key, payload } = action.payload
-            state.entries[key] = (state.entries[key] as any[]).filter(e => e.id !== payload)
+            state.entities[key] = (state.entities[key] as any[]).filter(e => e.id !== payload)
             return state;
         }
     }

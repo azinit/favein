@@ -7,7 +7,7 @@ declare type MutableEntity<T, D = T> = {
 
 }
 declare type EntityState<T, D = T> = {
-    entries: T[];
+    entities: T[];
     current?: T;
     data: Partial<D>;
 }
@@ -19,7 +19,7 @@ declare type SharedState = {
     auth: {
         current: IUser;
     }
-    entries: {
+    entities: {
         comments: IComment[];
         rates: IRate[];
         labels: ILabel[];

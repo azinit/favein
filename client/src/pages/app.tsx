@@ -21,7 +21,7 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    fetchAll().then(r => dispatch(updateState({ entries: r })))
+    fetchAll().then(r => dispatch(updateState({ entities: r })))
   }, [])
 
   return (

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Form } from 'react-bootstrap'
 import { dashboardsSlice } from 'store/entities'
 
-const { setCurrent, updateDTODetails, updateEntries } = dashboardsSlice.actions
+const { setCurrent, updateDTODetails, updateEntities } = dashboardsSlice.actions
 
 type Props = {
 }

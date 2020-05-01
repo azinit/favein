@@ -13,7 +13,7 @@ type Props = RouteComponentProps<Params> & {
 const DashboardPage = (props: Props) => {
     const { match } = props
     const { params: { id } } = match;
-    const { dashboards, lists, cards } = useSelector((state: IGlobalState) => state.shared.entries)
+    const { dashboards, lists, cards } = useSelector((state: IGlobalState) => state.shared.entities)
 
     const dashboard = dashboards.find(d => d.id === +id)
 

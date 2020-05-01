@@ -15,7 +15,7 @@ type Props = {
 }
 
 const AdminPage = (props: Props) => {
-    const { cards, comments, dashboards, labels, lists, rates, users } = useSelector((state: IGlobalState) => state.shared.entries)
+    const { cards, comments, dashboards, labels, lists, rates, users } = useSelector((state: IGlobalState) => state.shared.entities)
     const dispatch = useDispatch()
 
     useEffect(() => {

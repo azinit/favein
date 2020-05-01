@@ -12,7 +12,7 @@ const createGenericSlice = <
 >({
     name,
     initialState = {
-        entries: [],
+        entities: [],
         current: undefined,
         data: {},
     },
@@ -26,8 +26,8 @@ const createGenericSlice = <
         name,
         initialState,
         reducers: {
-            updateEntries(state: EntityState<T, D>, action: PayloadAction<T[]>) {
-                state.entries = action.payload
+            updateEntities(state: EntityState<T, D>, action: PayloadAction<T[]>) {
+                state.entities = action.payload
             },
             /**
              * If you want to write to values of the state that depend on the generic
@@ -65,7 +65,7 @@ export const configureEntitySlice = <T, D>(name: string) => {
 //     const { name, initialState = {}, reducers = {} } = options
 
 //     const _initialState: EntityState<T, D> = {
-//         entries: [],
+//         entities: [],
 //         current: undefined,
 //         data: {},
 //     }
@@ -76,8 +76,8 @@ export const configureEntitySlice = <T, D>(name: string) => {
 //         reducers: {
 //             // FIXME:!!! https://redux-toolkit.js.org/usage/usage-with-typescript#wrapping-createslice (generic-slice)
 //             // @ts-ignore
-//             updateEntries(state: EntityState<T, D>, action: PayloadAction<T[]>) {
-//                 state.entries = action.payload
+//             updateEntities(state: EntityState<T, D>, action: PayloadAction<T[]>) {
+//                 state.entities = action.payload
 //             },
 //             // @ts-ignore
 //             setCurrent(state: EntityState<T, D>, action: PayloadAction<T | undefined>) {
