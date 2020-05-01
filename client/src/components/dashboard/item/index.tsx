@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { dashboardsSlice } from 'store/entities'
 import { deleteEntity } from 'store/entities/service'
 import TextField from 'components/text-field'
 import DashboardActions from './dashboard-actions'
 import './index.scss'
 
-const { } = dashboardsSlice.actions
+const { updateDTODetails } = dashboardsSlice.actions
 type Props = {
     dashboard: IDashboard;
     showAuthor?: boolean;
@@ -19,6 +19,7 @@ const DashboardItem = (props: Props) => {
     const { dashboard, showAuthor = true, showActions = false } = props
     const { author, background, description, id, name } = dashboard
     const [state, setState] = useState<MutationState>("preview")
+    const { data } = useSelector((state: IGlobalState) => state.dashboards)
     const dispatch = useDispatch()
 
     const isPreview = state === 'preview'
@@ -27,8 +28,12 @@ const DashboardItem = (props: Props) => {
 
     const link = isEditing ? '#' : `/dashboards/${id}`
 
+    const getValue = (name: keyof IDashboardDTO & keyof IDashboard) => {
+        return data[name] || dashboard[name] || ''
+    }
     const onChange: OnChange = (e) => {
-
+        const { name, value } = e.target
+        dispatch(updateDTODetails({ [name]: value }))
     }
 
     const onSave = () => {
@@ -54,7 +59,7 @@ const DashboardItem = (props: Props) => {
                     <Card.Title className="dashboard-name">
                         <TextField
                             name="name"
-                            value={name}
+                            value={getValue('name')}
                             onChange={onChange}
                             mutationState={state}
                         />
@@ -62,7 +67,7 @@ const DashboardItem = (props: Props) => {
                     <Card.Text>
                         <TextField
                             name="description"
-                            value={description}
+                            value={getValue('description')}
                             onChange={onChange}
                             mutationState={state}
                         />
