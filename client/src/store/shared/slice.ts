@@ -37,7 +37,7 @@ const sharedSlice = createSlice({
             }
             return state;
         },
-        addEntry(state: SharedState, action: PayloadAction<{
+        addEntity(state: SharedState, action: PayloadAction<{
             key: keyof typeof sharedState.entries;
             payload: IBLModel;
         }>) {
@@ -46,7 +46,7 @@ const sharedSlice = createSlice({
             state.entries[key].push(payload as any)
             return state;
         },
-        deleteEntry(state: SharedState, action: PayloadAction<{
+        deleteEntity(state: SharedState, action: PayloadAction<{
             key: keyof typeof sharedState.entries;
             payload: number;
         }>) {
@@ -59,8 +59,8 @@ const sharedSlice = createSlice({
 
 export const {
     updateState,
-    addEntry,
-    deleteEntry
+    addEntity,
+    deleteEntity
 } = sharedSlice.actions
 
 export const sharedReducer = sharedSlice.reducer

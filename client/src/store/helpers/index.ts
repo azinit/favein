@@ -8,7 +8,7 @@ import {
 const createGenericSlice = <
     T,
     D,
-    Reducers extends SliceCaseReducers<EntryState<T, D>>
+    Reducers extends SliceCaseReducers<EntityState<T, D>>
 >({
     name,
     initialState = {
@@ -19,14 +19,14 @@ const createGenericSlice = <
     reducers
 }: {
     name: string
-    initialState?: EntryState<T, D>
-    reducers: ValidateSliceCaseReducers<EntryState<T, D>, Reducers>
+    initialState?: EntityState<T, D>
+    reducers: ValidateSliceCaseReducers<EntityState<T, D>, Reducers>
 }) => {
     return createSlice({
         name,
         initialState,
         reducers: {
-            updateEntries(state: EntryState<T, D>, action: PayloadAction<T[]>) {
+            updateEntries(state: EntityState<T, D>, action: PayloadAction<T[]>) {
                 state.entries = action.payload
             },
             /**
@@ -36,16 +36,16 @@ const createGenericSlice = <
              * which can sometimes be problematic with yet-unresolved generics.
              * This is a general problem when working with immer's Draft type and generics.
              */
-            setCurrent(state: EntryState<T, D>, action: PayloadAction<T | undefined>) {
+            setCurrent(state: EntityState<T, D>, action: PayloadAction<T | undefined>) {
                 state.current = action.payload
             },
-            updateDTODetails(state: EntryState<T, D>, action: PayloadAction<Partial<D>>) {
+            updateDTODetails(state: EntityState<T, D>, action: PayloadAction<Partial<D>>) {
                 state.data = {
                     ...state.data,
                     ...action.payload
                 }
             },
-            resetDTODetails(state: EntryState<T, D>) {
+            resetDTODetails(state: EntityState<T, D>) {
                 state.data = {}
             },
             ...reducers
@@ -61,10 +61,10 @@ export const configureEntitySlice = <T, D>(name: string) => {
 }
 
 // NOTE: old impl
-// export const configureEntitySlice = <T, D>(options: SliceOptions<EntryState<T, D>>) => {
+// export const configureEntitySlice = <T, D>(options: SliceOptions<EntityState<T, D>>) => {
 //     const { name, initialState = {}, reducers = {} } = options
 
-//     const _initialState: EntryState<T, D> = {
+//     const _initialState: EntityState<T, D> = {
 //         entries: [],
 //         current: undefined,
 //         data: {},
@@ -72,18 +72,18 @@ export const configureEntitySlice = <T, D>(name: string) => {
 
 //     const slice = createSlice({
 //         name: name,
-//         initialState: _initialState as EntryState<T, D>
+//         initialState: _initialState as EntityState<T, D>
 //         reducers: {
 //             // FIXME:!!! https://redux-toolkit.js.org/usage/usage-with-typescript#wrapping-createslice (generic-slice)
 //             // @ts-ignore
-//             updateEntries(state: EntryState<T, D>, action: PayloadAction<T[]>) {
+//             updateEntries(state: EntityState<T, D>, action: PayloadAction<T[]>) {
 //                 state.entries = action.payload
 //             },
 //             // @ts-ignore
-//             setCurrent(state: EntryState<T, D>, action: PayloadAction<T | undefined>) {
+//             setCurrent(state: EntityState<T, D>, action: PayloadAction<T | undefined>) {
 //                 state.current = action.payload
 //             },
-//             updateDTODetails(state: EntryState<T, D>, action: PayloadAction<Partial<D>>) {
+//             updateDTODetails(state: EntityState<T, D>, action: PayloadAction<Partial<D>>) {
 //                 state.data = {
 //                     ...state.data,
 //                     ...action.payload

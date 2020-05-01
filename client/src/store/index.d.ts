@@ -2,7 +2,11 @@
 /// <reference types="./helpers" />
 
 /// start region `store`
-declare interface EntryState<T, D = T> {
+declare type MutationState = 'preview' | 'edit' | 'create';
+declare type MutableEntity<T, D = T> = {
+
+}
+declare type EntityState<T, D = T> = {
     entries: T[];
     current?: T;
     data: Partial<D>;
@@ -10,7 +14,7 @@ declare interface EntryState<T, D = T> {
 
 declare type IBLModel = IComment | IRate | ILabel | IDashboard | IList | ICard | IUser;
 declare type IBLModelDTO = ICommentDTO | IRateDTO | ILabelDTO | IDashboardDTO | IListDTO | ICardDTO | IUserDTO;
-declare type CardEntryState = EntryState<ICard>;
+declare type CardEntityState = EntityState<ICard>;
 declare type SharedState = {
     auth: {
         current: IUser;
@@ -28,13 +32,12 @@ declare type SharedState = {
 
 declare type IGlobalState = {
     shared: SharedState;
-    dashboards: EntryState<IDashboard, IDashboardDTO>;
-    lists: EntryState<IList, IListDTO>;
-    cards: EntryState<ICard, ICardDTO>;
-    rates: EntryState<IRate, IRateDTO>;
+    dashboards: EntityState<IDashboard, IDashboardDTO>;
+    lists: EntityState<IList, IListDTO>;
+    cards: EntityState<ICard, ICardDTO>;
+    rates: EntityState<IRate, IRateDTO>;
 }
 
 declare type GlobalStateGetter = () => IGlobalState;
 declare type EntityName = keyof IGlobalState & keyof APIService;
-declare type MutationState = 'preview' | 'edit' | 'create';
 declare type OnChange<T = HTMLInputElement> = (e: React.ChangeEvent<T>) => void;
