@@ -1,6 +1,9 @@
 import { Dispatch } from "react";
 import { sliceMap } from '.'
-import { addEntity, deleteEntity } from '../shared/slice'
+import { 
+    addEntity as addEntityStore,
+    deleteEntity as deleteEntityStore 
+} from '../shared/slice'
 import API from 'api'
 
 const resolvePayload = (modelName: EntityName, state: IGlobalState) => {
@@ -31,7 +34,7 @@ export const create = <D = any>(name: EntityName) => async (dispatch: Dispatch<a
         } as any
         console.log(storePayload)
         dispatch(resetDTODetails())
-        dispatch(addEntity({
+        dispatch(addEntityStore({
             key: name,
             payload: storePayload
         }))
@@ -44,7 +47,7 @@ export const deleteEntity = (name: EntityName, id: number) => async (dispatch: D
     if (window.confirm('Вы действительно хотите продолжить удаление? Отменить операцию будет нельзя!')) {
         const response = await API[name].delete(id)
         if (response.status === 200) {
-            dispatch(deleteEntity({
+            dispatch(deleteEntityStore({
                 key: name,
                 payload: id
             }))
