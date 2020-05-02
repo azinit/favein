@@ -22,7 +22,7 @@ const CardSheet = (props: Props) => {
     } as IRate
 
     return (
-        <Card className="card-sheet">
+        <Card className="card-sheet shadow-lg">
             <Breadcrumb>
                 <Breadcrumb.Item href={dashboardLink}>{dashboard.name}</Breadcrumb.Item>
                 <Breadcrumb.Item href={listLink}>{list.name}</Breadcrumb.Item>
