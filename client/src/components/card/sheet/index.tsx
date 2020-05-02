@@ -3,6 +3,8 @@ import { Card, Breadcrumb } from 'react-bootstrap'
 import Label from 'components/label'
 import Comment from 'components/comment'
 import Rate from 'components/rate'
+import ReactMarkdown from 'react-markdown'
+import CodeRenderer from 'components/code-renderer'
 import './index.scss'
 
 type Props = {
@@ -36,7 +38,10 @@ const CardSheet = (props: Props) => {
                             </div>
                         )}
                         <div className="content mb-4">
-                            {content}
+                            <ReactMarkdown 
+                                source={content}
+                                renderers={{ code: CodeRenderer }}
+                            />
                         </div>
                         {rates && (
                             <div className="rates d-flex mb-4">
