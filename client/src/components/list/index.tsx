@@ -1,4 +1,5 @@
 import React from 'react'
+import cn from 'classnames'
 import { useSelector } from 'react-redux'
 import { CardDeck, Button, Card } from 'react-bootstrap'
 import CardItemCompact from 'components/card/item-compact'
@@ -37,11 +38,19 @@ const List = (props: Props) => {
             <div className='text-muted'>(empty)</div>
         )
     })()
+    const listHash = `list-${id}`;
+    const pageHash = window.location.hash.substr(1)
+    const isSelected = pageHash === listHash
 
     return (
         <div
-            className="list bg-light rounded-lg"
-            id={`list-${id}`}
+            className={cn(
+                "list",
+                "rounded-lg",
+                'bg-light',
+                { 'border border-secondary': isSelected }
+            )}
+            id={listHash}
         >
             <a className='title h4' href={`#list-${id}`}>{name}</a>
             {description && <p>{description}</p>}
