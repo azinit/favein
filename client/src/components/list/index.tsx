@@ -9,7 +9,7 @@ type Props = {
 
 const List = (props: Props) => {
     const { cards, list } = props
-    const { author, dashboard, description, name } = list;
+    const { description, name } = list;
     // FIXME: temp
     const tcards = [...cards, ...cards, ...cards]
     // TODO: by Carousel?
