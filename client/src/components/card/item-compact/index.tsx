@@ -37,7 +37,7 @@ const CardItemCompact = (props: Props) => {
 
     const popover = (
         <Popover id='card-content'>
-            <Popover.Title as="h3">{name}</Popover.Title>
+            {/* <Popover.Title as="h3">{name}</Popover.Title> */}
             <Popover.Content>
                 <div className="summary">
                     {summary}
@@ -54,10 +54,13 @@ const CardItemCompact = (props: Props) => {
     )
 
     return (
-        <Card className="card-item-compact w-400">
+        <Card className="card-item-compact w-400 btn-outline-secondary">
             <OverlayTrigger
-                trigger="hover"
-                placement="right"
+                trigger={[
+                    "hover",
+                    "focus"
+                ]}
+                placement="bottom"
                 overlay={popover}
             >
                 <Card.Body>{name}</Card.Body>

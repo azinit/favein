@@ -21,7 +21,7 @@ const List = (props: Props) => {
             <div className="cards-list d-flex" style={{ overflow: 'auto' }}>
                 {tcards.map(card => (
                     <CardItemCompact
-                        key={card.id}
+                        key={Math.ceil(Math.random() * 1024)}
                         card={card}
                     />
                 ))}
