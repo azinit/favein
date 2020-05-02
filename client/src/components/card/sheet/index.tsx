@@ -1,8 +1,9 @@
 import React from 'react'
-import { Card as BCard, Breadcrumb } from 'react-bootstrap'
+import { Card, Breadcrumb } from 'react-bootstrap'
 import Label from 'components/label'
 import Comment from 'components/comment'
 import Rate from 'components/rate'
+import './index.scss'
 
 type Props = {
     card: ICard;
@@ -13,16 +14,16 @@ const CardSheet = (props: Props) => {
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
     return (
-        <BCard className="card-sheet" style={{ width: '100%' }}>
+        <Card className="card-sheet">
             <Breadcrumb>
                 <Breadcrumb.Item href={dashboardLink}>{dashboard.name}</Breadcrumb.Item>
                 <Breadcrumb.Item href={listLink}>{list.name}</Breadcrumb.Item>
                 <Breadcrumb.Item active>{name}</Breadcrumb.Item>
             </Breadcrumb>
-            <BCard.Body>
-                <BCard.Title className="text-center">{name}</BCard.Title>
-                <BCard.Subtitle className="text-secondary text-center mb-4">{author.username} ({author.email})</BCard.Subtitle>
-                <BCard.Text>
+            <Card.Body>
+                <Card.Title className="text-center">{name}</Card.Title>
+                <Card.Subtitle className="text-secondary text-center mb-4">{author.username} ({author.email})</Card.Subtitle>
+                <Card.Text>
                     <div>
                         {labels && (
                             <div className="labels d-flex justify-content-center mb-4">
@@ -48,9 +49,9 @@ const CardSheet = (props: Props) => {
                             </div>
                         )}
                     </div>
-                </BCard.Text>
-            </BCard.Body>
-        </BCard>
+                </Card.Text>
+            </Card.Body>
+        </Card>
     )
 }
 
