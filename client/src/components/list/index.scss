@@ -4,4 +4,14 @@
     .card-item {
         flex: 0 0 500px;
     }
+    .new-card {
+        padding: 1.25rem;
+    }
+    
+    .cards-list {
+        flex-wrap: wrap;
+        & > .card {
+            margin: 2px;
+        }
+    }
 }

@@ -1,5 +1,6 @@
 import React from 'react'
-import CardItem from 'components/card/item'
+import { CardDeck, Button, Card } from 'react-bootstrap'
+import CardItemCompact from 'components/card/item-compact'
 import './index.scss'
 
 type Props = {
@@ -19,12 +20,19 @@ const List = (props: Props) => {
             {description && <p>{description}</p>}
             <div className="cards-list d-flex" style={{ overflow: 'auto' }}>
                 {tcards.map(card => (
-                    <CardItem
+                    <CardItemCompact
                         key={card.id}
                         card={card}
                     />
                 ))}
-                {(cards.length === 0) && <span className="btn btn-outline-info">+ Card</span>}
+                {(cards.length === 0) && (
+                    <Button
+                        className='card new-card w-400'
+                        variant="outline-info"
+                    >
+                        + Card
+                    </Button>
+                )}
             </div>
         </div>
     )
