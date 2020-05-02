@@ -10,7 +10,12 @@ type Props = {
 }
 
 const Comment = (props: Props) => {
-    const { id, author, content, createdAt } = props.comment
+    const {
+        // id,
+        author,
+        content,
+        createdAt
+    } = props.comment
     return (
         <Toast className="comment">
             <Toast.Header>

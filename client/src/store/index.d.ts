@@ -6,10 +6,15 @@ declare type MutationState = 'preview' | 'edit' | 'create';
 declare type MutableEntity<T, D = T> = {
 
 }
+declare type IHaveID = {
+    id: number;
+}
 declare type EntityState<T, D = T> = {
     entities: T[];
     current?: T;
-    data: Partial<D>;
+    payload: Partial<D>;
+    mutationState?: MutationState;
+    loading: boolean;
 }
 
 declare type IBLModel = IComment | IRate | ILabel | IDashboard | IList | ICard | IUser;
@@ -18,25 +23,15 @@ declare type CardEntityState = EntityState<ICard>;
 declare type AuthState = {
     current: IUser;
 }
-declare type SharedState = {
-    entities: {
-        comments: IComment[];
-        rates: IRate[];
-        labels: ILabel[];
-        dashboards: IDashboard[];
-        lists: IList[];
-        cards: ICard[];
-        users: IUser[];
-    }
-    loading: boolean;
-}
 
 declare type IGlobalState = {
-    shared: SharedState;
     dashboards: EntityState<IDashboard, IDashboardDTO>;
     lists: EntityState<IList, IListDTO>;
     cards: EntityState<ICard, ICardDTO>;
     rates: EntityState<IRate, IRateDTO>;
+    labels: EntityState<ILabel, ILabelDTO>;
+    comments: EntityState<IComment, ICommentDTO>;
+    users: EntityState<IUser, IUserDTO>;
     auth: AuthState;
 }
 

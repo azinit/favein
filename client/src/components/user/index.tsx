@@ -7,7 +7,7 @@ type Props = {
 }
 
 const User = (props: Props) => {
-    const { email, admin, id, username, roles } = props.user
+    const { email, id, username, roles } = props.user
     return (
         <div>
             <Card className="user">

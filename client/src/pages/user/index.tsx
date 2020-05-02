@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Jumbotron, CardDeck, Container } from 'react-bootstrap'
 import Header from 'components/header'
 import AddDashboard from 'components/dashboard/add'
 import DashboardItem from 'components/dashboard/item'
 import './index.scss'
+import { readEntities } from 'store/entities/service'
 
 type Params = {
     id: string;
@@ -17,11 +18,17 @@ type Props = RouteComponentProps<Params> & {
 const UserPage = (props: Props) => {
     const { match } = props
     const { params: { id } } = match;
-    const { users, dashboards, lists, cards } = useSelector((state: IGlobalState) => state.shared.entities)
+    const { users, dashboards } = useSelector((state: IGlobalState) => state)
     const { current } = useSelector((state: IGlobalState) => state.auth)
+    const dispatch = useDispatch()
 
-    const user = users.find(u => u.id === +id)
-    const userDashboards = dashboards.filter(d => d.author.id === +id)
+    useEffect(() => {
+        dispatch(readEntities('dashboards'))
+        dispatch(readEntities('users'))
+    }, [dispatch])
+
+    const user = users.entities.find(u => u.id === +id)
+    const userDashboards = dashboards.entities.filter(d => d.author.id === +id)
     const isCurrentUser = current.id === +id
 
     if (user === undefined) {

@@ -19,10 +19,14 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: authState,
     reducers: {
+        updateState(state: AuthState, action: PayloadAction<Partial<AuthState>>) {
+            state = { ...state, ...action.payload}
+        }
     }
 })
 
 export const {
+    updateState
 } = authSlice.actions
 
 export const authReducer = authSlice.reducer

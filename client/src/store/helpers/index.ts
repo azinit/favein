@@ -1,98 +1,53 @@
-import {
-    createSlice,
-    SliceCaseReducers, ValidateSliceCaseReducers, PayloadAction
-} from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-// FIXME: temp, REFACTOR!!!
+const configureEntityState = <T extends IHaveID, D>(): EntityState<T, D> => ({
+    entities: [],
+    current: undefined,
+    payload: {},
+    mutationState: 'preview',
+    loading: false
+})
 
-const createGenericSlice = <
-    T,
-    D,
-    Reducers extends SliceCaseReducers<EntityState<T, D>>
->({
-    name,
-    initialState = {
-        entities: [],
-        current: undefined,
-        data: {},
-    },
-    reducers
-}: {
-    name: string
-    initialState?: EntityState<T, D>
-    reducers: ValidateSliceCaseReducers<EntityState<T, D>, Reducers>
-}) => {
+export const configureEntitySlice = <T extends IHaveID, D>(name: string) => {
     return createSlice({
         name,
-        initialState,
+        initialState: configureEntityState<T, D>() as EntityState<any>,
         reducers: {
+            /** Обновление mutationState */
+            setMutationState(state: EntityState<T, D>, action: PayloadAction<MutationState>) {
+                state.mutationState = action.payload
+            },
+            /** Обновления сущностей по предметной области */
             updateEntities(state: EntityState<T, D>, action: PayloadAction<T[]>) {
                 state.entities = action.payload
             },
-            /**
-             * If you want to write to values of the state that depend on the generic
-             * (in this case: `state.data`, which is T), you might need to specify the
-             * State type manually here, as it defaults to `Draft<GenericState<T>>`,
-             * which can sometimes be problematic with yet-unresolved generics.
-             * This is a general problem when working with immer's Draft type and generics.
-             */
+            /** Задать флаг загрузки */
+            setLoading(state: EntityState<T, D>, action: PayloadAction<boolean>) {
+                state.loading = action.payload
+            },
+            /** Задать текущую сущность */
             setCurrent(state: EntityState<T, D>, action: PayloadAction<T | undefined>) {
                 state.current = action.payload
             },
+            /** Задать редактируемые данные */
             updateDTODetails(state: EntityState<T, D>, action: PayloadAction<Partial<D>>) {
-                state.data = {
-                    ...state.data,
+                state.payload = {
+                    ...state.payload,
                     ...action.payload
                 }
             },
+            /** Сбросить редактируемые данные */
             resetDTODetails(state: EntityState<T, D>) {
-                state.data = {}
+                state.payload = {}
             },
-            ...reducers
+            /** Добавить сущность */
+            addEntity(state: EntityState<T, D>, action: PayloadAction<T>) {
+                state.entities.push(action.payload)
+            },
+            /** Удалить сущность */
+            removeEntity(state: EntityState<T, D>, action: PayloadAction<number>) {
+                state.entities = state.entities.filter(e => e.id === action.payload)
+            }
         }
     })
 }
-
-export const configureEntitySlice = <T, D>(name: string) => {
-    return createGenericSlice({
-        name,
-        reducers: {}
-    })
-}
-
-// NOTE: old impl
-// export const configureEntitySlice = <T, D>(options: SliceOptions<EntityState<T, D>>) => {
-//     const { name, initialState = {}, reducers = {} } = options
-
-//     const _initialState: EntityState<T, D> = {
-//         entities: [],
-//         current: undefined,
-//         data: {},
-//     }
-
-//     const slice = createSlice({
-//         name: name,
-//         initialState: _initialState as EntityState<T, D>
-//         reducers: {
-//             // FIXME:!!! https://redux-toolkit.js.org/usage/usage-with-typescript#wrapping-createslice (generic-slice)
-//             // @ts-ignore
-//             updateEntities(state: EntityState<T, D>, action: PayloadAction<T[]>) {
-//                 state.entities = action.payload
-//             },
-//             // @ts-ignore
-//             setCurrent(state: EntityState<T, D>, action: PayloadAction<T | undefined>) {
-//                 state.current = action.payload
-//             },
-//             updateDTODetails(state: EntityState<T, D>, action: PayloadAction<Partial<D>>) {
-//                 state.data = {
-//                     ...state.data,
-//                     ...action.payload
-//                 }
-//             },
-//         }
-//     })
-
-// return slice;
-// }
-
-// FIXME: unknown types

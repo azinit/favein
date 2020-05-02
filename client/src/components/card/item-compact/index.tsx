@@ -12,14 +12,14 @@ type Props = {
 
 const CardItemCompact = (props: Props) => {
     const {
-        author,
+        // author,
         content,
         comments,
-        dashboard,
+        // dashboard,
         description,
         id,
         labels,
-        list,
+        // list,
         name,
         rates
     } = props.card
@@ -58,10 +58,7 @@ const CardItemCompact = (props: Props) => {
         <Card className="card-item-compact w-400 btn-outline-secondary">
             <Link to={`/cards/${id}`} className='card-link'>
                 <OverlayTrigger
-                    trigger={[
-                        "hover",
-                        "focus"
-                    ]}
+                    trigger={["hover", "focus"]}
                     placement="bottom"
                     overlay={popover}
                 >

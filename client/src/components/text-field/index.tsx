@@ -24,8 +24,8 @@ const TextField = (props: Props) => {
         className = ""
     } = props
 
-    const isEditing = mutationState == "edit"
-    const isPreview = mutationState == "preview"
+    const isEditing = mutationState === "edit"
+    const isPreview = mutationState === "preview"
     return (
         <Form.Group className={cn('text-field', `field_${name}`, mutationState, className)}>
             {label && (

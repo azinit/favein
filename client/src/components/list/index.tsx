@@ -1,7 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
 import { useSelector } from 'react-redux'
-import { CardDeck, Button, Card } from 'react-bootstrap'
 import CardItemCompact from 'components/card/item-compact'
 import './index.scss'
 import AddCard from 'components/card/add'

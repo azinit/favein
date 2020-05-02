@@ -1,17 +1,17 @@
 import React, { ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form } from 'react-bootstrap'
-import { dashboardsSlice } from 'store/entities'
+import { getActions } from 'store/entities/service'
 import TextField from 'components/text-field'
 
-const { setCurrent, updateDTODetails, updateEntities } = dashboardsSlice.actions
+const { updateDTODetails } = getActions('dashboards')
 
 type Props = {
 }
 
 const DashboardForm = (props: Props) => {
     const dispatch = useDispatch()
-    const { background = "", description = "", name = "" } = useSelector((state: IGlobalState) => state.dashboards.data)
+    const { background = "", description = "", name = "" } = useSelector((state: IGlobalState) => state.dashboards.payload)
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target

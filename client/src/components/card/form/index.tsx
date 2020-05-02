@@ -1,14 +1,14 @@
 import React, { ChangeEvent } from 'react'
 import { Form } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
-import { cardsSlice } from 'store/entities'
+import { getActions } from 'store/entities/service'
 import TextField from 'components/text-field'
 
-const { setCurrent, updateDTODetails, updateEntities } = cardsSlice.actions
+const { updateDTODetails } = getActions('cards')
 
 const CardForm = () => {
     const dispatch = useDispatch()
-    const { description = "", name = "", content = "" } = useSelector((state: IGlobalState) => state.cards.data)
+    const { description = "", name = "", content = "" } = useSelector((state: IGlobalState) => state.cards.payload)
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target

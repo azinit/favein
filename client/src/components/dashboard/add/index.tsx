@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Card, Modal, Button } from 'react-bootstrap'
 import { Plus } from 'react-bootstrap-icons'
-import { create } from 'store/entities/service'
+import { createEntity } from 'store/entities/service'
 import FormDashboard from '../form'
 import './index.scss'
 
@@ -13,7 +13,7 @@ const AddDashboard = () => {
     const onClose = () => setShow(false);
     const onOpen = () => setShow(true);
     const onSave = () => {
-        dispatch(create('dashboards'))
+        dispatch(createEntity('dashboards'))
         onClose()
     }
 

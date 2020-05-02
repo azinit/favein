@@ -17,19 +17,18 @@ type Props = {
 
 const DashboardItem = (props: Props) => {
     const { dashboard, showAuthor = true, showActions = false } = props
-    const { author, background, description, id, name } = dashboard
+    const { author, background, id, name } = dashboard
     const [state, setState] = useState<MutationState>("preview")
-    const { data } = useSelector((state: IGlobalState) => state.dashboards)
+    const { payload } = useSelector((state: IGlobalState) => state.dashboards)
     const dispatch = useDispatch()
 
     const isPreview = state === 'preview'
     const isEditing = state === 'edit'
-    const isCreating = state === 'create'
 
     const link = isEditing ? '#' : `/dashboards/${id}`
 
     const getValue = (name: keyof IDashboardDTO & keyof IDashboard) => {
-        return data[name] || dashboard[name] || ''
+        return payload[name] || dashboard[name] || ''
     }
     const onChange: OnChange = (e) => {
         const { name, value } = e.target

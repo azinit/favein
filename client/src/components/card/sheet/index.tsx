@@ -12,7 +12,18 @@ type Props = {
 }
 
 const CardSheet = (props: Props) => {
-    const { author, content, comments, dashboard, description, id, labels, list, name, rates } = props.card
+    const {
+        author,
+        content,
+        comments,
+        dashboard,
+        description,
+        // id,
+        labels,
+        list,
+        name,
+        rates
+    } = props.card
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
     const rate = {

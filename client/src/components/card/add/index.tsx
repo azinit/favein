@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Modal, Button } from 'react-bootstrap'
-import { create } from 'store/entities/service'
+import { createEntity } from 'store/entities/service'
 import { cardsSlice } from 'store/entities'
 import FormCard from '../form'
 // import './index.scss'
@@ -26,7 +26,7 @@ const AddCard = (props: Props) => {
         setShow(true)
     };
     const onSave = () => {
-        dispatch(create('cards'))
+        dispatch(createEntity('cards'))
         onClose()
     }
 

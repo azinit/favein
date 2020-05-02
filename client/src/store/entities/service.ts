@@ -1,57 +1,48 @@
 import { Dispatch } from "react";
 import { sliceMap } from '.'
-import { 
-    addEntity as addEntityStore,
-    deleteEntity as deleteEntityStore 
-} from '../shared/slice'
 import API from 'api'
 
-const resolvePayload = (modelName: EntityName, state: IGlobalState) => {
-    switch (modelName) {
-        case 'cards':
-             
-    }
+export const getActions = (name: EntityName) => sliceMap[name].actions
+
+export const readAllEntities = () => async (dispatch: Dispatch<any>) => {
+    Object.keys(sliceMap).forEach(name => {
+        dispatch(readEntities(name as EntityName))
+    })
 }
-export const create = <D = any>(name: EntityName) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
-    const state = getState()
-    const { data } = state[name]
-    const { auth } = state
-    // FIXME: temp
-    const payload = {
-        // FIXME: more unique
+export const readEntities = (name: EntityName) => async (dispatch: Dispatch<any>) => {
+    const { updateEntities, setLoading } = getActions(name)
+    dispatch(setLoading(true))
+    const response = await API[name].readList()
+    dispatch(updateEntities(response.data as any))
+    dispatch(setLoading(false))
+}
+
+export const readEntity = (name: EntityName, id: number) => async (dispatch: Dispatch<any>) => {
+    const response = await API[name].read(id)
+    return response.data
+}
+
+export const createEntity = (name: EntityName) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
+    const { resetDTODetails, addEntity } = getActions(name)
+    const { auth, ...rest } = getState()
+    const { payload } = rest[name]
+    // FIXME: temp, more unique
+    const reqPayload = {
         authorId: auth.current.id,
-        ...data
+        ...payload
     }
-    const response = await API[name].create(payload as any)
-    if (response.status === 200) {
-        const id = response.data
-        const slice = sliceMap[name]
-        const { resetDTODetails } = slice.actions
-        const storePayload = { 
-            id, 
-            ...data,
-            author: auth.current
-        } as any
-        console.log(storePayload)
-        dispatch(resetDTODetails())
-        dispatch(addEntityStore({
-            key: name,
-            payload: storePayload
-        }))
-    }
-    // TODO: reset data
-    // TODO: add to dashboards list
+    const responseId = await API[name].create(reqPayload as any)
+    const responseEntity = await API[name].read(responseId.data)
+    dispatch(resetDTODetails())
+    dispatch(addEntity(responseEntity.data as any))
 }
 
 export const deleteEntity = (name: EntityName, id: number) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
     if (window.confirm('Вы действительно хотите продолжить удаление? Отменить операцию будет нельзя!')) {
+        const { removeEntity } = getActions(name)
         const response = await API[name].delete(id)
-        if (response.status === 200) {
-            dispatch(deleteEntityStore({
-                key: name,
-                payload: id
-            }))
+        if (response.data) {
+            dispatch(removeEntity(id))
         }
     }
-    
 }
