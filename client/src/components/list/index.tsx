@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { CardDeck, Button, Card } from 'react-bootstrap'
 import CardItemCompact from 'components/card/item-compact'
 import './index.scss'
@@ -10,10 +11,33 @@ type Props = {
 
 const List = (props: Props) => {
     const { cards, list } = props
-    const { description, name } = list;
+    const { description, name, author } = list;
     // FIXME: temp
     const tcards = [...cards, ...cards, ...cards]
-    // TODO: by Carousel?
+    const { current } = useSelector((state: IGlobalState) => state.shared.auth)
+    const isCurrentUser = current.id !== author.id
+
+    const placeholder = (() => {
+        if (cards.length > 0) {
+            return (null)
+        }
+
+        if (isCurrentUser) {
+            return (
+                <Button
+                    className='card new-card w-400'
+                    variant="outline-info"
+                >
+                    + Card
+                </Button>
+            )
+        }
+
+        return (
+            <div className='text-muted'>(empty)</div>
+        )
+    })()
+
     return (
         <div className="list bg-light rounded-lg">
             <h4>{name}</h4>
@@ -25,14 +49,7 @@ const List = (props: Props) => {
                         card={card}
                     />
                 ))}
-                {(cards.length === 0) && (
-                    <Button
-                        className='card new-card w-400'
-                        variant="outline-info"
-                    >
-                        + Card
-                    </Button>
-                )}
+                {placeholder}
             </div>
         </div>
     )
