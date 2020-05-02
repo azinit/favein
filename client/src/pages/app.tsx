@@ -1,7 +1,7 @@
 import React, { useEffect, lazy } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import { updateState } from 'store/shared/slice';
+import { updateState, setLoading } from 'store/shared/slice';
 import Loader from 'components/loader'
 import { fetchAll } from 'api'
 import './app.scss'
@@ -19,10 +19,21 @@ const CardPage = lazy(() => import('./card'))
 
 function App() {
   const dispatch = useDispatch()
+  const { loading } = useSelector((state: IGlobalState) => state.shared)
 
   useEffect(() => {
-    fetchAll().then(r => dispatch(updateState({ entities: r })))
+    dispatch(setLoading(true))
+    fetchAll().then(r => {
+      dispatch(updateState({ entities: r }))
+      dispatch(setLoading(false))
+    })
   }, [])
+  
+  if (loading) {
+    return (
+      <Loader className="overlay" />
+    )
+  }
 
   return (
     <div className="favein-app">

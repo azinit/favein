@@ -28,6 +28,7 @@ declare type SharedState = {
         cards: ICard[];
         users: IUser[];
     }
+    loading: boolean;
 }
 
 declare type IGlobalState = {

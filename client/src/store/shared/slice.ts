@@ -23,13 +23,18 @@ export const sharedState: SharedState = {
         lists: [],
         cards: [],
         users: [],
-    }
+    },
+    loading: false
 }
 
 const sharedSlice = createSlice({
     name: 'shared',
     initialState: sharedState,
     reducers: {
+        setLoading(state: SharedState, action: PayloadAction<boolean>) {
+            state.loading = action.payload
+            return state;
+        },
         updateState(state: SharedState, action: PayloadAction<Partial<SharedState>>) {
             state = {
                 ...state,
@@ -58,6 +63,7 @@ const sharedSlice = createSlice({
 })
 
 export const {
+    setLoading,
     updateState,
     addEntity,
     deleteEntity
