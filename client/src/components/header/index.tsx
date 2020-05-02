@@ -1,9 +1,14 @@
 import React from 'react'
 import { Navbar, NavDropdown, Nav, Form, FormControl, Button } from 'react-bootstrap'
+import './index.scss'
 
 const Header = () => {
     return (
-        <Navbar bg="dark" expand="lg" variant="dark">
+        <Navbar
+            className='header'
+            expand="lg"
+            variant="dark"
+        >
             <Navbar.Brand href="/home">Favein</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
