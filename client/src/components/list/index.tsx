@@ -11,7 +11,7 @@ type Props = {
 
 const List = (props: Props) => {
     const { cards, list } = props
-    const { description, name, author } = list;
+    const { description, name, author, id } = list;
     // FIXME: temp
     const tcards = [...cards, ...cards, ...cards]
     const { current } = useSelector((state: IGlobalState) => state.shared.auth)
@@ -39,8 +39,11 @@ const List = (props: Props) => {
     })()
 
     return (
-        <div className="list bg-light rounded-lg">
-            <h4>{name}</h4>
+        <div
+            className="list bg-light rounded-lg"
+            id={`list-${id}`}
+        >
+            <a className='title h4' href={`#list-${id}`}>{name}</a>
             {description && <p>{description}</p>}
             <div className="cards-list d-flex" style={{ overflow: 'auto' }}>
                 {tcards.map(card => (
