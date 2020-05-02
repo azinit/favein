@@ -17,7 +17,7 @@ const List = (props: Props) => {
     const { current } = useSelector((state: IGlobalState) => state.shared.auth)
     const isCurrentUser = current.id !== author.id
 
-    const ActionsView = isCurrentUser && <AddCard/>
+    const ActionsView = isCurrentUser && <AddCard listId={id} />
     const listHash = `list-${id}`;
     const pageHash = window.location.hash.substr(1)
     const isSelected = pageHash === listHash

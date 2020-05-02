@@ -2,15 +2,29 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Modal, Button } from 'react-bootstrap'
 import { create } from 'store/entities/service'
+import { cardsSlice } from 'store/entities'
 import FormCard from '../form'
 // import './index.scss'
 
-const AddCard = () => {
+const { resetDTODetails, updateDTODetails } = cardsSlice.actions
+
+type Props = {
+    listId: number;
+}
+
+const AddCard = (props: Props) => {
+    const { listId } = props
     const [show, setShow] = useState(false);
     const dispatch = useDispatch()
 
-    const onClose = () => setShow(false);
-    const onOpen = () => setShow(true);
+    const onClose = () => {
+        setShow(false)
+        dispatch(resetDTODetails())
+    };
+    const onOpen = () => {
+        dispatch(updateDTODetails({ listId }))
+        setShow(true)
+    };
     const onSave = () => {
         dispatch(create('cards'))
         onClose()
