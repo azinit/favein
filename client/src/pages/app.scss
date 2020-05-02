@@ -46,6 +46,14 @@ body,
         }
     }
 
+    .link-reset {
+        text-decoration: none;
+        color: unset;
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
     .w-300 {
         min-width: 300px;
         width: 300px;
