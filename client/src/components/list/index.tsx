@@ -14,8 +14,9 @@ const List = (props: Props) => {
     const tcards = [...cards, ...cards, ...cards]
     // TODO: by Carousel?
     return (
-        <div className="list border border-secondary rounded p-4">
-            <h6>{name}</h6>
+        <div className="list bg-light rounded-lg">
+            <h4>{name}</h4>
+            {description && <p>{description}</p>}
             <div className="cards-list d-flex" style={{ overflow: 'auto' }}>
                 {tcards.map(card => (
                     <CardItem
