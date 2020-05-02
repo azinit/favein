@@ -28,7 +28,7 @@ function App() {
       dispatch(setLoading(false))
     })
   }, [])
-  
+
   if (loading) {
     return (
       <Loader className="overlay" />

@@ -14,33 +14,22 @@ const List = (props: Props) => {
     const { cards, list } = props
     const { description, name, author, id } = list;
     // FIXME: temp
-    const tcards = [...cards, ...cards, ...cards]
+    const tcards = [...cards]
     const { current } = useSelector((state: IGlobalState) => state.shared.auth)
     const isCurrentUser = current.id !== author.id
 
-    const placeholder = (() => {
-        if (cards.length > 0) {
-            return (null)
-        }
-
-        if (isCurrentUser) {
-            return (
-                <Button
-                    className='card new-card w-400'
-                    variant="outline-info"
-                >
-                    + Card
-                </Button>
-            )
-        }
-
-        return (
-            <div className='text-muted'>(empty)</div>
-        )
-    })()
+    const ActionsView = isCurrentUser && (
+        <Button
+            className='card new-card w-400'
+            variant="outline-info"
+        >
+            + Card
+        </Button>
+    )
     const listHash = `list-${id}`;
     const pageHash = window.location.hash.substr(1)
     const isSelected = pageHash === listHash
+    const showPlaceholder = cards.length === 0 && !isCurrentUser
 
     return (
         <div
@@ -61,7 +50,8 @@ const List = (props: Props) => {
                         card={card}
                     />
                 ))}
-                {placeholder}
+                {ActionsView}
+                {showPlaceholder && <div className='text-muted'>(empty)</div>}
             </div>
         </div>
     )
