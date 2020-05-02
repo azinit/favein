@@ -1,5 +1,9 @@
 .card-item-compact {
     transition: .2s;
+    .card-link {
+        text-decoration: none;
+        color: unset;
+    }
 }
 
 #card-content {

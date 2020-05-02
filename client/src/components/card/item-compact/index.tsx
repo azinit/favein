@@ -4,6 +4,7 @@ import { ChatSquare } from 'react-bootstrap-icons'
 import Label from 'components/label'
 import Rate from 'components/rate'
 import './index.scss'
+import { Link } from 'react-router-dom'
 
 type Props = {
     card: ICard;
@@ -55,16 +56,18 @@ const CardItemCompact = (props: Props) => {
 
     return (
         <Card className="card-item-compact w-400 btn-outline-secondary">
-            <OverlayTrigger
-                trigger={[
-                    "hover",
-                    "focus"
-                ]}
-                placement="bottom"
-                overlay={popover}
-            >
-                <Card.Body>{name}</Card.Body>
-            </OverlayTrigger>
+            <Link to={`/cards/${id}`} className='card-link'>
+                <OverlayTrigger
+                    trigger={[
+                        "hover",
+                        "focus"
+                    ]}
+                    placement="bottom"
+                    overlay={popover}
+                >
+                    <Card.Body className='title'>{name}</Card.Body>
+                </OverlayTrigger>
+            </Link>
         </Card >
     )
 }
