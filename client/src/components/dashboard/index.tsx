@@ -27,7 +27,12 @@ const Dashboard = (props: Props) => {
                 <Card.ImgOverlay className='darken dashboard-preview-overlay'>
                     <h1>{name}</h1>
                     {/* <Card.Title className="text-center">{name}</Card.Title> */}
-                    <Badge variant="dark">{author.username} &lt;{author.email}&gt;</Badge>
+                    <a
+                        href={`/users/${author.id}`}
+                        className='btn btn-dark btn-sm rounded-pill px-4'
+                    >
+                        {author.username} &lt;{author.email}&gt;
+                    </a>
                     {/* <Card.Subtitle className="text-secondary text-center mb-4"></Card.Subtitle> */}
                     {description && (
                         <Card.Text className='mt-3 description'>
