@@ -1,7 +1,8 @@
 import React from 'react'
 import Toast from 'react-bootstrap/Toast'
-import { PeopleCircle } from 'react-bootstrap-icons'
 import moment from 'moment'
+import { PeopleCircle } from 'react-bootstrap-icons'
+import Markdown from 'components/markdown'
 import './index.scss'
 
 type Props = {
@@ -19,7 +20,7 @@ const Comment = (props: Props) => {
                 <small>{moment(createdAt).format("DD.MM.YYYY")}</small>
             </Toast.Header>
             <Toast.Body>
-                {content}
+                <Markdown source={content} />
             </Toast.Body>
         </Toast>
     )
