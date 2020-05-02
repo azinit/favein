@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import User from 'components/user'
 import API from 'api'
+import Header from 'components/header'
 
 const UsersPage = () => {
     const [users, setUsers] = useState<IUser[]>([])
@@ -11,6 +12,7 @@ const UsersPage = () => {
 
     return (
         <div className='page page-users'>
+            <Header />
             <section className="jumbotron text-center">
                 <h2>Пользователи</h2>
             </section>

@@ -2,6 +2,7 @@ import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import CardSheet from 'components/card/sheet'
+import Header from 'components/header'
 import './index.scss'
 
 type Params = {
@@ -24,6 +25,7 @@ const CardPage = (props: Props) => {
 
     return (
         <div className="page page-card">
+            <Header />
             <CardSheet
                 card={card}
             />

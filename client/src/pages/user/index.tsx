@@ -2,6 +2,7 @@ import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Jumbotron, CardDeck, Container } from 'react-bootstrap'
+import Header from 'components/header'
 import AddDashboard from 'components/dashboard/add'
 import DashboardItem from 'components/dashboard/item'
 
@@ -27,6 +28,7 @@ const UserPage = (props: Props) => {
     }
     return (
         <div className="page page-user">
+            <Header />
             <Jumbotron className="bg-white p-0 mt-4">
                 <h1 className="text-center">{user.username}'s dashboards</h1>
             </Jumbotron>

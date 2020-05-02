@@ -9,6 +9,7 @@ import User from 'components/user'
 import CardSheet from 'components/card/sheet'
 import List from 'components/list'
 import Dashboard from 'components/dashboard'
+import Header from 'components/header'
 import { readList } from 'store/card/service'
 
 type Props = {
@@ -24,6 +25,7 @@ const AdminPage = (props: Props) => {
 
     return (
         <div className='page page-admin'>
+            <Header />
             <DemoSection title="Comments">
                 {comments.map(comment => <Comment key={comment.id} comment={comment} />)}
             </DemoSection>

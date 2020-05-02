@@ -2,6 +2,7 @@ import React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Dashboard from 'components/dashboard'
+import Header from 'components/header'
 import './index.scss'
 
 type Params = {
@@ -24,6 +25,7 @@ const DashboardPage = (props: Props) => {
 
     return (
         <div className="page page-dashboard">
+            <Header />
             <Dashboard
                 dashboard={dashboard}
                 lists={lists}

@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { updateState } from 'store/shared/slice';
 import Loader from 'components/loader'
-import Header from 'components/header'
 import { fetchAll } from 'api'
 import './app.scss'
 
@@ -27,7 +26,6 @@ function App() {
 
   return (
     <div className="favein-app">
-      <Header />
       <BrowserRouter>
         <React.Suspense fallback={<Loader className="overlay" />}>
           <Switch>
