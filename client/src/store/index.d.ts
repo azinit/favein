@@ -15,10 +15,10 @@ declare type EntityState<T, D = T> = {
 declare type IBLModel = IComment | IRate | ILabel | IDashboard | IList | ICard | IUser;
 declare type IBLModelDTO = ICommentDTO | IRateDTO | ILabelDTO | IDashboardDTO | IListDTO | ICardDTO | IUserDTO;
 declare type CardEntityState = EntityState<ICard>;
+declare type AuthState = {
+    current: IUser;
+}
 declare type SharedState = {
-    auth: {
-        current: IUser;
-    }
     entities: {
         comments: IComment[];
         rates: IRate[];
@@ -37,6 +37,7 @@ declare type IGlobalState = {
     lists: EntityState<IList, IListDTO>;
     cards: EntityState<ICard, ICardDTO>;
     rates: EntityState<IRate, IRateDTO>;
+    auth: AuthState;
 }
 
 declare type GlobalStateGetter = () => IGlobalState;

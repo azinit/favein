@@ -15,7 +15,7 @@ const resolvePayload = (modelName: EntityName, state: IGlobalState) => {
 export const create = <D = any>(name: EntityName) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
     const state = getState()
     const { data } = state[name]
-    const { auth } = state.shared
+    const { auth } = state
     // FIXME: temp
     const payload = {
         // FIXME: more unique

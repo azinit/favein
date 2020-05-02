@@ -14,7 +14,7 @@ type Props = {
 const List = (props: Props) => {
     const { cards, list } = props
     const { description, name, author, id } = list;
-    const { current } = useSelector((state: IGlobalState) => state.shared.auth)
+    const { current } = useSelector((state: IGlobalState) => state.auth)
     const isCurrentUser = current.id !== author.id
 
     const ActionsView = isCurrentUser && <AddCard listId={id} />
