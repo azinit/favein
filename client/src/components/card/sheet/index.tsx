@@ -10,11 +10,13 @@ type Props = {
 
 const CardSheet = (props: Props) => {
     const { author, content, comments, dashboard, description, id, labels, list, name, rates } = props.card
+    const dashboardLink = `/dashboards/${dashboard.id}`
+    const listLink = `${dashboardLink}#list-${list.id}`
     return (
         <BCard className="card-sheet" style={{ width: '100%' }}>
             <Breadcrumb>
-                <Breadcrumb.Item href="#">{dashboard.name}</Breadcrumb.Item>
-                <Breadcrumb.Item href="#">{list.name}</Breadcrumb.Item>
+                <Breadcrumb.Item href={dashboardLink}>{dashboard.name}</Breadcrumb.Item>
+                <Breadcrumb.Item href={listLink}>{list.name}</Breadcrumb.Item>
                 <Breadcrumb.Item active>{name}</Breadcrumb.Item>
             </Breadcrumb>
             <BCard.Body>
