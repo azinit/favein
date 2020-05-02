@@ -5,6 +5,7 @@ import { Jumbotron, CardDeck, Container } from 'react-bootstrap'
 import Header from 'components/header'
 import AddDashboard from 'components/dashboard/add'
 import DashboardItem from 'components/dashboard/item'
+import './index.scss'
 
 type Params = {
     id: string;

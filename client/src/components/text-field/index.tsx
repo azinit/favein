@@ -29,9 +29,7 @@ const TextField = (props: Props) => {
     return (
         <Form.Group className={cn('text-field', `field_${name}`, mutationState, className)}>
             {label && (
-                <Form.Label
-                    children={label}
-                />
+                <Form.Label>{label}</Form.Label>
             )}
             <Form.Control
                 type={type}

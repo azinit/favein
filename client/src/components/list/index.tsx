@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { CardDeck, Button, Card } from 'react-bootstrap'
 import CardItemCompact from 'components/card/item-compact'
 import './index.scss'
+import AddCard from 'components/card/add'
 
 type Props = {
     list: IList;
@@ -16,14 +17,7 @@ const List = (props: Props) => {
     const { current } = useSelector((state: IGlobalState) => state.shared.auth)
     const isCurrentUser = current.id !== author.id
 
-    const ActionsView = isCurrentUser && (
-        <Button
-            className='card new-card border border-info w-400'
-            variant="outline-info"
-        >
-            + Card
-        </Button>
-    )
+    const ActionsView = isCurrentUser && <AddCard/>
     const listHash = `list-${id}`;
     const pageHash = window.location.hash.substr(1)
     const isSelected = pageHash === listHash
