@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Breadcrumb } from 'react-bootstrap'
+import { Card, Breadcrumb, Alert } from 'react-bootstrap'
 import Label from 'components/label'
 import Comment from 'components/comment'
 import Rate from 'components/rate'
@@ -33,12 +33,12 @@ const CardSheet = (props: Props) => {
                             </div>
                         )}
                         {description && (
-                            <div className="summary mb-4 border border-secondary rounded p-4">
+                            <Alert variant="info">
                                 {description}
-                            </div>
+                            </Alert>
                         )}
                         <div className="content mb-4">
-                            <ReactMarkdown 
+                            <ReactMarkdown
                                 source={content}
                                 renderers={{ code: CodeRenderer }}
                             />
