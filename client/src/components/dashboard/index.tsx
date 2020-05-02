@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card as BCard } from 'react-bootstrap'
+import { Card, Badge } from 'react-bootstrap'
 import List from 'components/list'
 import './index.scss'
 
@@ -13,27 +13,39 @@ const Dashboard = (props: Props) => {
     const { dashboard, lists, cards } = props
     const { author, background, description, id, name } = dashboard
     return (
-        <BCard className="dashboard" style={{ width: '100%' }}>
-            <BCard.Body>
-                <BCard.Title className="text-center">{name}</BCard.Title>
-                <BCard.Subtitle className="text-secondary text-center mb-4">{author.username} ({author.email})</BCard.Subtitle>
-                <BCard.Text>
-                    {description &&
-                        <div className="summary mb-4 border border-secondary bg-secondary text-white rounded p-4">
+        <div className="dashboard">
+            <Card
+                className="dashboard-preview border-0 rounded-0"
+                text="white"
+            >
+                <Card.Img
+                    className="background rounded-0"
+                    src={background}
+                    height={400}
+                    alt="Dashboard background"
+                />
+                <Card.ImgOverlay className='darken dashboard-preview-overlay'>
+                    <h1>{name}</h1>
+                    {/* <Card.Title className="text-center">{name}</Card.Title> */}
+                    <Badge variant="dark">{author.username} &lt;{author.email}&gt;</Badge>
+                    {/* <Card.Subtitle className="text-secondary text-center mb-4"></Card.Subtitle> */}
+                    {description && (
+                        <Card.Text className='mt-3 description'>
                             {description}
-                        </div>
-                    }
-                    <BCard.Img src={background} alt="Dashboard background" className="background" height={200}/>
-                    {lists.filter(l => l.dashboard.id === id).map(l => (
-                        <List
-                            key={l.id}
-                            list={l}
-                            cards={cards.filter(c => c.list.id === l.id)}
-                        />
-                    ))}
-                </BCard.Text>
-            </BCard.Body>
-        </BCard>
+                        </Card.Text>
+                    )}
+                </Card.ImgOverlay>
+            </Card>
+            <div className="dashboard-content">
+                {lists.filter(l => l.dashboard.id === id).map(l => (
+                    <List
+                        key={l.id}
+                        list={l}
+                        cards={cards.filter(c => c.list.id === l.id)}
+                    />
+                ))}
+            </div>
+        </div>
     )
 }
 
