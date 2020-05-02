@@ -13,14 +13,12 @@ type Props = {
 const List = (props: Props) => {
     const { cards, list } = props
     const { description, name, author, id } = list;
-    // FIXME: temp
-    const tcards = [...cards]
     const { current } = useSelector((state: IGlobalState) => state.shared.auth)
     const isCurrentUser = current.id !== author.id
 
     const ActionsView = isCurrentUser && (
         <Button
-            className='card new-card w-400'
+            className='card new-card border border-info w-400'
             variant="outline-info"
         >
             + Card
@@ -37,14 +35,15 @@ const List = (props: Props) => {
                 "list",
                 "rounded-lg",
                 'bg-light',
+                'shadow',
                 { 'border border-secondary': isSelected }
             )}
             id={listHash}
         >
             <a className='title h4' href={`#list-${id}`}>{name}</a>
             {description && <p>{description}</p>}
-            <div className="cards-list d-flex" style={{ overflow: 'auto' }}>
-                {tcards.map(card => (
+            <div className="cards-list d-flex mt-2" style={{ overflow: 'auto' }}>
+                {cards.map(card => (
                     <CardItemCompact
                         key={Math.ceil(Math.random() * 1024)}
                         card={card}
