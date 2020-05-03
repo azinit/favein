@@ -22,6 +22,7 @@ const CardPage = (props: Props) => {
 
     useEffect(() => {
         dispatch(readEntities('cards'))
+        dispatch(readEntities('labels'))
     }, [dispatch])
 
     const card = entities.find(e => e.id === +id)

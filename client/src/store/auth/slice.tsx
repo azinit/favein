@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export const authState: AuthState = {
     current: {
-        id: 1,
+        id: 2,
         username: 'admin',
         password: 'admin',
         email: 'admin@gmail.com',

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, ValidateSliceCaseReducers } from '@reduxjs/toolkit'
 
 const configureEntityState = <T extends IHaveID, D>(): EntityState<T, D> => ({
     entities: [],
@@ -47,6 +47,28 @@ export const configureEntitySlice = <T extends IHaveID, D>(name: string) => {
             /** Удалить сущность */
             removeEntity(state: EntityState<T, D>, action: PayloadAction<number>) {
                 state.entities = state.entities.filter(e => e.id !== action.payload)
+            },
+            /** Добавить связанную сущность */
+            addLinkedEntity(state: EntityState<T, D>, action: PayloadAction<{
+                parentId: number;
+                childName: string;
+                payload: any;
+            }>) {
+                const { childName, parentId, payload } = action.payload
+                const entity = state.entities.find(e => e.id === parentId)
+                // @ts-ignore
+                entity[childName].push(payload)
+            },
+            /** Удалить связанную сущность */
+            removeLinkedEntity(state: EntityState<T, D>, action: PayloadAction<{
+                parentId: number;
+                childName: string;
+                childId: number;
+            }>) {
+                const { childName, parentId, childId } = action.payload
+                const entity = state.entities.find(e => e.id === parentId)
+                // @ts-ignore
+                entity[childName] = entity[childName].filter(le => le.id !== childId)
             }
         }
     })

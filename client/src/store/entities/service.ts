@@ -44,3 +44,27 @@ export const deleteEntity = (name: EntityName, id: number) => async (dispatch: D
         dispatch(removeEntity(id))
     }
 }
+
+export const attachLabel = (cardId: number, labelId: number) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
+    const { addLinkedEntity } = getActions('cards')
+    const { entities } = getState().labels
+    const relatedLabel = entities.find(e => e.id === labelId)
+    const response = await API.cards.addLabel(cardId, labelId)
+    console.log(response)
+    dispatch(addLinkedEntity({
+        parentId: cardId,
+        payload: relatedLabel,
+        childName: 'labels',
+    }))
+}
+
+export const detachLabel = (cardId: number, labelId: number) => async (dispatch: Dispatch<any>) => {
+    const { removeLinkedEntity } = getActions('cards')
+    const response = await API.cards.deleteLabel(cardId, labelId)
+    console.log(response)
+    dispatch(removeLinkedEntity({
+        parentId: cardId,
+        childId: labelId,
+        childName: 'labels',
+    }))
+}

@@ -1,4 +1,5 @@
 import { configureCRUDService } from "./helpers";
+import axios from "axios";
 
 const API: APIService = {
     comments: configureCRUDService('comments'),
@@ -6,9 +7,19 @@ const API: APIService = {
     labels: configureCRUDService('labels'),
     dashboards: configureCRUDService('dashboards'),
     lists: configureCRUDService('lists'),
-    cards: configureCRUDService('cards'),
+    cards: {
+        ...configureCRUDService('cards'),
+        addLabel(cardId, labelId) {
+            return axios.put(`/cards/${cardId}/labels/add/${labelId}`)
+        },
+        deleteLabel(cardId, labelId) {
+            return axios.put(`/cards/${cardId}/labels/remove/${labelId}`)
+        }
+    } as ICardsService,
     users: configureCRUDService('users')
 }
+
+axios.defaults.baseURL = 'http://localhost/api'
 
 export const fetchAll = () => {
     return new Promise<TotalData>(async (resolve, reject) => {

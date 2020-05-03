@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const configureCRUDService = <T, D>(model: string) => {
     const CRUDService: ICRUDService<T, D> = {
-        api: `${process.env.REACT_APP_API_DOMAIN}/${model}`,
+        api: `/${model}`,
         readList() {
             return axios.get(this.api);
         },

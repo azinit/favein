@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Breadcrumb, Alert } from 'react-bootstrap'
-import Label from 'components/label'
+import { useSelector } from 'react-redux'
+import Label from 'components/label/mutable'
 import Comment from 'components/comment'
 import Rate from 'components/rate'
 import Markdown from 'components/markdown'
@@ -26,6 +27,8 @@ const CardSheet = (props: Props) => {
     } = props.card
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
+    const { current } = useSelector((state: IGlobalState) => state.auth)
+    const isCurrentUser = current.id === author.id
     const rate = {
         author: {},
         id: -1,
@@ -50,8 +53,8 @@ const CardSheet = (props: Props) => {
                 </section>
                 <section>
                     {labels && (
-                        <div className="labels d-flex justify-content-center">
-                            {labels.map(l => <Label key={l.id} label={l} />)}
+                        <div className="labels d-flex justify-content-center flex-wrap">
+                            {labels.map(l => <Label key={l.id} label={l} canDelete={isCurrentUser} />)}
                         </div>
                     )}
                     {description && (
