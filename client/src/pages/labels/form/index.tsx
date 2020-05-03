@@ -23,7 +23,7 @@ const LabelForm = (props: Props) => {
     }
     const onSave = () => {
         const action = (mutationState === 'create') ? createEntity : updateEntity
-            dispatch(action('labels'))
+        dispatch(action('labels'))
         onClose()
     }
 
@@ -41,8 +41,18 @@ const LabelForm = (props: Props) => {
         <Modal show={show} onHide={onHide}>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    {mutationState === 'create' && 'Создание новой метки'}
-                    {mutationState === 'edit' && 'Редактирование метки'}
+                    {mutationState === 'create' && 'Новая метка'}
+                    {mutationState === 'edit' && (
+                        <span>
+                            Метка
+                            <span
+                                className='ml-2 text-white p-1 rounded'
+                                style={{ backgroundColor: current!.color }}
+                            >
+                                {current!.name}
+                            </span>
+                        </span>
+                    )}
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
