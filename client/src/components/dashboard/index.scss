@@ -21,5 +21,9 @@
         .btn:not(:hover) {
             opacity: 0.2;
         }
+
+        .btn-block + .btn-block {
+            margin-top: 2px;
+        }
     }
 }
