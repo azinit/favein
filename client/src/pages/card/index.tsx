@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import CardSheet from 'components/card/sheet'
 import Header from 'components/header'
 import './index.scss'
-import { readEntities } from 'store/entities/service'
+import { readEntities, getActions } from 'store/entities/service'
 import Loader from 'components/loader'
 
 type Params = {
@@ -18,6 +18,7 @@ const CardPage = (props: Props) => {
     const { match } = props
     const { params: { id } } = match;
     const { entities, loading = true } = useSelector((state: IGlobalState) => state.cards)
+    const { setCurrent } = getActions('cards')
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -26,6 +27,9 @@ const CardPage = (props: Props) => {
     }, [dispatch])
 
     const card = entities.find(e => e.id === +id)
+    if (card) {
+        dispatch(setCurrent(card as any))
+    }
 
     if (loading) {
         return <Loader className='overlay' />
@@ -36,9 +40,7 @@ const CardPage = (props: Props) => {
     return (
         <div className="page page-card">
             <Header />
-            <CardSheet
-                card={card}
-            />
+            <CardSheet card={card} />
         </div>
     )
 }

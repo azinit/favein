@@ -102,3 +102,16 @@ export const addComment = (cardId: number) => async (dispatch: Dispatch<any>, ge
         childName: 'comments',
     }))
 }
+
+export const deleteComment = (cardId: number, commentId: number) => async (dispatch: Dispatch<any>) => {
+    const { removeLinkedEntity } = getActions('cards')
+    const responseDetach = await API.cards.deleteComment(cardId, commentId)
+    console.log(responseDetach)
+    const responseDelete = await API.comments.delete(commentId)
+    console.log(responseDelete)
+    dispatch(removeLinkedEntity({
+        parentId: cardId,
+        childId: commentId,
+        childName: 'comments',
+    }))
+}

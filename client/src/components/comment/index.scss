@@ -4,4 +4,10 @@
     button.close {
         display: none;
     }
+
+    .delete-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
