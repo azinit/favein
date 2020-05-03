@@ -4,18 +4,15 @@ import { addComment, getActions } from 'store/entities/service'
 import { Form, Button } from 'react-bootstrap'
 import TextField from 'components/text-field'
 
-type Props = {
-    cardId: number;
-}
-
-const CommentForm = ({ cardId }: Props) => {
+const CommentForm = () => {
 
     const { updateDTODetails } = getActions('comments')
     const dispatch = useDispatch()
     const { content = "" } = useSelector((state: IGlobalState) => state.comments.payload)
+    const { id } = useSelector((state: IGlobalState) => state.cards.current!)
 
     const onAdd = () => {
-        dispatch(addComment(cardId))
+        dispatch(addComment(id))
     }
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
