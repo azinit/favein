@@ -15,8 +15,8 @@ const List = (props: Props) => {
     const { description, name, author, id } = list;
     const { current } = useSelector((state: IGlobalState) => state.auth)
     const { mutationState } = useSelector((state: IGlobalState) => state.lists)
-    const isDeleting = true
-    const isCurrentUser = current.id !== author.id
+    const isDeleting = mutationState === 'delete'
+    const isCurrentUser = current.id === author.id
 
     const ActionsView = isCurrentUser && !isDeleting && <AddCard listId={id} />
     const listHash = `list-${id}`;
@@ -40,7 +40,7 @@ const List = (props: Props) => {
                 'bg-light',
                 'shadow',
                 { 'border border-secondary': isSelected },
-                { 'border border-danger': mutationState === 'delete' }
+                { 'border border-danger': isDeleting }
             )}
             id={listHash}
         >
