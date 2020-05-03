@@ -36,7 +36,7 @@ const Dashboard = (props: Props) => {
                             dispatch(setMutationState('delete'))
                         }}
                     >
-                        <Trash />
+                        <Trash />&nbsp;Delete Mode
                     </Button>
                 </>
             )}
@@ -50,7 +50,7 @@ const Dashboard = (props: Props) => {
                         dispatch(setMutationState('preview'))
                     }}
                 >
-                    <X />
+                    <X />&nbsp;Preview Mode
                 </Button>
             )}
         </section>

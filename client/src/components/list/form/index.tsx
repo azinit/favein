@@ -45,7 +45,7 @@ const ListForm = () => {
                     onOpen()
                 }}
             >
-                <Plus />
+                <Plus />&nbsp;New list
             </Button>
 
             <Modal show={show} onHide={onClose}>
