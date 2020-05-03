@@ -40,9 +40,7 @@ export const createEntity = (name: EntityName) => async (dispatch: Dispatch<any>
 export const deleteEntity = (name: EntityName, id: number) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
     if (window.confirm('Вы действительно хотите продолжить удаление? Отменить операцию будет нельзя!')) {
         const { removeEntity } = getActions(name)
-        const response = await API[name].delete(id)
-        if (response.data) {
-            dispatch(removeEntity(id))
-        }
+        await API[name].delete(id)
+        dispatch(removeEntity(id))
     }
 }

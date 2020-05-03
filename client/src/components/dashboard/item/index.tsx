@@ -8,7 +8,7 @@ import TextField from 'components/text-field'
 import DashboardActions from './dashboard-actions'
 import './index.scss'
 
-const { updateDTODetails } = dashboardsSlice.actions
+const { updateDTODetails, setMutationState } = dashboardsSlice.actions
 type Props = {
     dashboard: IDashboard;
     showAuthor?: boolean;
@@ -18,17 +18,24 @@ type Props = {
 const DashboardItem = (props: Props) => {
     const { dashboard, showAuthor = true, showActions = false } = props
     const { author, background, id, name } = dashboard
-    const [state, setState] = useState<MutationState>("preview")
-    const { payload } = useSelector((state: IGlobalState) => state.dashboards)
+    const { payload, mutationState } = useSelector((state: IGlobalState) => state.dashboards)
     const dispatch = useDispatch()
 
-    const isPreview = state === 'preview'
-    const isEditing = state === 'edit'
+    const isPreview = mutationState === 'preview'
+    const isEditing = mutationState === 'edit'
 
     const link = isEditing ? '#' : `/dashboards/${id}`
 
     const getValue = (name: keyof IDashboardDTO & keyof IDashboard) => {
-        return payload[name] || dashboard[name] || ''
+        // FIXME: apply not for all items!
+        switch(mutationState) {
+            case 'preview':
+                return dashboard[name]
+            case 'edit':
+                return payload[name] || dashboard[name] || ''
+            case 'create':
+                return payload[name] || ''
+        }
     }
     const onChange: OnChange = (e) => {
         const { name, value } = e.target
@@ -36,14 +43,14 @@ const DashboardItem = (props: Props) => {
     }
 
     const onSave = () => {
-        setState('preview')
+        dispatch(setMutationState('preview'))
     }
     const onEdit = () => {
-        setState('edit')
+        dispatch(setMutationState('edit'))
         console.log('EDIT: impl')
     }
     const onCancel = () => {
-        setState('preview')
+        dispatch(setMutationState('preview'))
     }
 
     const onDelete = () => {
@@ -60,17 +67,17 @@ const DashboardItem = (props: Props) => {
                             name="name"
                             value={getValue('name')}
                             onChange={onChange}
-                            mutationState={state}
+                            mutationState={mutationState}
                         />
                     </Card.Title>
-                    <Card.Text>
+                    <section>
                         <TextField
                             name="description"
                             value={getValue('description')}
                             onChange={onChange}
-                            mutationState={state}
+                            mutationState={mutationState}
                         />
-                    </Card.Text>
+                    </section>
                     {showAuthor && (
                         <Card.Text>{author.username}&nbsp;&lt;{author.email}&gt;</Card.Text>
                     )}

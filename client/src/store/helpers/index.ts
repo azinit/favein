@@ -46,7 +46,7 @@ export const configureEntitySlice = <T extends IHaveID, D>(name: string) => {
             },
             /** Удалить сущность */
             removeEntity(state: EntityState<T, D>, action: PayloadAction<number>) {
-                state.entities = state.entities.filter(e => e.id === action.payload)
+                state.entities = state.entities.filter(e => e.id !== action.payload)
             }
         }
     })
