@@ -27,22 +27,24 @@ const CardSheet = (props: Props) => {
     } = props.card
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
-    const { current } = useSelector((state: IGlobalState) => state.auth)
+
     const [mutationState, setMutationState] = React.useState<MutationState>('preview')
+
+    const { current } = useSelector((state: IGlobalState) => state.auth)
+    const totalLabels = useSelector((state: IGlobalState) => state.labels.entities)
+    const relatedLabeldIds = labels.map(l => l.id)
+    const visibleLabels = (mutationState === 'edit') ? totalLabels : labels
+
     const isCurrentUser = current.id === author.id
     const rate = {
         author: {},
         id: -1,
         value: (!rates.length) ? 0 : Math.ceil(rates.map(r => r.value).reduce((a, b) => a + b) / rates.length)
     } as IRate
-
-    return (
-        <Card className="card-sheet shadow-lg">
-            <Breadcrumb>
-                <Breadcrumb.Item href={dashboardLink}>{dashboard.name}</Breadcrumb.Item>
-                <Breadcrumb.Item href={listLink}>{list.name}</Breadcrumb.Item>
-                <Breadcrumb.Item active>{name}</Breadcrumb.Item>
-                {mutationState === 'preview' && (
+    const ActionsView = isCurrentUser && (() => {
+        switch (mutationState) {
+            case 'preview':
+                return (
                     <Button
                         variant="outline-info"
                         className='card-action edit-btn'
@@ -51,8 +53,9 @@ const CardSheet = (props: Props) => {
                     >
                         <PencilSquare size={16} />
                     </Button>
-                )}
-                {mutationState === 'edit' && (
+                )
+            case 'edit':
+                return (
                     <Button
                         variant="outline-secondary"
                         className='card-action cancel-btn'
@@ -61,7 +64,19 @@ const CardSheet = (props: Props) => {
                     >
                         <X size={16} />
                     </Button>
-                )}
+                )
+            default:
+                return (null)
+        }
+    })()
+
+    return (
+        <Card className="card-sheet shadow-lg">
+            <Breadcrumb>
+                <Breadcrumb.Item href={dashboardLink}>{dashboard.name}</Breadcrumb.Item>
+                <Breadcrumb.Item href={listLink}>{list.name}</Breadcrumb.Item>
+                <Breadcrumb.Item active>{name}</Breadcrumb.Item>
+                {ActionsView}
             </Breadcrumb>
             <Card.Body>
                 <Card.Title className="text-center">{name}</Card.Title>
@@ -75,7 +90,14 @@ const CardSheet = (props: Props) => {
                 <section>
                     {labels && (
                         <div className="labels d-flex justify-content-center flex-wrap">
-                            {labels.map(l => <Label key={l.id} label={l} canDelete={isCurrentUser} />)}
+                            {visibleLabels.map(l => (
+                                <Label
+                                    key={l.id}
+                                    label={l}
+                                    mutationState={mutationState}
+                                    isRelated={relatedLabeldIds.includes(l.id)}
+                                />
+                            ))}
                         </div>
                     )}
                     {description && (

@@ -11,8 +11,18 @@
         transform: translate(-50%, -50%);
     }
 
-    &.canDelete:hover {
-        background-color: var(--danger)!important;
+    &.other {
+        opacity: 0.2;
+    }
+
+    &.edit:hover {
+        &.related {
+            background-color: var(--danger)!important;
+        }
+        &.other {
+            opacity: 1.0;
+            background-color: var(--success)!important;
+        }
         cursor: pointer;
         .name {
             opacity: 0;

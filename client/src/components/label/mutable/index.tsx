@@ -2,40 +2,47 @@ import React from 'react'
 import cn from 'classnames'
 import { useDispatch } from 'react-redux'
 import { Badge } from 'react-bootstrap'
-import { Trash } from 'react-bootstrap-icons'
+import { Trash, Plus } from 'react-bootstrap-icons'
 import './index.scss'
-import { detachLabel } from 'store/entities/service'
+import { detachLabel, attachLabel } from 'store/entities/service'
 
 type Props = {
     label: ILabel;
-    canDelete?: boolean;
+    mutationState: MutationState;
+    isRelated: boolean;
 }
 
 const MutableLabel = (props: Props) => {
-    const [hover, setHover] = React.useState(false)
-    const { label, canDelete = true } = props
+    const { label, mutationState, isRelated } = props
     const { color, name, id } = label
     const cardId = +window.location.pathname.replace('/cards/', '')
-
     const dispatch = useDispatch()
+
+    const isPreview = mutationState === 'preview'
+    const isEditing = mutationState === 'edit'
     
-    const toggleHover = () => setHover(!hover)
     const onClick = () => {
-        if (hover) {
-            dispatch(detachLabel(cardId, id))
+        switch (mutationState) {
+            case 'edit':
+                const action = isRelated ? detachLabel : attachLabel
+                dispatch(action(cardId, id))
         }
+    }
+    const icon = isRelated ? <Trash /> : <Plus />
+    const className = isRelated ? 'related' : 'other'
+
+    if (isPreview && !isRelated) {
+        return (null)
     }
 
     return (
         <Badge
-            className={cn("mutable-label label p-2", { canDelete })}
+            className={cn("mutable-label label p-2", mutationState, className)}
             style={{ backgroundColor: color, color: '#fff' }}
-            onMouseEnter={toggleHover}
-            onMouseLeave={toggleHover}
             onClick={onClick}
         >
             <span className="name">{name}</span>
-            <span className="action"><Trash /></span>
+            <span className="action">{icon}</span>
         </Badge>
     )
 }
