@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react'
 import { Form, Modal, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import TextField from 'components/text-field'
-import { getActions, createEntity, updateEntity } from 'store/entities/service'
+import { getActions, createEntity, updateEntity, deleteEntity } from 'store/entities/service'
 const { updateDTODetails, resetDTODetails, } = getActions('labels')
 
 type Props = {
@@ -27,9 +27,13 @@ const LabelForm = (props: Props) => {
         onClose()
     }
 
+    const onDelete = () => {
+        dispatch(deleteEntity('labels', current!.id))
+        onClose()
+    }
     const getValue = (name: keyof ILabelDTO & keyof ILabel) => {
         // FIXME: apply not for all items!
-        return payload[name] || current![name] || ''
+        return payload[name] || current?.[name] || ''
     }
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,12 +49,7 @@ const LabelForm = (props: Props) => {
                     {mutationState === 'edit' && (
                         <span>
                             Метка
-                            <span
-                                className='ml-2 text-white p-1 rounded'
-                                style={{ backgroundColor: current!.color }}
-                            >
-                                {current!.name}
-                            </span>
+                            <span className='ml-2' style={{ color: current!.color }}>{current!.name}</span>
                         </span>
                     )}
                 </Modal.Title>
@@ -78,6 +77,11 @@ const LabelForm = (props: Props) => {
                 <Button variant="info" onClick={onSave}>
                     Save
                 </Button>
+                {mutationState === 'edit' && (
+                    <Button variant="danger" onClick={onDelete}>
+                        Delete
+                    </Button>
+                )}
             </Modal.Footer>
         </Modal>
     )
