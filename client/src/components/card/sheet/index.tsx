@@ -1,11 +1,11 @@
 import React from 'react'
-import { Card, Breadcrumb, Alert } from 'react-bootstrap'
+import { Card, Breadcrumb, Alert, Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import Label from 'components/label/mutable'
 import Comment from 'components/comment'
 import Rate from 'components/rate'
 import Markdown from 'components/markdown'
-import { ChatSquare, PersonFill } from 'react-bootstrap-icons'
+import { ChatSquare, PersonFill, PencilSquare, X } from 'react-bootstrap-icons'
 import './index.scss'
 
 type Props = {
@@ -28,6 +28,7 @@ const CardSheet = (props: Props) => {
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
     const { current } = useSelector((state: IGlobalState) => state.auth)
+    const [mutationState, setMutationState] = React.useState<MutationState>('preview')
     const isCurrentUser = current.id === author.id
     const rate = {
         author: {},
@@ -41,6 +42,26 @@ const CardSheet = (props: Props) => {
                 <Breadcrumb.Item href={dashboardLink}>{dashboard.name}</Breadcrumb.Item>
                 <Breadcrumb.Item href={listLink}>{list.name}</Breadcrumb.Item>
                 <Breadcrumb.Item active>{name}</Breadcrumb.Item>
+                {mutationState === 'preview' && (
+                    <Button
+                        variant="outline-info"
+                        className='card-action edit-btn'
+                        size="sm"
+                        onClick={() => setMutationState('edit')}
+                    >
+                        <PencilSquare size={16} />
+                    </Button>
+                )}
+                {mutationState === 'edit' && (
+                    <Button
+                        variant="outline-secondary"
+                        className='card-action cancel-btn'
+                        size="sm"
+                        onClick={() => setMutationState('preview')}
+                    >
+                        <X size={16} />
+                    </Button>
+                )}
             </Breadcrumb>
             <Card.Body>
                 <Card.Title className="text-center">{name}</Card.Title>

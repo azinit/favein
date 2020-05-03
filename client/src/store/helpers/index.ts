@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, ValidateSliceCaseReducers } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const configureEntityState = <T extends IHaveID, D>(): EntityState<T, D> => ({
     entities: [],
