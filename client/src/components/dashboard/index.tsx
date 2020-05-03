@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Badge } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import List from 'components/list'
 import './index.scss'
 

@@ -20,6 +20,10 @@
         flex: 0 0 500px;
     }
     .new-card {
+        transition: 0.3s;
+        &:not(:hover) {
+            opacity: 0.3;
+        }
         padding: 1.25rem;
     }
     
