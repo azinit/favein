@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import './index.scss'
 import { Trash, X } from 'react-bootstrap-icons'
 import { getActions } from 'store/entities/service'
+import ListForm from 'components/list/form'
 
 type Props = {
     dashboard: IDashboard;
@@ -24,17 +25,20 @@ const Dashboard = (props: Props) => {
     const toolbar = (
         <section className="toolbar text-center">
             {mutationState === 'preview' && (
-                <Button
-                    block
-                    variant="outline-danger"
-                    className='rounded-0'
-                    onClick={() => {
-                        console.log('=> DeleteMode')
-                        dispatch(setMutationState('delete'))
-                    }}
-                >
-                    <Trash />
-                </Button>
+                <>
+                    <ListForm />
+                    <Button
+                        block
+                        variant="outline-danger"
+                        className='rounded-0'
+                        onClick={() => {
+                            console.log('=> DeleteMode')
+                            dispatch(setMutationState('delete'))
+                        }}
+                    >
+                        <Trash />
+                    </Button>
+                </>
             )}
             {mutationState === 'delete' && (
                 <Button
