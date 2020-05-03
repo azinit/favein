@@ -1,12 +1,14 @@
 import React from 'react'
-import { Card, Breadcrumb, Alert, Button } from 'react-bootstrap'
+import { Card, Breadcrumb, Alert } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import Label from 'components/label/mutable'
 import Comment from 'components/comment'
 import Rate from 'components/rate'
 import Markdown from 'components/markdown'
-import { ChatSquare, PersonFill, PencilSquare, X } from 'react-bootstrap-icons'
+import { ChatSquare, PersonFill } from 'react-bootstrap-icons'
 import './index.scss'
+import CardActions from './actions'
+import CommentForm from './comment-form'
 
 type Props = {
     card: ICard;
@@ -19,7 +21,7 @@ const CardSheet = (props: Props) => {
         comments,
         dashboard,
         description,
-        // id,
+        id,
         labels,
         list,
         name,
@@ -41,34 +43,7 @@ const CardSheet = (props: Props) => {
         id: -1,
         value: (!rates.length) ? 0 : Math.ceil(rates.map(r => r.value).reduce((a, b) => a + b) / rates.length)
     } as IRate
-    const ActionsView = isCurrentUser && (() => {
-        switch (mutationState) {
-            case 'preview':
-                return (
-                    <Button
-                        variant="outline-info"
-                        className='card-action edit-btn'
-                        size="sm"
-                        onClick={() => setMutationState('edit')}
-                    >
-                        <PencilSquare size={16} />
-                    </Button>
-                )
-            case 'edit':
-                return (
-                    <Button
-                        variant="outline-secondary"
-                        className='card-action cancel-btn'
-                        size="sm"
-                        onClick={() => setMutationState('preview')}
-                    >
-                        <X size={16} />
-                    </Button>
-                )
-            default:
-                return (null)
-        }
-    })()
+    const ActionsView = isCurrentUser && <CardActions mutationState={mutationState} setMutationState={setMutationState} />
 
     return (
         <Card className="card-sheet shadow-lg">
@@ -127,12 +102,18 @@ const CardSheet = (props: Props) => {
                     </div>
                     <hr />
                     <div className="comments">
-                        <h4 id="comments">
-                            Comments&nbsp;
-                                <span className="text-muted">{comments.length}</span>
+                        <h4 id="comments" className="mb-4">
+                            Comments&nbsp;<span className="text-muted">{comments.length}</span>
                         </h4>
-                        <div className='comments-list d-flex'>
-                            {comments.map(c => <Comment key={c.id} comment={c} />)}
+                        <div className="comment-form mb-4">
+                            <CommentForm cardId={id} />
+                        </div>
+                        <div className='comments-list d-flex flex-wrap'>
+                            {comments
+                                .slice()
+                                .sort((c1, c2) => new Date(c2.createdAt).getTime() - new Date(c1.createdAt).getTime())
+                                .map(c => <Comment key={c.id} comment={c} />)
+                            }
                         </div>
                     </div>
                 </section>

@@ -17,7 +17,7 @@ export const readEntities = (name: EntityName) => async (dispatch: Dispatch<any>
     dispatch(setLoading(false))
 }
 
-export const createEntity = (name: EntityName) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
+export const createEntity = (name: EntityName, resolve?: (response: any) => void) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
     const { resetDTODetails, addEntity } = getActions(name)
     const { auth, ...rest } = getState()
     const { payload } = rest[name]
@@ -30,6 +30,7 @@ export const createEntity = (name: EntityName) => async (dispatch: Dispatch<any>
     const responseEntity = await API[name].read(responseId.data)
     dispatch(resetDTODetails())
     dispatch(addEntity(responseEntity.data as any))
+    resolve?.(responseEntity)
 }
 
 export const readEntity = (name: EntityName, id: number) => async (dispatch: Dispatch<any>) => {
@@ -80,5 +81,24 @@ export const detachLabel = (cardId: number, labelId: number) => async (dispatch:
         parentId: cardId,
         childId: labelId,
         childName: 'labels',
+    }))
+}
+
+export const addComment = (cardId: number) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
+    const responseEntity: any = await new Promise((resolve) => {
+        dispatch(createEntity('comments', (response) => {
+            resolve(response.data)
+        }))
+    })
+    console.log('cm:', responseEntity)
+    const { addLinkedEntity } = getActions('cards')
+    const { entities } = getState().comments
+    const relatedComment = entities.find(e => e.id === responseEntity.id)!
+    const response = await API.cards.addComment(cardId, relatedComment.id)
+    console.log(response)
+    dispatch(addLinkedEntity({
+        parentId: cardId,
+        payload: relatedComment,
+        childName: 'comments',
     }))
 }

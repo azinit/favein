@@ -27,8 +27,8 @@ declare type IListsService = ICRUDService<IList, IListDTO>;
 declare type ICardsService = ICRUDService<ICard, ICardDTO> & {
     addLabel: (cardId: number, labelId: number) => APIResponse<boolean>;
     deleteLabel: (cardId: number, labelId: number) => APIResponse<boolean>;
-    // addComment: (cardId: number, commentId: number) => APIResponse<boolean>;
-    // deleteComment: (cardId: number, commentId: number) => APIResponse<boolean>;
+    addComment: (cardId: number, commentId: number) => APIResponse<boolean>;
+    deleteComment: (cardId: number, commentId: number) => APIResponse<boolean>;
     // addRate: (cardId: number, rateId: number) => APIResponse<boolean>;
     // deleteRate: (cardId: number, rateId: number) => APIResponse<boolean>;
 };

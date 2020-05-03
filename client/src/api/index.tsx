@@ -14,6 +14,12 @@ const API: APIService = {
         },
         deleteLabel(cardId, labelId) {
             return axios.put(`/cards/${cardId}/labels/remove/${labelId}`)
+        },
+        addComment(cardId, commentId) {
+            return axios.put(`/cards/${cardId}/comments/add/${commentId}`)
+        },
+        deleteComment(cardId, commentId) {
+            return axios.put(`/cards/${cardId}/comments/remove/${commentId}`)
         }
     } as ICardsService,
     users: configureCRUDService('users')
