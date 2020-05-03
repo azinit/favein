@@ -2,7 +2,7 @@
 /// <reference types="./helpers" />
 
 /// start region `store`
-declare type MutationState = 'preview' | 'edit' | 'create';
+declare type MutationState = 'preview' | 'edit' | 'create' | 'delete';
 declare type MutableEntity<T, D = T> = {
 
 }
@@ -13,7 +13,7 @@ declare type EntityState<T, D = T> = {
     entities: T[];
     current?: T;
     payload: Partial<D>;
-    mutationState?: MutationState;
+    mutationState: MutationState;
     loading: boolean;
 }
 

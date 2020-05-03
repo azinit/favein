@@ -1,7 +1,10 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 import List from 'components/list'
+import { useSelector, useDispatch } from 'react-redux'
 import './index.scss'
+import { Trash, X } from 'react-bootstrap-icons'
+import { getActions } from 'store/entities/service'
 
 type Props = {
     dashboard: IDashboard;
@@ -12,6 +15,43 @@ type Props = {
 const Dashboard = (props: Props) => {
     const { dashboard, lists, cards } = props
     const { author, background, description, id, name } = dashboard
+    const { current } = useSelector((state: IGlobalState) => state.auth)
+    const { mutationState } = useSelector((state: IGlobalState) => state.lists)
+    const dispatch = useDispatch()
+    const { setMutationState } = getActions('lists')
+    const isCurrentUser = current.id === author.id
+
+    const toolbar = (
+        <section className="toolbar text-center">
+            {mutationState === 'preview' && (
+                <Button
+                    block
+                    variant="outline-danger"
+                    className='rounded-0'
+                    onClick={() => {
+                        console.log('=> DeleteMode')
+                        dispatch(setMutationState('delete'))
+                    }}
+                >
+                    <Trash />
+                </Button>
+            )}
+            {mutationState === 'delete' && (
+                <Button
+                    block
+                    variant="outline-secondary"
+                    className='rounded-0'
+                    onClick={() => {
+                        console.log('=> PreviewMode')
+                        dispatch(setMutationState('preview'))
+                    }}
+                >
+                    <X />
+                </Button>
+            )}
+        </section>
+    )
+
     return (
         <div className="dashboard">
             <Card
@@ -41,6 +81,7 @@ const Dashboard = (props: Props) => {
                     )}
                 </Card.ImgOverlay>
             </Card>
+            {isCurrentUser && toolbar}
             <div className="dashboard-content">
                 {lists.filter(l => l.dashboard.id === id).map(l => (
                     <List

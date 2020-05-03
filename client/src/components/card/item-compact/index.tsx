@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
+import cn from 'classnames'
 import { Card, OverlayTrigger, Popover } from 'react-bootstrap'
 import { ChatSquare } from 'react-bootstrap-icons'
 import Label from 'components/label'
 import Rate from 'components/rate'
+import { useDispatch } from 'react-redux'
 import './index.scss'
 import { Link } from 'react-router-dom'
+import { deleteEntity } from 'store/entities/service'
 
 type Props = {
     card: ICard;
+    mutationState: MutationState;
 }
 
 const CardItemCompact = (props: Props) => {
+    const {
+        card,
+        mutationState
+    } = props
     const {
         // author,
         content,
@@ -22,8 +30,16 @@ const CardItemCompact = (props: Props) => {
         // list,
         name,
         rates
-    } = props.card
+    } = card
 
+    const dispatch = useDispatch()
+    const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
+        switch (mutationState) {
+            case 'delete':
+                e.preventDefault()
+                dispatch(deleteEntity('cards', id))
+        }
+    }
     const summary = description || content.substring(0, 128) + '...'
     const LabelsView = labels && (
         <div className="labels d-flex justify-content-start">
@@ -53,17 +69,34 @@ const CardItemCompact = (props: Props) => {
             </Popover.Content>
         </Popover>
     )
+    const triggers = (() => {
+        switch (mutationState) {
+            case 'delete':
+                return []
+            default:
+                return ["hover", "focus"]
+        }
+    })()
+    const className = (() => {
+        switch (mutationState) {
+            case 'delete':
+                return 'btn-outline-danger'
+            default:
+                return 'btn-outline-secondary'
+        }
+    })()
 
     return (
-        <Card className="card-item-compact w-400 btn-outline-secondary">
-            <Link to={`/cards/${id}`} className='card-link'>
-                <OverlayTrigger
-                    trigger={["hover", "focus"]}
-                    placement="bottom"
-                    overlay={popover}
-                >
-                    <Card.Body className='title'>{name}</Card.Body>
-                </OverlayTrigger>
+        <Card className={cn("card-item-compact", "w-400", className)}>
+            <Link to={`/cards/${id}`} className='card-link' onClick={onClick}>
+            <OverlayTrigger
+                // @ts-ignore
+                trigger={triggers}
+                placement="bottom"
+                overlay={popover}
+            >
+                <Card.Body className='title'>{name}</Card.Body>
+            </OverlayTrigger>
             </Link>
         </Card >
     )

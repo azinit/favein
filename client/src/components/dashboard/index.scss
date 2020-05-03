@@ -16,4 +16,10 @@
     &-content {
         margin: 20px;
     }
+
+    .toolbar {
+        &:not(:hover) {
+            opacity: 0.2;
+        }
+    }
 }
