@@ -44,6 +44,14 @@ export const configureEntitySlice = <T extends IHaveID, D>(name: string) => {
             addEntity(state: EntityState<T, D>, action: PayloadAction<T>) {
                 state.entities.push(action.payload)
             },
+            /** Задать сущность по id */
+            setEntity(state: EntityState<T, D>, action: PayloadAction<{
+                id: number;
+                payload: any;
+            }>) {
+                const { id, payload } = action.payload
+                state.entities = state.entities.map(e => (e.id === id) ? payload : e)
+            },
             /** Удалить сущность */
             removeEntity(state: EntityState<T, D>, action: PayloadAction<number>) {
                 state.entities = state.entities.filter(e => e.id !== action.payload)

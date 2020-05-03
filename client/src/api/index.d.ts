@@ -7,7 +7,7 @@ declare type ICRUDService<T, D = T> = {
     readList: () => APIResponse<T[]>;
     create: (details: D) => APIResponse<number>;
     read: (id: number) => APIResponse<T>;
-    update: (details: D) => APIResponse<boolean>;
+    update: (id: number, details: D) => APIResponse<boolean>;
     delete: (id: number) => APIResponse<boolean>;
 }
 

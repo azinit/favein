@@ -12,8 +12,8 @@ export const configureCRUDService = <T, D>(model: string) => {
         read(id) {
             return axios.get(`${this.api}/${id}`)
         },
-        update(details) {
-            return axios.put(this.api, details);
+        update(id, details) {
+            return axios.put(`${this.api}/${id}`, details);
         },
         delete(id) {
             return axios.delete(`${this.api}/${id}`)

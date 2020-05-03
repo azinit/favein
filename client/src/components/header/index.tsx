@@ -18,6 +18,9 @@ const Header = () => {
                     <Nav.Link href="/admin">Admin</Nav.Link>
                     <Nav.Link href="/home">Home</Nav.Link>
                     <Nav.Link href="/users">Users</Nav.Link>
+                    <Nav.Link href="/labels">Labels</Nav.Link>
+                    <Nav.Link href="/cards/9">Card Example</Nav.Link>
+                    <Nav.Link href="/dashboards/3">Dashboard Example</Nav.Link>
                     {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

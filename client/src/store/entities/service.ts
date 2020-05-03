@@ -17,11 +17,6 @@ export const readEntities = (name: EntityName) => async (dispatch: Dispatch<any>
     dispatch(setLoading(false))
 }
 
-export const readEntity = (name: EntityName, id: number) => async (dispatch: Dispatch<any>) => {
-    const response = await API[name].read(id)
-    return response.data
-}
-
 export const createEntity = (name: EntityName) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
     const { resetDTODetails, addEntity } = getActions(name)
     const { auth, ...rest } = getState()
@@ -35,6 +30,25 @@ export const createEntity = (name: EntityName) => async (dispatch: Dispatch<any>
     const responseEntity = await API[name].read(responseId.data)
     dispatch(resetDTODetails())
     dispatch(addEntity(responseEntity.data as any))
+}
+
+export const readEntity = (name: EntityName, id: number) => async (dispatch: Dispatch<any>) => {
+    const response = await API[name].read(id)
+    return response.data
+}
+
+export const updateEntity = (name: EntityName) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
+    const { resetDTODetails, setEntity } = getActions(name)
+    const { auth, ...rest } = getState()
+    const { payload, current } = rest[name]
+    // FIXME: temp, more unique
+    const reqPayload = { ...current, ...payload }
+    await API[name].update(current!.id, reqPayload as any)
+    dispatch(resetDTODetails())
+    dispatch(setEntity({
+        id: current!.id,
+        payload: reqPayload
+    }))
 }
 
 export const deleteEntity = (name: EntityName, id: number) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {

@@ -9,6 +9,7 @@ const AdminPage = lazy(() => import('./admin'))
 const UsersPage = lazy(() => import('./users'))
 const DashboardPage = lazy(() => import('./dashboard'))
 const CardPage = lazy(() => import('./card'))
+const LabelsPage = lazy(() => import('./labels'))
 
 // TODO: withAuth
 // TODO: withStore
@@ -26,6 +27,7 @@ function App() {
             <Route path="/users/:id" component={UserPage} />
             <Route path="/cards/:id" component={CardPage} />
             <Route path="/users" component={UsersPage} />
+            <Route path="/labels" component={LabelsPage} />
             <Route path="/dashboards/:id" component={DashboardPage} />
             <Redirect to="admin" />
           </Switch>

@@ -10,6 +10,7 @@ type Props = FormControlProps & {
     name: string;
     label?: string;
     className?: string;
+    style?: any;
 }
 
 const TextField = (props: Props) => {
@@ -21,7 +22,8 @@ const TextField = (props: Props) => {
         onChange,
         label,
         mutationState = "edit",
-        className = ""
+        className = "",
+        style = {}
     } = props
 
     const isEditing = mutationState === "edit"
@@ -32,6 +34,7 @@ const TextField = (props: Props) => {
                 <Form.Label>{label}</Form.Label>
             )}
             <Form.Control
+                style={style}
                 type={type}
                 name={name}
                 placeholder={isEditing ? placeholder : ''}
