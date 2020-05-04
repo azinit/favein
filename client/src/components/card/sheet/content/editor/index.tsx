@@ -25,8 +25,8 @@ const ContentEditor = ({ source, onSave }: Props) => {
         console.log([nextContent])
         const { updateDTODetails } = getActions('cards')
         dispatch(updateDTODetails({ content: nextContent }))
-        dispatch(updateEntity('cards'))
-        onSave()
+        // dispatch(updateEntity('cards'))
+        // onSave()
     }
 
     return (

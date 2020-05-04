@@ -14,12 +14,18 @@
             top: 50%;
             transform: translate(0, -50%);
             & > * {
-                margin-bottom: 2px;   
+                margin-bottom: 2px;
             }
         }
     }
 
     .card-body {
         padding: 60px;
+    }
+
+    #description:focus,
+    #name:focus {
+        outline: none;
+        box-shadow: none;
     }
 }
