@@ -5,7 +5,7 @@
         &:hover {
             opacity: 0.7;
             &::before {
-                content: '#';
+                content: "#";
                 color: grey;
                 position: absolute;
                 transform: translate(-110%);
@@ -26,11 +26,22 @@
         }
         padding: 1.25rem;
     }
-    
+
     .cards-list {
         flex-wrap: wrap;
         & > .card {
             margin: 2px;
+        }
+    }
+
+    // is deleting
+    &.border-danger {
+        a.title:hover {
+            color: var(--danger);
+            &::before {
+                color: var(--danger);
+                content: "X";
+            }
         }
     }
 }

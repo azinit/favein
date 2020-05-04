@@ -72,7 +72,8 @@ const CardItemCompact = (props: Props) => {
     const triggers = (() => {
         switch (mutationState) {
             case 'delete':
-                return []
+                // FIXME: old []
+                return ["hover", "focus"]
             default:
                 return ["hover", "focus"]
         }

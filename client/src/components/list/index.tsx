@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import cn from 'classnames'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import CardItemCompact from 'components/card/item-compact'
 import './index.scss'
 import AddCard from 'components/card/add'
+import { deleteEntity } from 'store/entities/service'
 
 type Props = {
     list: IList;
@@ -15,6 +16,7 @@ const List = (props: Props) => {
     const { description, name, author, id } = list;
     const { current } = useSelector((state: IGlobalState) => state.auth)
     const { mutationState } = useSelector((state: IGlobalState) => state.lists)
+    const dispatch = useDispatch()
     const isDeleting = mutationState === 'delete'
     const isCurrentUser = current.id === author.id
 
@@ -27,11 +29,21 @@ const List = (props: Props) => {
     const label = (() => {
         switch (mutationState) {
             case 'delete':
-                return <span>{name} <span className='text-muted'>(deleting)</span></span>
+                return <span>{name} <span className='text-muted'>(delete mode)</span></span>
             default:
                 return name
         }
     })()
+
+    const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
+        switch (mutationState) {
+            case 'delete':
+                e.preventDefault()
+                // TODO: forceDelete on server (with cards)
+                dispatch(deleteEntity('lists', id))
+        }
+    }
+
     return (
         <div
             className={cn(
@@ -44,7 +56,7 @@ const List = (props: Props) => {
             )}
             id={listHash}
         >
-            <a className='title h4' href={`#list-${id}`}>{label}</a>
+            <a className='title h4' href={`#list-${id}`} onClick={onClick} >{label}</a>
             {description && <p>{description}</p>}
             <div className="cards-list d-flex mt-2" style={{ overflow: 'auto' }}>
                 {cards.map(card => (
@@ -57,7 +69,7 @@ const List = (props: Props) => {
                 {ActionsView}
                 {showPlaceholder && <div className='text-muted'>(empty)</div>}
             </div>
-        </div>
+        </div >
     )
 }
 
