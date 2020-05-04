@@ -20,7 +20,7 @@ const CardSheet = (props: Props) => {
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
 
-    const [mutationState, setMutationState] = React.useState<MutationState>('edit')
+    const [mutationState, setMutationState] = React.useState<MutationState>('preview')
     const isCurrentUser = useSelector((state: IGlobalState) => state.auth.current.id === author.id)
     const dispatch = useDispatch()
 
