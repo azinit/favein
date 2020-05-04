@@ -2,13 +2,13 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { dashboardsSlice } from 'store/entities'
-import { deleteEntity } from 'store/entities/service'
+import { deleteEntity, getActions, updateEntity } from 'store/entities/service'
 import TextField from 'components/text-field'
 import DashboardActions from './dashboard-actions'
 import './index.scss'
 
-const { updateDTODetails, setMutationState } = dashboardsSlice.actions
+const { updateDTODetails, setMutationState, resetDTODetails, setCurrent } = getActions('dashboards')
+
 type Props = {
     dashboard: IDashboard;
     showAuthor?: boolean;
@@ -18,17 +18,18 @@ type Props = {
 const DashboardItem = (props: Props) => {
     const { dashboard, showAuthor = true, showActions = false } = props
     const { author, background, id, name } = dashboard
-    const { payload, mutationState } = useSelector((state: IGlobalState) => state.dashboards)
+    const { payload, mutationState, current } = useSelector((state: IGlobalState) => state.dashboards)
     const dispatch = useDispatch()
 
-    const isPreview = mutationState === 'preview'
-    const isEditing = mutationState === 'edit'
+    const currentState = (current?.id === id) ? mutationState : 'preview'
+    const isEditing = currentState === 'edit'
+    const isPreview = currentState === 'preview'
 
     const link = isEditing ? '#' : `/dashboards/${id}`
 
     const getValue = (name: keyof IDashboardDTO & keyof IDashboard) => {
         // FIXME: apply not for all items!
-        switch(mutationState) {
+        switch(currentState) {
             case 'preview':
                 return dashboard[name]
             case 'edit':
@@ -44,9 +45,12 @@ const DashboardItem = (props: Props) => {
 
     const onSave = () => {
         dispatch(setMutationState('preview'))
+        dispatch(updateEntity('dashboards'))
     }
     const onEdit = () => {
         dispatch(setMutationState('edit'))
+        dispatch(setCurrent(dashboard as any))
+        dispatch(resetDTODetails())
         console.log('EDIT: impl')
     }
     const onCancel = () => {
@@ -67,7 +71,7 @@ const DashboardItem = (props: Props) => {
                             name="name"
                             value={getValue('name')}
                             onChange={onChange}
-                            mutationState={mutationState}
+                            mutationState={currentState}
                         />
                     </Card.Title>
                     <section>
@@ -75,7 +79,7 @@ const DashboardItem = (props: Props) => {
                             name="description"
                             value={getValue('description')}
                             onChange={onChange}
-                            mutationState={mutationState}
+                            mutationState={currentState}
                         />
                     </section>
                     {showAuthor && (

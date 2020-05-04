@@ -4,6 +4,7 @@ import API from 'api'
 
 export const confirmDelete = () => window.confirm('Вы действительно хотите продолжить удаление? Отменить операцию будет нельзя!')
 
+// TODO: if import slice => correct types, but here..unique
 export const getActions = (name: EntityName) => sliceMap[name].actions
 
 export const readAllEntities = () => async (dispatch: Dispatch<any>) => {
