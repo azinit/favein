@@ -10,6 +10,7 @@ type Props = {
     onSave: Function;
 }
 
+// based on https://github.com/kkfor/for-editor
 const ContentEditor = ({ source, onSave }: Props) => {
     const [value, setValue] = useState(source)
     const dispatch = useDispatch()
