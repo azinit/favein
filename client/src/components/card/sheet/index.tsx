@@ -9,7 +9,7 @@ import './index.scss'
 import Content from './content'
 import { updateEntity, getActions } from 'store/entities/service'
 
-const { resetDTODetails } = getActions('cards')
+const { resetDTODetails, setMutationState } = getActions('cards')
 // FIXME: useSelector.current instead
 type Props = {
     card: ICard;
@@ -20,20 +20,19 @@ const CardSheet = (props: Props) => {
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
 
-    const [mutationState, setMutationState] = React.useState<MutationState>('preview')
     const isCurrentUser = useSelector((state: IGlobalState) => state.auth.current.id === author.id)
     const dispatch = useDispatch()
 
     const onSave = () => {
         dispatch(updateEntity('cards'))
-        setMutationState('preview')
+        dispatch(setMutationState('preview'))
     }
     const onCancel = () => {
         dispatch(resetDTODetails())
-        setMutationState('preview')
+        dispatch(setMutationState('preview'))
     }
 
-    const mutationConfig = { mutationState, setMutationState, onSave, onCancel }
+    const mutationConfig = { onSave, onCancel }
 
     // views
     const ActionsView = isCurrentUser && <CardActions {...mutationConfig} />
@@ -46,9 +45,9 @@ const CardSheet = (props: Props) => {
                 {ActionsView}
             </Breadcrumb>
             <Card.Body>
-                <Header {...mutationConfig} />
+                <Header />
                 <section className="card-content">
-                    <Content {...mutationConfig} />
+                    <Content />
                 </section>
                 <hr />
                 <section className="social-block">

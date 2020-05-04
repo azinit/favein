@@ -2,16 +2,11 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import Label from 'components/label/mutable'
 
-type Props = {
-    mutationState: MutationState;
-}
-
-const Labels = (props: Props) => {
-    const { mutationState } = props
-    const { labels } = useSelector((state: IGlobalState) => state.cards.current!)
+const Labels = () => {
+    const { current, mutationState } = useSelector((state: IGlobalState) => state.cards)
     const totalLabels = useSelector((state: IGlobalState) => state.labels.entities)
-    const relatedLabeldIds = labels.map(l => l.id)
-    const visibleLabels = (mutationState === 'edit') ? totalLabels : labels
+    const relatedLabeldIds = current!.labels.map(l => l.id)
+    const visibleLabels = (mutationState === 'edit') ? totalLabels : current!.labels
     return (
         <div className="labels d-flex justify-content-center flex-wrap">
             {visibleLabels.map(l => (

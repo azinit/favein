@@ -6,13 +6,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getActions } from 'store/entities/service'
 import Labels from '../labels'
 
-type Props = {
-    mutationState: MutationState;
-}
-
-const Header = (props: Props) => {
-    const { name, labels, description, author, comments, rates } = useSelector((state: IGlobalState) => state.cards.current!)
-    const isEditing = props.mutationState === 'edit'
+const Header = () => {
+    const { current, mutationState } = useSelector((state: IGlobalState) => state.cards)
+    const { name, labels, description, author, comments, rates } = current!
+    const isEditing = mutationState === 'edit'
     const { updateDTODetails } = getActions('cards')
     const dispatch = useDispatch()
 
@@ -24,42 +21,25 @@ const Header = (props: Props) => {
 
     return (
         <>
-            <Card.Title
-                className={cn(
-                    "text-center p-1",
-                    { 'border border-info rounded': isEditing }
-                )}
-            >
-                <span
-                    id="name"
-                    className='h2'
-                    contentEditable={isEditing}
-                    onInput={onChange}
-                >
+            <Card.Title className={cn("text-center p-1", { 'border border-info rounded': isEditing })}>
+                <span id="name" className='h2' contentEditable={isEditing} onInput={onChange}>
                     {name}
                 </span>
             </Card.Title>
             <Card.Subtitle className="text-secondary text-center mb-2">{author.username} ({author.email})</Card.Subtitle>
             <section className="text-center">
                 <a className='link-reset' href="#comments">{comments.length}&nbsp;<ChatSquare /></a>
-                    &nbsp;
-                    &nbsp;
-                    <a className='link-reset' href="#rates">{rates.length}<PersonFill /></a>
+                &nbsp;
+                &nbsp;
+                <a className='link-reset' href="#rates">{rates.length}<PersonFill /></a>
             </section>
             <section>
                 {labels && (
-                    <Labels {...props} />
+                    <Labels />
                 )}
                 {description && (
-                    <Alert
-                        variant="info"
-                        className={cn({ 'border border-info bg-white': isEditing })}
-                    >
-                        <div
-                            id='description'
-                            contentEditable={isEditing}
-                            onInput={onChange}
-                        >
+                    <Alert variant="info" className={cn({ 'border border-info bg-white': isEditing })}>
+                        <div id='description' contentEditable={isEditing} onInput={onChange}>
                             {description}
                         </div>
                     </Alert>

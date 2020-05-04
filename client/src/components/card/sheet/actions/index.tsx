@@ -1,16 +1,21 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
+import { getActions } from 'store/entities/service'
 import { PencilSquare, X, FileEarmarkCheck } from 'react-bootstrap-icons'
 
+const { setMutationState } = getActions('cards')
+
 type Props = {
-    mutationState: MutationState;
-    setMutationState: (ms: MutationState) => void;
     onSave: Function;
     onCancel: Function;
 }
 
 const CardActions = (props: Props) => {
-    const { mutationState, setMutationState, onSave, onCancel } = props
+    const { onSave, onCancel } = props
+    const { mutationState } = useSelector((state: IGlobalState) => state.cards)
+    const dispatch = useDispatch()
+
     switch (mutationState) {
         case 'preview':
             return (
@@ -18,7 +23,7 @@ const CardActions = (props: Props) => {
                     variant="outline-info"
                     className='card-action edit-btn'
                     size="sm"
-                    onClick={() => setMutationState('edit')}
+                    onClick={() => dispatch(setMutationState('edit'))}
                 >
                     <PencilSquare size={16} />
                 </Button>

@@ -18,12 +18,14 @@ const CardPage = (props: Props) => {
     const { match } = props
     const { params: { id } } = match;
     const { entities, loading = true } = useSelector((state: IGlobalState) => state.cards)
-    const { setCurrent } = getActions('cards')
+    const { setCurrent, setMutationState, resetDTODetails } = getActions('cards')
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(readEntities('cards'))
         dispatch(readEntities('labels'))
+        dispatch(setMutationState('preview'))
+        dispatch(resetDTODetails())
     }, [dispatch])
 
     const card = entities.find(e => e.id === +id)

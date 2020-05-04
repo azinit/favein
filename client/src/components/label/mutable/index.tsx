@@ -19,7 +19,7 @@ const MutableLabel = (props: Props) => {
     const dispatch = useDispatch()
 
     const isPreview = mutationState === 'preview'
-    const isEditing = mutationState === 'edit'
+    // const isEditing = mutationState === 'edit'
     
     const onClick = () => {
         switch (mutationState) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Toast, Button } from 'react-bootstrap'
+import { Toast } from 'react-bootstrap'
 import moment from 'moment'
 import cn from 'classnames'
 import { PeopleCircle, Trash } from 'react-bootstrap-icons'
