@@ -30,6 +30,7 @@ const ContentEditor = ({ source }: Props) => {
 
     return (
         <MarkdownEditor
+            language="en"
             value={value}
             onChange={onChange}
             onSave={_onSave}

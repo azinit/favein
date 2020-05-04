@@ -34,10 +34,10 @@ const Header = () => {
                 <a className='link-reset' href="#rates">{rates.length}<PersonFill /></a>
             </section>
             <section>
-                {labels && (
+                {(labels || isEditing) && (
                     <Labels />
                 )}
-                {description && (
+                {(description || isEditing) && (
                     <Alert variant="info" className={cn({ 'border border-info bg-white': isEditing })}>
                         <div id='description' contentEditable={isEditing} onInput={onChange}>
                             {description}
