@@ -11,6 +11,7 @@ type Props = FormControlProps & {
     label?: string;
     className?: string;
     style?: any;
+    inline?: boolean;
 }
 
 const TextField = (props: Props) => {
@@ -23,13 +24,14 @@ const TextField = (props: Props) => {
         label,
         mutationState = "edit",
         className = "",
-        style = {}
+        style = {},
+        inline = false
     } = props
 
     const isEditing = mutationState === "edit"
     const isPreview = mutationState === "preview"
     return (
-        <Form.Group className={cn('text-field', `field_${name}`, mutationState, className)}>
+        <Form.Group className={cn('text-field', `field_${name}`, mutationState, className, { inline })}>
             {label && (
                 <Form.Label>{label}</Form.Label>
             )}

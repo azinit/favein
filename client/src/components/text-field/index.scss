@@ -2,13 +2,18 @@
     .form-control {
         padding: 10px;
         background-color: transparent;
-        border-color: transparent;
-        border-bottom-color: rgb(146, 146, 146);
+    }
+    
+    &.inline {
+        .form-control {
+            border-color: transparent;
+            border-bottom-color: rgb(146, 146, 146);
+        }
 
-        &:disabled {
+        :disabled {
             border-bottom-color: transparent;
         }
-        &:focus {
+        :focus {
             box-shadow: none;
             border-bottom-color: rgb(220, 220, 220);
         }

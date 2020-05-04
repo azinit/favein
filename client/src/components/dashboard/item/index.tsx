@@ -72,6 +72,7 @@ const DashboardItem = (props: Props) => {
                             value={getValue('name')}
                             onChange={onChange}
                             mutationState={currentState}
+                            inline
                         />
                     </Card.Title>
                     <section>
@@ -80,6 +81,7 @@ const DashboardItem = (props: Props) => {
                             value={getValue('description')}
                             onChange={onChange}
                             mutationState={currentState}
+                            inline
                         />
                     </section>
                     {showAuthor && (
