@@ -1,8 +1,8 @@
 import React from 'react'
 import CodeRenderer from 'components/code-renderer'
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown'
 
-type Props = {
+type Props = ReactMarkdownProps & {
     source: string;
 }
 

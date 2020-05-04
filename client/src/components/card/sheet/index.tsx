@@ -1,12 +1,12 @@
 import React from 'react'
 import { Card, Breadcrumb } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-import Markdown from 'components/markdown'
 import Header from './header'
 import CardActions from './actions'
 import Comments from './comments'
 import Rates from './rates'
 import './index.scss'
+import Content from './content'
 
 // FIXME: useSelector.current instead
 type Props = {
@@ -16,8 +16,7 @@ type Props = {
 const CardSheet = (props: Props) => {
     const {
         name, content,
-        dashboard, list, author,
-        comments, rates
+        dashboard, list, author
     } = props.card
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
@@ -39,9 +38,7 @@ const CardSheet = (props: Props) => {
             <Card.Body>
                 <Header {...mutationConfig} />
                 <section className="card-content">
-                    <div className="content mb-4">
-                        <Markdown source={content} />
-                    </div>
+                    <Content {...mutationConfig} />
                 </section>
                 <hr />
                 <section className="social-block">
