@@ -45,7 +45,7 @@ const AdminPage = (props: Props) => {
             <DemoSection title="Users">
                 {users.entities.map(user => <User key={user.id} user={user} />)}
             </DemoSection>
-            <DemoSection title="Cards Sheets" className="flex-wrap">
+            {/* <DemoSection title="Cards Sheets" className="flex-wrap">
                 {cards.entities.slice(1, 4).map(card => <CardSheet key={card.id} card={card} />)}
             </DemoSection>
             <DemoSection title="Lists" className="flex-wrap">
@@ -56,7 +56,7 @@ const AdminPage = (props: Props) => {
                         cards={cards.entities.filter(c => c.list.id === list.id)}
                     />
                 ))}
-            </DemoSection>
+                </DemoSection> */}
             <DemoSection title="Dashboards" className="flex-column w-100">
                 <Tabs id="profile-dashboards-tabs">
                     {dashboards.entities.map(dashboard => (
@@ -69,7 +69,7 @@ const AdminPage = (props: Props) => {
                         </Tab>
                     ))}
                 </Tabs>
-            </DemoSection>
+            </DemoSection> */}
         </div>
     )
 }
