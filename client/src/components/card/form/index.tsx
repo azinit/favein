@@ -33,14 +33,6 @@ const CardForm = () => {
                 value={description}
                 onChange={onChange}
             />
-            <TextField 
-                type="textarea"
-                label="Content"
-                name="content"
-                placeholder="Первый хук, который мы изучим, это функция useState ..."
-                value={content}
-                onChange={onChange}
-            />
         </Form>
     )
 }
