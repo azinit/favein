@@ -3,7 +3,7 @@ import { Card, Button } from 'react-bootstrap'
 import List from 'components/list'
 import { useSelector, useDispatch } from 'react-redux'
 import './index.scss'
-import { Trash, X } from 'react-bootstrap-icons'
+import { Trash, X, PencilSquare } from 'react-bootstrap-icons'
 import { getActions } from 'store/entities/service'
 import ListForm from 'components/list/form'
 
@@ -22,37 +22,59 @@ const Dashboard = (props: Props) => {
     const { setMutationState } = getActions('lists')
     const isCurrentUser = current.id === author.id
 
+    const onChange = () => {
+
+    }
+    
     const toolbar = (
         <section className="toolbar text-center">
-            {mutationState === 'preview' && (
-                <>
-                    <ListForm />
-                    <Button
-                        block
-                        variant="outline-danger"
-                        className='rounded-0'
-                        onClick={() => {
-                            console.log('=> DeleteMode')
-                            dispatch(setMutationState('delete'))
-                        }}
-                    >
-                        <Trash />&nbsp;Delete Mode
-                    </Button>
-                </>
-            )}
-            {mutationState === 'delete' && (
-                <Button
-                    block
-                    variant="outline-secondary"
-                    className='rounded-0'
-                    onClick={() => {
-                        console.log('=> PreviewMode')
-                        dispatch(setMutationState('preview'))
-                    }}
-                >
-                    <X />&nbsp;Preview Mode
-                </Button>
-            )}
+            {(() => {
+                switch (mutationState) {
+                    case 'preview':
+                        return (
+                            <>
+                                <ListForm />
+                                <Button
+                                    block
+                                    variant="outline-info"
+                                    className='rounded-0'
+                                    onClick={() => {
+                                        console.log('=> EditMode')
+                                        dispatch(setMutationState('edit'))
+                                    }}
+                                >
+                                    <PencilSquare />&nbsp;Edit Mode
+                                </Button>
+                                <Button
+                                    block
+                                    variant="outline-danger"
+                                    className='rounded-0'
+                                    onClick={() => {
+                                        console.log('=> DeleteMode')
+                                        dispatch(setMutationState('delete'))
+                                    }}
+                                >
+                                    <Trash />&nbsp;Delete Mode
+                                </Button>
+                            </>
+                        )
+                    case 'edit':
+                    case 'delete':
+                        return (
+                            <Button
+                                block
+                                variant="outline-secondary"
+                                className='rounded-0'
+                                onClick={() => {
+                                    console.log('=> PreviewMode')
+                                    dispatch(setMutationState('preview'))
+                                }}
+                            >
+                                <X />&nbsp;Preview Mode
+                            </Button>
+                        )
+                }
+            })()}
         </section>
     )
 
