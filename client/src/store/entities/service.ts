@@ -26,7 +26,7 @@ export const createEntity = (name: EntityName, resolve?: (response: any) => void
     const { payload } = rest[name]
     // FIXME: temp, more unique
     const reqPayload = {
-        authorId: auth.current.id,
+        authorId: auth.current?.id,
         ...payload
     }
     const responseId = await API[name].create(reqPayload as any)

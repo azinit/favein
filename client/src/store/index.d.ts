@@ -20,8 +20,14 @@ declare type EntityState<T, D = T> = {
 declare type IBLModel = IComment | IRate | ILabel | IDashboard | IList | ICard | IUser;
 declare type IBLModelDTO = ICommentDTO | IRateDTO | ILabelDTO | IDashboardDTO | IListDTO | ICardDTO | IUserDTO;
 declare type CardEntityState = EntityState<ICard>;
+declare type AuthDTO = {
+    email: string;
+    password: string;
+}
 declare type AuthState = {
-    current: IUser;
+    current?: IUser;
+    token?: string;
+    authPayload: Partial<AuthDTO>
 }
 
 declare type IGlobalState = {

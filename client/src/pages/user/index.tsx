@@ -30,7 +30,7 @@ const UserPage = (props: Props) => {
 
     const user = users.entities.find(u => u.id === +id)
     const userDashboards = dashboards.entities.filter(d => d.author.id === +id)
-    const isCurrentUser = current.id === +id
+    const isCurrentUser = current?.id === +id
 
     if (user === undefined) {
         return <Page404 message="Такого пользователя не существует" />

@@ -20,7 +20,7 @@ const CardSheet = (props: Props) => {
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
 
-    const isCurrentUser = useSelector((state: IGlobalState) => state.auth.current.id === author.id)
+    const isCurrentUser = useSelector((state: IGlobalState) => state.auth.current?.id === author.id)
     const dispatch = useDispatch()
 
     const onSave = () => {

@@ -21,7 +21,12 @@ declare type LinkMutationOptions = {
 declare type ICommentsService = ICRUDService<IComment, ICommentDTO>;
 declare type IRatesService = ICRUDService<IRate, IRateDTO>;
 declare type ILabelsService = ICRUDService<ILabel, ILabelDTO>;
-declare type IUsersService = ICRUDService<IUser, IUserDTO>;
+declare type IUsersService = ICRUDService<IUser, IUserDTO> & {
+    signIn: (email: string, password: string) => APIResponse<{
+        token: string;
+        user: IUser;
+    }>;
+};
 declare type IDashboardsService = ICRUDService<IDashboard, IDashboardDTO>;
 declare type IListsService = ICRUDService<IList, IListDTO>;
 declare type ICardsService = ICRUDService<ICard, ICardDTO> & {

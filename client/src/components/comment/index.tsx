@@ -20,7 +20,7 @@ const Comment = (props: Props) => {
         createdAt
     } = props.comment
     const dispatch = useDispatch()
-    const isCurrentUser = useSelector((state: IGlobalState) => state.auth.current.id === author.id)
+    const isCurrentUser = useSelector((state: IGlobalState) => state.auth.current?.id === author.id)
     const { current } = useSelector((state: IGlobalState) => state.cards)
 
     const onDelete = () => {

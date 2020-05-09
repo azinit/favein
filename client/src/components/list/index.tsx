@@ -18,7 +18,7 @@ const List = (props: Props) => {
     const { mutationState } = useSelector((state: IGlobalState) => state.lists)
     const dispatch = useDispatch()
     const isDeleting = mutationState === 'delete'
-    const isCurrentUser = current.id === author.id
+    const isCurrentUser = current?.id === author.id
 
     const ActionsView = isCurrentUser && !isDeleting && <AddCard listId={id} />
     const listHash = `list-${id}`;

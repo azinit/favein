@@ -20,7 +20,7 @@ const Dashboard = (props: Props) => {
     const { mutationState } = useSelector((state: IGlobalState) => state.lists)
     const dispatch = useDispatch()
     const { setMutationState } = getActions('lists')
-    const isCurrentUser = current.id === author.id
+    const isCurrentUser = current?.id === author.id
 
     const onChange = () => {
 

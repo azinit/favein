@@ -29,12 +29,14 @@ const Header = () => {
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown> */}
                 </Nav>
-                <a
-                    href={`/users/${current.id}`}
-                    className='text-white btn btn-outline-secondary'
-                >
-                    admin
-                </a>
+                {current && (
+                    <a
+                        href={`/users/${current.id}`}
+                        className='text-white btn btn-outline-secondary'
+                    >
+                        {current.username}
+                    </a>
+                )}
                 {/* <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                     <Button variant="outline-success">Search</Button>

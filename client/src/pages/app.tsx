@@ -10,6 +10,7 @@ const UsersPage = lazy(() => import('./users'))
 const DashboardPage = lazy(() => import('./dashboard'))
 const CardPage = lazy(() => import('./card'))
 const LabelsPage = lazy(() => import('./labels'))
+const SignInPage = lazy(() => import('./auth/sign-in'))
 
 // TODO: withAuth
 // TODO: withStore
@@ -29,6 +30,7 @@ function App() {
             <Route path="/users" component={UsersPage} />
             <Route path="/labels" component={LabelsPage} />
             <Route path="/dashboards/:id" component={DashboardPage} />
+            <Route path="/auth/sign-in" component={SignInPage} />
             <Redirect to="admin" />
           </Switch>
         </React.Suspense>

@@ -22,10 +22,16 @@ const API: APIService = {
             return axios.put(`/cards/${cardId}/comments/remove/${commentId}`)
         }
     } as ICardsService,
-    users: configureCRUDService('users')
+    users: {
+        ...configureCRUDService('users'),
+        signIn(email, password) {
+            return axios.post('/signIn', { email, password })
+        }
+    }
 }
 
 axios.defaults.baseURL = 'http://localhost/api'
+axios.defaults.headers.common.Authorization = window.sessionStorage.getItem('favein_auth_jwt');
 
 export const fetchAll = () => {
     return new Promise<TotalData>(async (resolve, reject) => {
