@@ -38,7 +38,7 @@ const ListForm = () => {
         <>
             <Button
                 block
-                variant="outline-info"
+                variant="outline-success"
                 className='rounded-0'
                 onClick={() => {
                     console.log('=> Add List')
