@@ -41,7 +41,7 @@ public class SignInServiceImpl implements SignInService {
                         .claim("roles", user.getAuthorities().toString()) // роль
                         .signWith(SignatureAlgorithm.HS256, secret) // подписываем его с нашим secret
                         .compact(); // преобразовали в строку
-                return new TokenDto(token);
+                return new TokenDto(token, user);
             } else throw new AccessDeniedException("Wrong email/password");
         } else throw new AccessDeniedException("User not found");
     }
