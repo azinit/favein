@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import axios from 'axios'
 
 const getSessionItem = (key: string) => window.sessionStorage.getItem(key) || undefined;
 
@@ -9,18 +8,6 @@ export const authState: AuthState = {
         const user = getSessionItem('favein_auth_user')
         return user ? JSON.parse(user) : undefined;
     })(),
-    // current: {
-    //     id: 2,
-    //     username: 'admin',
-    //     password: 'admin',
-    //     email: 'admin@gmail.com',
-    //     roles: ['ADMIN', 'USER'],
-    //     enabled: true,
-    //     admin: true,
-    //     active: true,
-    //     accountNonLocked: true,
-    //     accountNonExpired: true
-    // }
     authPayload: {},
     isAuth: !!getSessionItem('favein_auth_jwt'),
 }

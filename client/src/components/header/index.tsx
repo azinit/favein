@@ -18,12 +18,12 @@ const Header = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/admin">Admin</Nav.Link>
+                    {isAuth && <Nav.Link href="/admin">Admin</Nav.Link>}
                     <Nav.Link href="/home">Home</Nav.Link>
-                    <Nav.Link href="/users">Users</Nav.Link>
-                    <Nav.Link href="/labels">Labels</Nav.Link>
-                    <Nav.Link href="/cards/9">Card Example</Nav.Link>
-                    <Nav.Link href="/dashboards/3">Dashboard Example</Nav.Link>
+                    {isAuth && <Nav.Link href="/users">Users</Nav.Link>}
+                    {isAuth && <Nav.Link href="/labels">Labels</Nav.Link>}
+                    {isAuth && <Nav.Link href="/cards/9">Card Example</Nav.Link>}
+                    {isAuth && <Nav.Link href="/dashboards/3">Dashboard Example</Nav.Link>}
                     {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -50,9 +50,14 @@ const Header = () => {
                             </Button>
                         </>
                     ) : (
-                        <Link to="/auth/sign-in" className="btn btn-info">
-                            Войти
-                        </Link>
+                        <>
+                            <Link to="/auth/sign-in" className="btn btn-info">
+                                Войти
+                            </Link>
+                            <Link to="/auth/sign-up" className="btn btn-outline-secondary ml-2">
+                                Создать аккаунт
+                            </Link>
+                        </>
                     )
                 }
             </Navbar.Collapse>

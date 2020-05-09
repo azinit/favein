@@ -21,18 +21,25 @@ const SignInPage = () => {
     }
 
     return (
-        <div className="page page-auth page-signin bg-light">
+        <div className="page page-auth page-signup bg-light">
             <Header />
             <div className="body">
                 <div className="container bg-white shadow-sm">
-                    <h3 className='text-center mb-4'>Вход в FaveIn</h3>
+                    <h3 className='text-center mb-4'>Создание нового аккаунта</h3>
                     <form onSubmit={onSubmit}>
+                        <TextField
+                            label="Username"
+                            name="username"
+                            placeholder="user213132"
+                            value={""}
+                            onChange={onChange}
+                        />
                         <TextField
                             label="Email"
                             name="email"
                             type="email"
                             placeholder="example@gmail.com"
-                            value={email}
+                            value={""}
                             onChange={onChange}
                         />
                         <TextField
@@ -48,7 +55,7 @@ const SignInPage = () => {
                             variant="info"
                             block
                         >
-                            Войти
+                            Создать
                         </Button>
                     </form>
                 </div>
