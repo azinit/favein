@@ -7,6 +7,15 @@ type Props = ReactMarkdownProps & {
 }
 
 const Markdown = ({ source }: Props) => {
+
+    if (!source) {
+        return (
+            <div className="text-muted">
+                *empty content*
+            </div>
+        )
+    }
+
     return (
         <ReactMarkdown
             source={source}
