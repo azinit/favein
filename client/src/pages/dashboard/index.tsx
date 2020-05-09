@@ -6,6 +6,7 @@ import Header from 'components/header'
 import './index.scss'
 import { readEntities } from 'store/entities/service'
 import Loader from 'components/loader'
+import Page404 from 'pages/errors/404'
 
 type Params = {
     id: string;
@@ -33,7 +34,7 @@ const DashboardPage = (props: Props) => {
         return <Loader className='overlay' />
     }
     if (dashboard === undefined) {
-        return <div>Такой доски не существует</div>
+        return <Page404 message="Такой доски не существует" />
     }
 
     return (

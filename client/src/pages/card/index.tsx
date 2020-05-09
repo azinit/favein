@@ -6,6 +6,7 @@ import Header from 'components/header'
 import './index.scss'
 import { readEntities, getActions } from 'store/entities/service'
 import Loader from 'components/loader'
+import Page404 from 'pages/errors/404'
 
 type Params = {
     id: string;
@@ -37,7 +38,7 @@ const CardPage = (props: Props) => {
         return <Loader className='overlay' />
     }
     if (card === undefined) {
-        return <div>Такой карточки не существует</div>
+        return <Page404 message="Такой карточки не существует" />
     }
     return (
         <div className="page page-card">

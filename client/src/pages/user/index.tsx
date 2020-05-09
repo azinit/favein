@@ -7,6 +7,7 @@ import AddDashboard from 'components/dashboard/add'
 import DashboardItem from 'components/dashboard/item'
 import './index.scss'
 import { readEntities } from 'store/entities/service'
+import Page404 from 'pages/errors/404'
 
 type Params = {
     id: string;
@@ -32,8 +33,9 @@ const UserPage = (props: Props) => {
     const isCurrentUser = current.id === +id
 
     if (user === undefined) {
-        return <div>Такого пользователя не существует</div>
+        return <Page404 message="Такого пользователя не существует" />
     }
+
     return (
         <div className="page page-user">
             <Header />
