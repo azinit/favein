@@ -19,6 +19,7 @@ import javax.validation.Valid
 @Api("Card API", description = "Операции с карточками")
 @RequestMapping("api/cards", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
+@PreAuthorize("isAuthenticated()")
 class CardController(
         @Autowired
         private val cardRepository: CardRepository,
@@ -32,7 +33,6 @@ class CardController(
         private val rateRepository: RateRepository
 ) {
     /// start region CRUD
-    @PreAuthorize("isAuthenticated()")
     @ApiOperation("Получить список карточек")
     @GetMapping
     fun findAll(

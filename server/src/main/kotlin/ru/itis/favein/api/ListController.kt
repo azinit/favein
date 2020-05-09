@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import ru.itis.favein.models.List
 import ru.itis.favein.models.ListDTO
@@ -31,6 +32,7 @@ import javax.validation.Valid
 @Api("List API", description = "Операции со списком карточек")
 @RequestMapping("api/lists", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
+@PreAuthorize("isAuthenticated()")
 class ListController(
         @Autowired
         private val listRepository: ListRepository,

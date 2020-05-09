@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import ru.itis.favein.models.User
 import ru.itis.favein.models.UserDTO
@@ -17,6 +18,7 @@ import javax.validation.Valid
 @Api("User API", description = "Операции с users")
 @RequestMapping("api/users", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
+@PreAuthorize("isAuthenticated()")
 class UserController(
         @Autowired
         private val userRepository: UserRepository
