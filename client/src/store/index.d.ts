@@ -28,6 +28,7 @@ declare type AuthState = {
     current?: IUser;
     token?: string;
     authPayload: Partial<AuthDTO>
+    isAuth: boolean;
 }
 
 declare type IGlobalState = {

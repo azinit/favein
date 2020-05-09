@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 const getSessionItem = (key: string) => window.sessionStorage.getItem(key) || undefined;
 
@@ -20,18 +21,24 @@ export const authState: AuthState = {
     //     accountNonLocked: true,
     //     accountNonExpired: true
     // }
-    authPayload: {
-        email: 'admin@gmail.com',
-        password: 'admin'
-    }
+    authPayload: {},
+    isAuth: !!getSessionItem('favein_auth_jwt'),
 }
 
 const authSlice = createSlice({
     name: 'auth',
     initialState: authState,
     reducers: {
+        logout(state: AuthState) {
+            state.token = undefined
+            state.isAuth = false
+            state.current = undefined
+            window.sessionStorage.removeItem("favein_auth_jwt")
+            window.sessionStorage.removeItem("favein_auth_user")
+        },
         setToken(state: AuthState, action: PayloadAction<string>) {
             state.token = action.payload
+            state.isAuth = true
         },
         updateAuthPayload(state: AuthState, action: PayloadAction<Partial<AuthDTO>>) {
             state.authPayload = {
@@ -49,6 +56,7 @@ const authSlice = createSlice({
 })
 
 export const {
+    logout,
     setToken,
     updateAuthPayload,
     setUser,

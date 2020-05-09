@@ -1,10 +1,13 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { Navbar, Nav } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Navbar, Nav, Button } from 'react-bootstrap'
 import './index.scss'
+import { logout } from 'store/auth/slice'
 
 const Header = () => {
-    const { current } = useSelector((state: IGlobalState) => state.auth)
+    const { isAuth, current } = useSelector((state: IGlobalState) => state.auth)
+    const dispatch = useDispatch();
     return (
         <Navbar
             className='header'
@@ -29,18 +32,29 @@ const Header = () => {
                         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                     </NavDropdown> */}
                 </Nav>
-                {current && (
-                    <a
-                        href={`/users/${current.id}`}
-                        className='text-white btn btn-outline-secondary'
-                    >
-                        {current.username}
-                    </a>
-                )}
-                {/* <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-success">Search</Button>
-                </Form> */}
+                {isAuth ?
+                    (
+                        <>
+                            <a
+                                href={`/users/${current!.id}`}
+                                className='text-white btn btn-outline-secondary'
+                            >
+                                {current!.username}
+                            </a>
+                            <Button
+                                variant="secondary"
+                                onClick={() => dispatch(logout())}
+                                className="ml-2"
+                            >
+                                Выйти
+                            </Button>
+                        </>
+                    ) : (
+                        <Link to="/auth/sign-in" className="btn btn-info">
+                            Войти
+                        </Link>
+                    )
+                }
             </Navbar.Collapse>
         </Navbar>
     )

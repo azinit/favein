@@ -16,7 +16,6 @@ const SignInPage = () => {
         dispatch(updateAuthPayload({ [name]: value }))
     }
     const onSubmit = (e: FormEvent) => {
-        alert('111')
         e.preventDefault()
         dispatch(signIn())
     }
