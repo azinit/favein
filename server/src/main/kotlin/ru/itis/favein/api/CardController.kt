@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import ru.itis.favein.models.Card
 import ru.itis.favein.models.CardDTO
@@ -31,6 +32,7 @@ class CardController(
         private val rateRepository: RateRepository
 ) {
     /// start region CRUD
+    @PreAuthorize("isAuthenticated()")
     @ApiOperation("Получить список карточек")
     @GetMapping
     fun findAll(
