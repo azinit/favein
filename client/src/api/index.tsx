@@ -27,11 +27,17 @@ const API: APIService = {
         signIn(email, password) {
             return axios.post('/signIn', { email, password })
         }
+    },
+    init(token) {
+        axios.defaults.baseURL = 'http://localhost/api'
+        const { Authorization, ...headers } = axios.defaults.headers.common
+        if (token) {
+            axios.defaults.headers.common.Authorization = token
+            return;
+        }
+        axios.defaults.headers.common = headers
     }
 }
-
-axios.defaults.baseURL = 'http://localhost/api'
-axios.defaults.headers.common.Authorization = window.sessionStorage.getItem('favein_auth_jwt');
 
 export const fetchAll = () => {
     return new Promise<TotalData>(async (resolve, reject) => {

@@ -46,6 +46,7 @@ declare type APIService = {
     dashboards: IDashboardsService;
     lists: IListsService;
     cards: ICardsService;
+    init: (token: string) => void;
 }
 
 declare type TotalData = {
