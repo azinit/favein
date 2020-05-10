@@ -8,16 +8,16 @@ import './index.scss'
 const FavesPage = () => {
     const { faves = [] } = useSelector((state: IGlobalState) => state.auth.current!)
     const { entities = [] } = useSelector((state: IGlobalState) => state.cards)
-    const disptach = useDispatch()
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        disptach(readEntities('cards'))
-    }, [])
+        dispatch(readEntities('cards'))
+    }, [dispatch])
 
     const contentRenderer = () => {
-        if (entities.length === 0) {
+        if (faves.length === 0) {
             return (
-                <div className='text-muted'>Отсутствуют избранные карточки</div>
+                <div className='text-muted text-center'>Сохраненные карточки <i>отсутствуют</i></div>
             )
         }
 
@@ -38,7 +38,7 @@ const FavesPage = () => {
         <div className='page page-faves'>
             <Header />
             <div className="body">
-                <h1 className='text-center m-4'>Избранные карточки</h1>
+                <h1 className='text-center m-4'>Избранное</h1>
                 <div className="container">
                     {contentRenderer()}
                 </div>

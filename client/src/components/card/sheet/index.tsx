@@ -20,7 +20,8 @@ const CardSheet = (props: Props) => {
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
 
-    const isCurrentUser = useSelector((state: IGlobalState) => state.auth.current?.id === author.id)
+    const { current } = useSelector((state: IGlobalState) => state.auth)
+    const isCurrentUser = current!.id === author.id
     const dispatch = useDispatch()
 
     const onSave = () => {
@@ -35,7 +36,7 @@ const CardSheet = (props: Props) => {
     const mutationConfig = { onSave, onCancel, id }
 
     // views
-    const ActionsView = isCurrentUser && <CardActions {...mutationConfig} />
+    const ActionsView = isCurrentUser && <CardActions {...mutationConfig} isFaved={current!.faves.includes(id)} />
     return (
         <Card className="card-sheet shadow-lg">
             <Breadcrumb>

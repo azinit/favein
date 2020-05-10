@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getActions, deleteEntity } from 'store/entities/service'
 import { PencilSquare, X, FileEarmarkCheck, Trash, Star } from 'react-bootstrap-icons'
 import './index.scss'
+import { addFave, deleteFave } from 'store/auth/service'
 
 const { setMutationState } = getActions('cards')
 
@@ -11,10 +12,11 @@ type Props = {
     onSave: Function;
     onCancel: Function;
     id: number;
+    isFaved: boolean;
 }
 
 const CardActions = (props: Props) => {
-    const { onSave, onCancel, id } = props
+    const { onSave, onCancel, id, isFaved } = props
     const { mutationState } = useSelector((state: IGlobalState) => state.cards)
     const dispatch = useDispatch()
 
@@ -33,7 +35,11 @@ const CardActions = (props: Props) => {
             variant="outline-warning"
             className='card-action fave-btn'
             size="sm"
-            onClick={() => console.log('FAVE', id)}
+            onClick={() => {
+                const action = isFaved ? deleteFave : addFave;
+                dispatch(action(id))
+            }}
+            active={isFaved}
         >
             <Star size={16} />
         </Button>

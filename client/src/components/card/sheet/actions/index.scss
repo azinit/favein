@@ -1,6 +1,7 @@
 .card-actions {
-    .btn-outline-warning:hover {
-        color: white;
+    .btn-outline-warning:hover,
+    .btn-outline-warning.active {
+        color: white!important;
     }
 
     // FIXME: temp
