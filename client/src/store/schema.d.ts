@@ -13,6 +13,7 @@ declare type IUser = IUserDTO & {
     admin: boolean;
     roles: IRole[];
     enabled: boolean;
+    faves: ICard[];
 }
 /// start region `Rate`
 declare type IRateDTO = {

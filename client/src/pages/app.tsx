@@ -14,6 +14,7 @@ const CardPage = lazy(() => import('./card'))
 const LabelsPage = lazy(() => import('./labels'))
 const SignInPage = lazy(() => import('./auth/sign-in'))
 const SignUpPage = lazy(() => import('./auth/sign-up'))
+const FavesPage = lazy(() => import('./faves'))
 
 // TODO: withAuth
 // TODO: withStore
@@ -37,6 +38,7 @@ function App() {
                   <Route path="/users" component={UsersPage} />
                   <Route path="/labels" component={LabelsPage} />
                   <Route path="/dashboards/:id" component={DashboardPage} />
+                  <Route path="/faves" component={FavesPage} />
                   <Redirect to={`/users/${current?.id}`} />
                 </Switch>
               ) : (
