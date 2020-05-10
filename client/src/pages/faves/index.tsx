@@ -28,6 +28,7 @@ const FavesPage = () => {
                         key={fave.id}
                         card={fave}
                         mutationState="preview"
+                        extend
                     />
                 ))}
             </div>
