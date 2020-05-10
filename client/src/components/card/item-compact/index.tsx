@@ -4,7 +4,7 @@ import { Card, OverlayTrigger, Popover } from 'react-bootstrap'
 import { ChatSquare } from 'react-bootstrap-icons'
 import Label from 'components/label'
 import Rate from 'components/rate'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './index.scss'
 import { Link } from 'react-router-dom'
 import { deleteEntity } from 'store/entities/service'
@@ -33,6 +33,7 @@ const CardItemCompact = (props: Props) => {
     } = card
 
     const dispatch = useDispatch()
+    const { faves = [] } = useSelector((state: IGlobalState) => state.auth.current!)
     const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
         switch (mutationState) {
             case 'delete':
@@ -88,7 +89,7 @@ const CardItemCompact = (props: Props) => {
     })()
 
     return (
-        <Card className={cn("card-item-compact", "w-400", className)}>
+        <Card className={cn("card-item-compact", "w-400", className, { "border border-warning": faves.includes(id)} )}>
             <Link to={`/cards/${id}`} className='card-link' onClick={onClick}>
             <OverlayTrigger
                 // @ts-ignore
