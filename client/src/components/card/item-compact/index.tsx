@@ -12,22 +12,24 @@ import { deleteEntity } from 'store/entities/service'
 type Props = {
     card: ICard;
     mutationState: MutationState;
+    extend?: boolean;
 }
 
 const CardItemCompact = (props: Props) => {
     const {
         card,
-        mutationState
+        mutationState,
+        extend = false
     } = props
     const {
-        // author,
+        author,
         content,
         comments,
-        // dashboard,
+        dashboard,
         description,
         id,
         labels,
-        // list,
+        list,
         name,
         rates
     } = card
@@ -89,16 +91,22 @@ const CardItemCompact = (props: Props) => {
     })()
 
     return (
-        <Card className={cn("card-item-compact", "w-400", className, { "border border-warning": faves.includes(id)} )}>
+        <Card className={cn("card-item-compact", "w-400", className, { "border border-warning": faves.includes(id) })}>
             <Link to={`/cards/${id}`} className='card-link' onClick={onClick}>
-            <OverlayTrigger
-                // @ts-ignore
-                trigger={triggers}
-                placement="bottom"
-                overlay={popover}
-            >
-                <Card.Body className='title'>{name}</Card.Body>
-            </OverlayTrigger>
+                <OverlayTrigger
+                    // @ts-ignore
+                    trigger={triggers}
+                    placement="bottom"
+                    overlay={popover}
+                >
+                    <Card.Body className='title'>{name}</Card.Body>
+                </OverlayTrigger>
+                {extend && (
+                    <Card.Footer>
+                        {dashboard.name}/{list.name}
+                        <span className='float-right'>{author.username}</span>
+                    </Card.Footer>
+                )}
             </Link>
         </Card >
     )
