@@ -22,6 +22,7 @@ const Header = () => {
                     {isAuth && <Nav.Link href="/users">Пользователи</Nav.Link>}
                     {isAuth && <Nav.Link href="/labels">Метки</Nav.Link>}
                     {isAuth && <Nav.Link href="/faves">Избранное</Nav.Link>}
+                    {isAuth && <Nav.Link href="/user-cards">Материалы</Nav.Link>}
                     {isAuth && <Nav.Link href="/cards/9" className='text-secondary'>[Card Example]</Nav.Link>}
                     {isAuth && <Nav.Link href="/dashboards/3" className='text-secondary'>[Dashboard Example]</Nav.Link>}
                     {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
