@@ -2,7 +2,8 @@
     background-color: #343a40;
 }
 
-.page-dashboard .header {
+.page-dashboard .header,
+.page-home .header {
     position: absolute !important;
     z-index: 2 !important;
     width: 100% !important;

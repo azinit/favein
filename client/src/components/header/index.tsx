@@ -19,7 +19,6 @@ const Header = () => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     {isAuth && <Nav.Link href="/admin">Admin</Nav.Link>}
-                    <Nav.Link href="/home">Home</Nav.Link>
                     {isAuth && <Nav.Link href="/users">Users</Nav.Link>}
                     {isAuth && <Nav.Link href="/labels">Labels</Nav.Link>}
                     {isAuth && <Nav.Link href="/cards/9">Card Example</Nav.Link>}
@@ -37,7 +36,7 @@ const Header = () => {
                         <>
                             <a
                                 href={`/users/${current!.id}`}
-                                className='text-white btn btn-outline-secondary'
+                                className='btn btn-outline-secondary'
                             >
                                 {current!.username}
                             </a>
