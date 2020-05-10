@@ -1,0 +1,22 @@
+.card-actions {
+    .btn-outline-warning:hover {
+        color: white;
+    }
+
+    // FIXME: temp
+    .fave-btn {
+        margin-right: 0;
+    }
+    .delete-btn {
+        margin-right: 40px;
+    }
+    .edit-btn {
+        margin-right: 80px;
+    }
+    .cancel-btn {
+        margin-right: 80px;
+    }
+    .save-btn {
+        margin-right: 120px;
+    }
+}

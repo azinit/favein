@@ -2,7 +2,8 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { getActions, deleteEntity } from 'store/entities/service'
-import { PencilSquare, X, FileEarmarkCheck, Trash } from 'react-bootstrap-icons'
+import { PencilSquare, X, FileEarmarkCheck, Trash, Star } from 'react-bootstrap-icons'
+import './index.scss'
 
 const { setMutationState } = getActions('cards')
 
@@ -17,60 +18,87 @@ const CardActions = (props: Props) => {
     const { mutationState } = useSelector((state: IGlobalState) => state.cards)
     const dispatch = useDispatch()
 
-    const deleteBtn = (
+    const btnDelete = (
         <Button
             variant="outline-danger"
-            className='card-action edit-btn'
+            className='card-action delete-btn'
             size="sm"
             onClick={() => dispatch(deleteEntity('cards', id))}
         >
-            <Trash />
+            <Trash size={16} />
+        </Button>
+    )
+    const btnFave = (
+        <Button
+            variant="outline-warning"
+            className='card-action fave-btn'
+            size="sm"
+            onClick={() => console.log('FAVE', id)}
+        >
+            <Star size={16} />
+        </Button>
+    )
+    const btnEdit = (
+        <Button
+            variant="outline-info"
+            className='card-action edit-btn'
+            size="sm"
+            onClick={() => dispatch(setMutationState('edit'))}
+        >
+            <PencilSquare size={16} />
+        </Button>
+    )
+    const btnSave = (
+        <Button
+            variant="outline-success"
+            className='card-action save-btn'
+            size="sm"
+            onClick={() => onSave()}
+        >
+            <FileEarmarkCheck size={16} />
+        </Button>
+    )
+    const btnCancel = (
+        <Button
+            variant="outline-secondary"
+            className='card-action cancel-btn'
+            size="sm"
+            onClick={() => onCancel()}
+        >
+            <X size={16} />
         </Button>
     )
 
-    switch (mutationState) {
-        case 'preview':
-            return (
-                <>
-                    {deleteBtn}
-                    <Button
-                        variant="outline-info"
-                        className='card-action edit-btn'
-                        size="sm"
-                        onClick={() => dispatch(setMutationState('edit'))}
-                        style={{ marginRight: 40 }}
-                    >
-                        <PencilSquare size={16} />
-                    </Button>
-                </>
-            )
-        case 'edit':
-            return (
-                <>
-                    {deleteBtn}
-                    <Button
-                        variant="outline-success"
-                        className='card-action save-btn'
-                        size="sm"
-                        onClick={() => onSave()}
-                        style={{ marginRight: 80 }}
-                    >
-                        <FileEarmarkCheck size={16} />
-                    </Button>
-                    <Button
-                        variant="outline-secondary"
-                        className='card-action cancel-btn'
-                        size="sm"
-                        onClick={() => onCancel()}
-                        style={{ marginRight: 40 }}
-                    >
-                        <X size={16} />
-                    </Button>
-                </>
-            )
-        default:
-            return (null)
+
+    const actionsRenderer = () => {
+        switch (mutationState) {
+            case 'preview':
+                return (
+                    <>
+                        {btnFave}
+                        {btnDelete}
+                        {btnEdit}
+                    </>
+                )
+            case 'edit':
+                return (
+                    <>
+                        {btnFave}
+                        {btnDelete}
+                        {btnSave}
+                        {btnCancel}
+                    </>
+                )
+            default:
+                return (null)
+        }
     }
+
+    return (
+        <div className="card-actions">
+            {actionsRenderer()}
+        </div>
+    )
 }
 
 export default CardActions
