@@ -20,7 +20,7 @@ const SignUpPage = lazy(() => import('./auth/sign-up'))
 // TODO: withRouting
 
 function App() {
-  const { isAuth, token = "" } = useSelector((state: IGlobalState) => state.auth)
+  const { isAuth, token = "", current } = useSelector((state: IGlobalState) => state.auth)
   API.init(token)
   return (
     <div className="favein-app">
@@ -37,7 +37,7 @@ function App() {
                   <Route path="/users" component={UsersPage} />
                   <Route path="/labels" component={LabelsPage} />
                   <Route path="/dashboards/:id" component={DashboardPage} />
-                  <Redirect to="/admin" />
+                  <Redirect to={`/users/${current?.id}`} />
                 </Switch>
               ) : (
                 <Switch>

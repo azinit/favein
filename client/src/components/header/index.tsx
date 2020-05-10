@@ -18,7 +18,7 @@ const Header = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    {isAuth && <Nav.Link href="/admin">Admin</Nav.Link>}
+                    {isAuth && current?.admin && <Nav.Link href="/admin" className='text-warning'>Admin</Nav.Link>}
                     {isAuth && <Nav.Link href="/users">Users</Nav.Link>}
                     {isAuth && <Nav.Link href="/labels">Labels</Nav.Link>}
                     {isAuth && <Nav.Link href="/cards/9">Card Example</Nav.Link>}
