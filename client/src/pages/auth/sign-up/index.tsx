@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap'
 import { signIn } from 'store/auth/service'
 import './index.scss'
 
-const SignInPage = () => {
+const SignUpPage = () => {
     const dispatch = useDispatch()
     const { email = "", password = "" } = useSelector((state: IGlobalState) => state.auth.authPayload)
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +39,7 @@ const SignInPage = () => {
                             name="email"
                             type="email"
                             placeholder="example@gmail.com"
-                            value={""}
+                            value={email}
                             onChange={onChange}
                         />
                         <TextField
@@ -64,4 +64,4 @@ const SignInPage = () => {
     )
 }
 
-export default SignInPage
+export default SignUpPage

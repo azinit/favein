@@ -27,7 +27,7 @@ const CardPage = (props: Props) => {
         dispatch(readEntities('labels'))
         dispatch(setMutationState('preview'))
         dispatch(resetDTODetails())
-    }, [dispatch])
+    }, [dispatch, resetDTODetails, setMutationState])
 
     const card = entities.find(e => e.id === +id)
     if (card) {
