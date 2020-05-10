@@ -26,7 +26,13 @@ const API: APIService = {
         ...configureCRUDService('users'),
         signIn(email, password) {
             return axios.post('/signIn', { email, password })
-        }
+        },
+        addFave(userId, cardId) { 
+            return axios.put(`/users/${userId}/faves/add/${cardId}`);
+        },
+        deleteFave(userId, cardId) { 
+            return axios.put(`/users/${userId}/faves/delete/${cardId}`);
+        },
     },
     init(token) {
         axios.defaults.baseURL = 'http://localhost/api'

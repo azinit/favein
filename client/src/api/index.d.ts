@@ -26,6 +26,8 @@ declare type IUsersService = ICRUDService<IUser, IUserDTO> & {
         token: string;
         user: IUser;
     }>;
+    addFave: (userId: number, cardId: number) => APIResponse<boolean>;
+    deleteFave: (userId: number, cardId: number) => APIResponse<boolean>;
 };
 declare type IDashboardsService = ICRUDService<IDashboard, IDashboardDTO>;
 declare type IListsService = ICRUDService<IList, IListDTO>;
