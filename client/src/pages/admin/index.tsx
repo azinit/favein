@@ -31,7 +31,7 @@ const AdminPage = (props: Props) => {
     return (
         <div className='page page-admin'>
             <Header />
-            <DemoSection title="Comments">
+            <DemoSection title="Comments" className="flex-wrap" >
                 {comments.entities.map(comment => <Comment key={comment.id} comment={comment} />)}
             </DemoSection>
             <DemoSection title="Rates">
