@@ -13,10 +13,11 @@ type Props = {
     onCancel: Function;
     id: number;
     isFaved: boolean;
+    isCurrentUser: boolean;
 }
 
 const CardActions = (props: Props) => {
-    const { onSave, onCancel, id, isFaved } = props
+    const { onSave, onCancel, id, isFaved, isCurrentUser } = props
     const { mutationState } = useSelector((state: IGlobalState) => state.cards)
     const dispatch = useDispatch()
 
@@ -77,6 +78,10 @@ const CardActions = (props: Props) => {
 
 
     const actionsRenderer = () => {
+        if (!isCurrentUser) {
+            return <>{btnFave}</>
+        }
+
         switch (mutationState) {
             case 'preview':
                 return (

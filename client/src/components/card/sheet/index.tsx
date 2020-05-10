@@ -33,10 +33,10 @@ const CardSheet = (props: Props) => {
         dispatch(setMutationState('preview'))
     }
 
-    const mutationConfig = { onSave, onCancel, id }
+    const mutationConfig = { onSave, onCancel, id, isCurrentUser }
 
     // views
-    const ActionsView = isCurrentUser && <CardActions {...mutationConfig} isFaved={current!.faves.includes(id)} />
+    const ActionsView = <CardActions {...mutationConfig} isFaved={current!.faves.includes(id)} />
     return (
         <Card className="card-sheet shadow-lg">
             <Breadcrumb>
