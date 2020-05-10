@@ -52,8 +52,8 @@ const CardSheet = (props: Props) => {
                 </section>
                 <hr />
                 <section className="social-block">
-                    <Rates />
-                    <hr />
+                    {/* <Rates /> */}
+                    {/* <hr /> */}
                     <Comments />
                 </section>
             </Card.Body>
