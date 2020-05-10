@@ -19,10 +19,11 @@ const Header = () => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     {isAuth && current?.admin && <Nav.Link href="/admin" className='text-warning'>Admin</Nav.Link>}
-                    {isAuth && <Nav.Link href="/users">Users</Nav.Link>}
-                    {isAuth && <Nav.Link href="/labels">Labels</Nav.Link>}
-                    {isAuth && <Nav.Link href="/cards/9">Card Example</Nav.Link>}
-                    {isAuth && <Nav.Link href="/dashboards/3">Dashboard Example</Nav.Link>}
+                    {isAuth && <Nav.Link href="/users">Пользователи</Nav.Link>}
+                    {isAuth && <Nav.Link href="/labels">Метки</Nav.Link>}
+                    {isAuth && <Nav.Link href="/faves">Избранное</Nav.Link>}
+                    {isAuth && <Nav.Link href="/cards/9" className='text-secondary'>[Card Example]</Nav.Link>}
+                    {isAuth && <Nav.Link href="/dashboards/3" className='text-secondary'>[Dashboard Example]</Nav.Link>}
                     {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
