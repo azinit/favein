@@ -30,7 +30,9 @@ class CardController(
         @Autowired
         private val labelRepository: LabelRepository,
         @Autowired
-        private val rateRepository: RateRepository
+        private val rateRepository: RateRepository,
+        @Autowired
+        private val userRepository: UserRepository
 ) {
     /// start region CRUD
     @ApiOperation("Получить список карточек")
@@ -263,6 +265,20 @@ class CardController(
             card.rates -= rate
             cardRepository.save(card)
             return ResponseEntity(HttpStatus.OK)
+        }
+        return ResponseEntity(HttpStatus.NOT_FOUND)
+    }
+
+    @ApiOperation("Получить информацию по кол-ву добавлений в избранное")
+    @GetMapping("/{card-id}/faves")
+    fun getFavesAmount(
+            @ApiParam("Уникальный идентификатор карточки", required = true)
+            @PathVariable("card-id") id: Long
+    ): ResponseEntity<Int> {
+        val entity = cardRepository.findById(id)
+        if (entity.isPresent) {
+            val amount = userRepository.findAll().filter { processFaves(it.faves).contains(id) }.size
+            return ResponseEntity(amount, HttpStatus.OK)
         }
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }

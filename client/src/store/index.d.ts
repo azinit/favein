@@ -24,11 +24,16 @@ declare type AuthDTO = {
     email: string;
     password: string;
 }
+declare type FaveAmountLink = {
+    cardId: number;
+    amount: number;
+}
 declare type AuthState = {
     current?: IUser;
     token?: string;
     authPayload: Partial<AuthDTO>
     isAuth: boolean;
+    faves: FaveAmountLink[];
 }
 
 declare type IGlobalState = {

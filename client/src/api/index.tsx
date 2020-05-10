@@ -20,8 +20,11 @@ const API: APIService = {
         },
         deleteComment(cardId, commentId) {
             return axios.put(`/cards/${cardId}/comments/remove/${commentId}`)
+        },
+        getFavesAmount(cardId) {
+            return axios.get(`/cards/${cardId}/faves`)
         }
-    } as ICardsService,
+    },
     users: {
         ...configureCRUDService('users'),
         signIn(email, password) {

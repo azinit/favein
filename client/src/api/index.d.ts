@@ -36,6 +36,7 @@ declare type ICardsService = ICRUDService<ICard, ICardDTO> & {
     deleteLabel: (cardId: number, labelId: number) => APIResponse<boolean>;
     addComment: (cardId: number, commentId: number) => APIResponse<boolean>;
     deleteComment: (cardId: number, commentId: number) => APIResponse<boolean>;
+    getFavesAmount: (cardId: number) => APIResponse<number>;
     // addRate: (cardId: number, rateId: number) => APIResponse<boolean>;
     // deleteRate: (cardId: number, rateId: number) => APIResponse<boolean>;
 };

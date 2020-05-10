@@ -1,13 +1,14 @@
-import React, { MouseEvent } from 'react'
+import React, { MouseEvent, useEffect, useState } from 'react'
 import cn from 'classnames'
 import { Card, OverlayTrigger, Popover } from 'react-bootstrap'
-import { ChatSquare } from 'react-bootstrap-icons'
+import { ChatSquare, Star } from 'react-bootstrap-icons'
 import Label from 'components/label'
 import Rate from 'components/rate'
 import { useDispatch, useSelector } from 'react-redux'
 import './index.scss'
 import { Link } from 'react-router-dom'
 import { deleteEntity } from 'store/entities/service'
+import API from 'api'
 
 type Props = {
     card: ICard;
@@ -36,6 +37,7 @@ const CardItemCompact = (props: Props) => {
 
     const dispatch = useDispatch()
     const { faves = [] } = useSelector((state: IGlobalState) => state.auth.current!)
+    const [favesAmount, setFavesAmount] = useState(0)
     const onClick = (e: MouseEvent<HTMLAnchorElement>) => {
         switch (mutationState) {
             case 'delete':
@@ -43,6 +45,13 @@ const CardItemCompact = (props: Props) => {
                 dispatch(deleteEntity('cards', id))
         }
     }
+
+    useEffect(() => {
+        API.cards
+            .getFavesAmount(id)
+            .then(response => setFavesAmount(response.data))
+    })
+
     const summary = description || content.substring(0, 128) + '...'
     const LabelsView = labels && (
         <div className="labels d-flex justify-content-start">
@@ -67,7 +76,10 @@ const CardItemCompact = (props: Props) => {
                 </div>
                 <div className="social d-flex mt-2">
                     <div className="flex-grow-1 comments">{comments.length} <ChatSquare /></div>
-                    <Rate rate={rate} showAuthor={false} />
+                    <div className="faves d-flex align-items-center">
+                        {favesAmount} <Star className="ml-1" />
+                    </div>
+                    {/* <Rate rate={rate} showAuthor={false} /> */}
                 </div>
             </Popover.Content>
         </Popover>

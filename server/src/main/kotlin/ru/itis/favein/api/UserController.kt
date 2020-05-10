@@ -96,13 +96,6 @@ class UserController(
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
 
-    fun processFaves(faves: String): List<Long> {
-        if (faves == "") {
-            return listOf()
-        }
-        return faves.split(" ").map { it.toLong() }
-    }
-
     @ApiOperation("Добавить карточку в избранное")
     @PutMapping("{user-id}/faves/add/{card-id}")
     fun addFave(
@@ -145,4 +138,11 @@ class UserController(
         }
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }
+}
+
+fun processFaves(faves: String): List<Long> {
+    if (faves == "") {
+        return listOf()
+    }
+    return faves.split(" ").map { it.toLong() }
 }

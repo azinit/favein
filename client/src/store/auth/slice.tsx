@@ -23,6 +23,8 @@ export const authState: AuthState = {
     })(),
     authPayload: {},
     isAuth: !!getSessionItem('favein_auth_jwt'),
+    // FIXME: delete
+    faves: []
 }
 
 const authSlice = createSlice({
