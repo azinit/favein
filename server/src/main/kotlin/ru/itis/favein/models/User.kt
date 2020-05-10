@@ -1,5 +1,6 @@
 package ru.itis.favein.models
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import org.springframework.security.core.GrantedAuthority
@@ -30,7 +31,9 @@ data class User(
         @CollectionTable(name = "user_role", joinColumns = [JoinColumn(name = "user_id")])
         /** is enum, how store */
         @Enumerated(EnumType.STRING)
-        var roles: Set<Role> = setOf(Role.USER)
+        var roles: Set<Role> = setOf(Role.USER),
+
+        var faves: String = ""
 ) : UserDetails {
     override fun getAuthorities(): Collection<GrantedAuthority> = roles
     override fun isEnabled(): Boolean = active

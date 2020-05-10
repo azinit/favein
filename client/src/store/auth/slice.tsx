@@ -34,6 +34,8 @@ const authSlice = createSlice({
             }
         },
         setUser(state: AuthState, action: PayloadAction<IUser>) {
+            // @ts-ignore
+            action.payload.faves = action.payload.faves.split(' ').map(f => +f)
             state.current = action.payload
         },
         updateState(state: AuthState, action: PayloadAction<Partial<AuthState>>) {
