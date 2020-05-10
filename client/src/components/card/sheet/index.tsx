@@ -16,7 +16,7 @@ type Props = {
 }
 
 const CardSheet = (props: Props) => {
-    const { name, dashboard, list, author } = props.card
+    const { name, dashboard, list, author, id } = props.card
     const dashboardLink = `/dashboards/${dashboard.id}`
     const listLink = `${dashboardLink}#list-${list.id}`
 
@@ -32,7 +32,7 @@ const CardSheet = (props: Props) => {
         dispatch(setMutationState('preview'))
     }
 
-    const mutationConfig = { onSave, onCancel }
+    const mutationConfig = { onSave, onCancel, id }
 
     // views
     const ActionsView = isCurrentUser && <CardActions {...mutationConfig} />
