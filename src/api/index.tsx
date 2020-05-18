@@ -41,7 +41,7 @@ const API: APIService = {
         },
     },
     init(token) {
-        axios.defaults.baseURL = 'http://localhost/api'
+        // axios.defaults.baseURL = 'http://localhost/api'
         const { Authorization, ...headers } = axios.defaults.headers.common
         if (token) {
             axios.defaults.headers.common.Authorization = token

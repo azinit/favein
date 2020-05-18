@@ -55,5 +55,6 @@
     "@types/react-router-dom": "^5.1.3",
     "@types/react-syntax-highlighter": "^11.0.4",
     "node-sass": "^4.13.1"
-  }
+  },
+  "proxy": "https://api-favein-itis.herokuapp.com/api"
 }
