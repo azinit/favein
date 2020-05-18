@@ -3,13 +3,13 @@ import Header from 'components/header'
 import { useSelector, useDispatch } from 'react-redux'
 import TextField from 'components/text-field'
 import { updateAuthPayload, resetAuthPayload } from 'store/auth/slice'
-import { Button } from 'react-bootstrap'
+import { Button, Alert } from 'react-bootstrap'
 import { signIn } from 'store/auth/service'
 import './index.scss'
 
 const SignInPage = () => {
     const dispatch = useDispatch()
-    const { email = "", password = "" } = useSelector((state: IGlobalState) => state.auth.authPayload)
+    const { email = "", password = "", errors = [] } = useSelector((state: IGlobalState) => state.auth.authPayload)
 
     useEffect(() => {
         dispatch(resetAuthPayload())
@@ -31,6 +31,9 @@ const SignInPage = () => {
             <div className="body">
                 <div className="container bg-white shadow-sm">
                     <h3 className='text-center mb-4'>Вход в FaveIn</h3>
+                    {errors.map(e => (
+                        <Alert variant="danger">{e}</Alert>
+                    ))}
                     <form onSubmit={onSubmit}>
                         <TextField
                             label="Email"

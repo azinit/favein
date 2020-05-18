@@ -24,6 +24,7 @@ declare type AuthDTO = {
     username?: string;
     email: string;
     password: string;
+    errors: string[];
 }
 declare type FaveAmountLink = {
     cardId: number;

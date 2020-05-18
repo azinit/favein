@@ -24,7 +24,8 @@ export const authState: AuthState = {
     authPayload: {
         email: undefined,
         password: undefined,
-        username: undefined
+        username: undefined,
+        errors: []
     },
     isAuth: !!getSessionItem('favein_auth_jwt'),
     // FIXME: delete
@@ -52,8 +53,11 @@ const authSlice = createSlice({
                 ...action.payload
             }
         },
+        addError(state: AuthState, action: PayloadAction<string>) {
+            state.authPayload.errors?.push(action.payload)
+        },
         resetAuthPayload(state: AuthState)  {
-            state.authPayload = {}
+            state.authPayload = { errors: [] }
         },
         setUser(state: AuthState, action: PayloadAction<IUser>) {
             // @ts-ignore
@@ -84,6 +88,7 @@ const authSlice = createSlice({
 })
 
 export const {
+    addError,
     resetAuthPayload,
     logout,
     setToken,
