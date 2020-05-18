@@ -11,7 +11,7 @@ const HomePage = () => {
             <Header />
             <div className="body">
                 <div className="body-overlay" />
-                <Carousel interval={300000}>
+                <Carousel interval={3000}>
                     {screens.map((props) => (
                         <Carousel.Item>
                             <Screen {...props}/>

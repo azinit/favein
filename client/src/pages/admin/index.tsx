@@ -34,13 +34,13 @@ const AdminPage = (props: Props) => {
             <DemoSection title="Comments" className="flex-wrap" >
                 {comments.entities.map(comment => <Comment key={comment.id} comment={comment} />)}
             </DemoSection>
-            <DemoSection title="Rates">
+            {/* <DemoSection title="Rates">
                 {rates.entities.map(rate => <Rate key={rate.id} rate={rate} />)}
-            </DemoSection>
+            </DemoSection> */}
             <DemoSection title="Labels">
                 {labels.entities.map(label => <Label key={label.id} label={label} />)}
             </DemoSection>
-            <DemoSection title="Users">
+            <DemoSection title="Users" className="flex-wrap">
                 {users.entities.map(user => <User key={user.id} user={user} />)}
             </DemoSection>
             {/* <DemoSection title="Cards Sheets" className="flex-wrap">
