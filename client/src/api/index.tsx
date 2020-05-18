@@ -28,7 +28,7 @@ const API: APIService = {
     users: {
         ...configureCRUDService('users'),
         signIn(email, password) {
-            return axios.post('/signIn', { email, password })
+            return axios.post('/sign-in', { email, password })
         },
         addFave(userId, cardId) { 
             return axios.put(`/users/${userId}/faves/add/${cardId}`);

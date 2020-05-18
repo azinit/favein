@@ -8,12 +8,11 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import ru.itis.favein.dto.SignInDto;
 import ru.itis.favein.dto.TokenDto;
-import ru.itis.favein.models.Role;
 import ru.itis.favein.models.User;
 import ru.itis.favein.repository.UserRepository;
 
 @Service
-public class SignInServiceImpl implements SignInService {
+public class AuthService {
 
     @Autowired
     private UserRepository usersRepository;
@@ -24,7 +23,6 @@ public class SignInServiceImpl implements SignInService {
     @Value("${jwt.secret}")
     private String secret;
 
-    @Override
     public TokenDto signIn(SignInDto signInData) {
         // получаем пользователя по его email
         User user = usersRepository.findByEmail(signInData.getEmail());
