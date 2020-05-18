@@ -30,6 +30,9 @@ const TextField = (props: Props) => {
 
     const isEditing = mutationState === "edit"
     const isPreview = mutationState === "preview"
+
+    const as = type === "textarea" ? "textarea" : "input"
+
     return (
         <Form.Group className={cn('text-field', `field_${name}`, mutationState, className, { inline })}>
             {label && (
@@ -43,6 +46,7 @@ const TextField = (props: Props) => {
                 value={value}
                 onChange={onChange}
                 disabled={isPreview}
+                as={as}
             />
         </Form.Group>
     )
