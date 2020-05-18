@@ -54,7 +54,10 @@ const authSlice = createSlice({
             }
         },
         addError(state: AuthState, action: PayloadAction<string>) {
-            state.authPayload.errors?.push(action.payload)
+            const { errors } = state.authPayload
+            if (errors && !errors.includes(action.payload)) {
+                errors.push(action.payload)
+            }
         },
         resetAuthPayload(state: AuthState)  {
             state.authPayload = { errors: [] }
