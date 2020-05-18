@@ -32,8 +32,8 @@ const ContentEditor = ({ source }: Props) => {
     return (
         <>
             <Alert variant="warning">
+                <i className="foricon for-save mr-2" />
                 Не забывайте сохранить содержание карточки!
-                <span className="ml-2" style={{ fontSize: 12, lineHeight: "20px", opacity: 0.5 }}>(Кнопка "Дискета")</span>
             </Alert>
             <MarkdownEditor
                 language="en"
