@@ -44,6 +44,7 @@ const UserPage = (props: Props) => {
             </Jumbotron>
             <Jumbotron className="bg-white p-2">
                 <Container>
+                {(userDashboards.length === 0) && <div className="text-center mb-4 text-muted">У пользователя нет еще ни одного дашборда</div>}
                     <CardDeck className="justify-content-center">
                         {userDashboards.map(dashboard => (
                             <DashboardItem
@@ -53,7 +54,6 @@ const UserPage = (props: Props) => {
                                 showActions={isCurrentUser}
                             />
                         ))}
-                        {(userDashboards.length === 0) && <div>У пользователя нет еще ни одного дашборда</div>}
                         {isCurrentUser && <AddDashboard />}
                     </CardDeck>
                 </Container>
