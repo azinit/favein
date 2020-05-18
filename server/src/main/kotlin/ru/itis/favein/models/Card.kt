@@ -19,7 +19,7 @@ data class Card(
         @ApiModelProperty(notes = "Описание", example = "Хуки — нововведение в React 16.8, которое позволяет использовать состояние и другие возможности React без написания классов.")
         var description: String = "",
         /** Base content */
-        @Column(length = 4096)
+        @Column(length = 10485760)
         @ApiModelProperty(notes = "Содержание", example = "Первый хук, который мы изучим, это функция useState. Не беспокойтесь, если этот пример будет поначалу неясен. Скоро мы разберёмся, как он работает.")
         var content: String = "",
         @ManyToOne(fetch = FetchType.LAZY)

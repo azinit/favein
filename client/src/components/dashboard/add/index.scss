@@ -1,0 +1,15 @@
+.dashboard-add {
+    height: 250px;
+    width: 300px;
+    flex: unset !important;
+    margin-bottom: 15px !important;
+    transition: 0.2s;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #17a2b8;
+        .icon {
+            fill: #fff;
+        }
+    }
+}

@@ -1,8 +1,29 @@
 .dashboard {
-    position: relative;
-    .background {
-        // position: absolute;
-        // opacity: 0.2;
-        object-fit: cover;
+    &-preview {
+        &-overlay {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .background {
+            object-fit: cover;
+        }
+        .description {
+            font-size: 20px;
+        }
+    }
+    &-content {
+        margin: 20px;
+    }
+
+    .toolbar {
+        .btn:not(:hover) {
+            opacity: 0.2;
+        }
+
+        .btn-block + .btn-block {
+            margin-top: 2px;
+        }
     }
 }

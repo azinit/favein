@@ -1,3 +1,3 @@
 /// <reference types="react-scripts" />
-/// <reference types="./fetch" />
+/// <reference types="./api" />
 /// <reference types="./store" />

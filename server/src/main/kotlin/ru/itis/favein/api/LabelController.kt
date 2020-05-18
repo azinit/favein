@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import ru.itis.favein.models.Label
 import ru.itis.favein.models.LabelDTO
@@ -18,6 +19,7 @@ import javax.validation.Valid
 @Api("Label API", description = "Операции с метками")
 @RequestMapping("api/labels", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
+@PreAuthorize("isAuthenticated()")
 class LabelController(
         @Autowired
         private val labelRepository: LabelRepository

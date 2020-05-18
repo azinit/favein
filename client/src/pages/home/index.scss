@@ -1,3 +1,57 @@
+$secondary: white;
+$primary: black;
+
+@mixin colorize-text($primary) {
+    color: white;
+    // background: #333333;
+    text-shadow: $secondary 0px 0px 5px, $secondary 0px 0px 10px,
+        // $secondary 0px 0px 15px,
+            $primary 0px 0px 20px,
+        $primary 0px 0px 30px, $primary 0px 0px 40px;
+    // $primary 0px 0px 50px, $primary 0px 0px 75px;
+}
+
 .page-home {
-    background-color: rgba(95, 89, 179, 0.377);
+    position: relative;
+    .header {
+        a.nav-link {
+            transition: 0.2s;
+            &.text-secondary {
+                color: var(--light) !important;
+                opacity: 0.2;
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
+        }
+        a.navbar-brand {
+            @include colorize-text(var(--info));
+        }
+
+        .btn {
+            opacity: 0.2;
+            transition: 0.3s;
+            &:hover {
+                opacity: 1.0;
+            }
+        }
+    }
+
+    .body {
+        position: relative;
+        &-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1;
+        }
+    }
+
+    .carousel-img {
+        height: 100vh;
+        object-fit: cover;
+    }
 }

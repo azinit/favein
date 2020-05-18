@@ -1,52 +1,63 @@
 import React from 'react'
-import { Card as BCard, Breadcrumb } from 'react-bootstrap'
-import Label from '../../label'
-import Comment from '../../comment'
-import Rate from '../../rate'
+import { Card, Breadcrumb } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
+import Header from './header'
+import CardActions from './actions'
+import Comments from './comments'
+import Rates from './rates'
+import './index.scss'
+import Content from './content'
+import { updateEntity, getActions } from 'store/entities/service'
 
+const { resetDTODetails, setMutationState } = getActions('cards')
+// FIXME: useSelector.current instead
 type Props = {
     card: ICard;
 }
 
 const CardSheet = (props: Props) => {
-    const { author, content, comments, dashboard, description, id, labels, list, name, rates } = props.card
+    const { name, dashboard, list, author, id } = props.card
+    const dashboardLink = `/dashboards/${dashboard.id}`
+    const listLink = `${dashboardLink}#list-${list.id}`
+
+    const { current } = useSelector((state: IGlobalState) => state.auth)
+    const isCurrentUser = current!.id === author.id
+    const dispatch = useDispatch()
+
+    const onSave = () => {
+        dispatch(updateEntity('cards'))
+        dispatch(setMutationState('preview'))
+    }
+    const onCancel = () => {
+        dispatch(resetDTODetails())
+        dispatch(setMutationState('preview'))
+    }
+
+    const mutationConfig = { onSave, onCancel, id, isCurrentUser }
+
+    // views
+    const ActionsView = <CardActions {...mutationConfig} isFaved={current!.faves.includes(id)} />
     return (
-        <BCard className="card-sheet" style={{ width: '100%' }}>
+        <Card className="card-sheet shadow-lg">
             <Breadcrumb>
-                <Breadcrumb.Item href="#">{dashboard.name}</Breadcrumb.Item>
-                <Breadcrumb.Item href="#">{list.name}</Breadcrumb.Item>
+                <Breadcrumb.Item href={dashboardLink}>{dashboard.name}</Breadcrumb.Item>
+                <Breadcrumb.Item href={listLink}>{list.name}</Breadcrumb.Item>
                 <Breadcrumb.Item active>{name}</Breadcrumb.Item>
+                {ActionsView}
             </Breadcrumb>
-            <BCard.Body>
-                <BCard.Title className="text-center">{name}</BCard.Title>
-                <BCard.Subtitle className="text-secondary text-center mb-4">{author.username} ({author.email})</BCard.Subtitle>
-                <BCard.Text>
-                    {labels &&
-                        <div className="labels d-flex justify-content-center mb-4">
-                            {labels.map(l => <Label key={l.id} label={l} />)}
-                        </div>
-                    }
-                    {description &&
-                        <div className="summary mb-4 border border-secondary rounded p-4">
-                            {description}
-                        </div>
-                    }
-                    <div className="content mb-4">
-                        {content}
-                    </div>
-                    {rates &&
-                        <div className="rates d-flex mb-4">
-                            {rates.map(r => <Rate key={r.id} rate={r} />)}
-                        </div>
-                    }
-                    {comments &&
-                        <div className="comments d-flex">
-                            {comments.map(c => <Comment key={c.id} comment={c} />)}
-                        </div>
-                    }
-                </BCard.Text>
-            </BCard.Body>
-        </BCard>
+            <Card.Body>
+                <Header />
+                <section className="card-content">
+                    <Content />
+                </section>
+                <hr />
+                <section className="social-block">
+                    {/* <Rates /> */}
+                    {/* <hr /> */}
+                    <Comments />
+                </section>
+            </Card.Body>
+        </Card>
     )
 }
 

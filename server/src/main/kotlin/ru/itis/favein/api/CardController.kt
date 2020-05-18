@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import ru.itis.favein.models.Card
 import ru.itis.favein.models.CardDTO
@@ -18,6 +19,7 @@ import javax.validation.Valid
 @Api("Card API", description = "Операции с карточками")
 @RequestMapping("api/cards", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
+@PreAuthorize("isAuthenticated()")
 class CardController(
         @Autowired
         private val cardRepository: CardRepository,
@@ -28,7 +30,9 @@ class CardController(
         @Autowired
         private val labelRepository: LabelRepository,
         @Autowired
-        private val rateRepository: RateRepository
+        private val rateRepository: RateRepository,
+        @Autowired
+        private val userRepository: UserRepository
 ) {
     /// start region CRUD
     @ApiOperation("Получить список карточек")
@@ -261,6 +265,20 @@ class CardController(
             card.rates -= rate
             cardRepository.save(card)
             return ResponseEntity(HttpStatus.OK)
+        }
+        return ResponseEntity(HttpStatus.NOT_FOUND)
+    }
+
+    @ApiOperation("Получить информацию по кол-ву добавлений в избранное")
+    @GetMapping("/{card-id}/faves")
+    fun getFavesAmount(
+            @ApiParam("Уникальный идентификатор карточки", required = true)
+            @PathVariable("card-id") id: Long
+    ): ResponseEntity<Int> {
+        val entity = cardRepository.findById(id)
+        if (entity.isPresent) {
+            val amount = userRepository.findAll().filter { processFaves(it.faves).contains(id) }.size
+            return ResponseEntity(amount, HttpStatus.OK)
         }
         return ResponseEntity(HttpStatus.NOT_FOUND)
     }

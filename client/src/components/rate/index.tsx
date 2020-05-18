@@ -14,11 +14,11 @@ const Rate = (props: Props) => {
 
     return (
         <div className="rate">
-            {showAuthor &&
+            {showAuthor && (
                 <div className="rate-author">
                     {author.username}
                 </div>
-            }
+            )}
             <div className="rate-stars">
                 {[...Array(value)].map((_, i) => <StarFill key={`1-${i}`} />)}
                 {[...Array(empty)].map((_, i) => <Star key={`0-${i}`} />)}

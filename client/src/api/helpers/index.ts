@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const configureCRUDService = <T, D>(model: string) => {
     const CRUDService: ICRUDService<T, D> = {
-        api: `${process.env.REACT_APP_API_DOMAIN}/${model}`,
+        api: `/${model}`,
         readList() {
             return axios.get(this.api);
         },
@@ -12,8 +12,8 @@ export const configureCRUDService = <T, D>(model: string) => {
         read(id) {
             return axios.get(`${this.api}/${id}`)
         },
-        update(details) {
-            return axios.put(this.api, details);
+        update(id, details) {
+            return axios.put(`${this.api}/${id}`, details);
         },
         delete(id) {
             return axios.delete(`${this.api}/${id}`)

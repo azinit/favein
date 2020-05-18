@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import ru.itis.favein.models.Dashboard
 import ru.itis.favein.models.DashboardDTO
@@ -18,6 +19,7 @@ import javax.validation.Valid
 @Api("Dashboard API", description = "Операции с dashboards")
 @RequestMapping("api/dashboards", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
+@PreAuthorize("isAuthenticated()")
 class DashboardController(
         @Autowired
         private val dashboardRepository: DashboardRepository,

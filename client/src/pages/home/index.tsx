@@ -1,11 +1,24 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import Header from 'components/header'
 import './index.scss'
+import { Jumbotron, Carousel } from 'react-bootstrap'
+import Screen from './screen'
+import { screens } from './fixtures'
 
 const HomePage = () => {
     return (
-        <div className="page-home">
-            <h1>Hello, home</h1>
+        <div className="page page-home">
+            <Header />
+            <div className="body">
+                <div className="body-overlay" />
+                <Carousel interval={3000}>
+                    {screens.map((props) => (
+                        <Carousel.Item>
+                            <Screen {...props}/>
+                        </Carousel.Item>
+                    ))}
+                </Carousel>
+            </div>
         </div>
     )
 }

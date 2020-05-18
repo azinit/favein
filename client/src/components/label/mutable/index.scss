@@ -1,0 +1,34 @@
+.mutable-label {
+    transition: 0.5s;
+    position: relative;
+    cursor: default;
+
+    .action {
+        position: absolute;
+        opacity: 0;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &.other {
+        opacity: 0.2;
+    }
+
+    &.edit:hover {
+        &.related {
+            background-color: var(--danger)!important;
+        }
+        &.other {
+            opacity: 1.0;
+            background-color: var(--success)!important;
+        }
+        cursor: pointer;
+        .name {
+            opacity: 0;
+        }
+        .action {
+            opacity: 1;
+        }
+    }
+}

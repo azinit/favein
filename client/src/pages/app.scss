@@ -1,12 +1,25 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 // @import "~bootstrap-slider/dist/css/bootstrap-slider.css";
 
+html,
+body,
+#root,
+.favein-app,
+.page {
+    position: relative;
+    height: 100%;
+}
+
+// html,
+// .page {
+//     background-color: white;
+// }
+
 .favein-app {
     .user,
     .rate,
     .comment,
     .label,
-    .card-sheet,
     .card-item {
         margin: 10px;
     }
@@ -27,5 +40,40 @@
             border-bottom: 1px solid #000;
             vertical-align: middle;
         }
+    }
+
+    .darken {
+        background-color: rgba(0, 0, 0, 0.8);
+        transition: background-color 0.2s;
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+    }
+
+    .link-reset {
+        text-decoration: none;
+        color: unset;
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    .w-300 {
+        min-width: 300px;
+        width: 300px;
+    }
+
+    .w-400 {
+        min-width: 400px;
+        width: 400px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: normal;
     }
 }

@@ -1,0 +1,44 @@
+.dashboard-item {
+    height: 250px;
+    width: 300px;
+    position: relative;
+    flex: unset !important;
+    margin-bottom: 15px !important;
+
+    .card-img-overlay {
+        background-color: rgba(0, 0, 0, 0.6);
+        transition: background-color 0.2s;
+    }
+    .card-img {
+        background-size: cover;
+        height: 100%;
+        object-fit: cover;
+    }
+    .dashboard-actions {
+        position: absolute;
+        bottom: 0;
+        z-index: 2;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+    .dashboard-name {
+        input {
+            font-size: 1.25rem!important;
+        }
+    }
+    .dashboard-link {
+        color: unset;
+        text-decoration: none;
+        transition: opacity 0.2s;
+    }
+
+    &:hover, &.hover {
+        .card-img-overlay {
+            background-color: rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+        }
+        .dashboard-actions {
+            opacity: 1.0;
+        }
+    }
+}

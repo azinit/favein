@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import ru.itis.favein.models.Comment
 import ru.itis.favein.models.CommentDTO
@@ -18,6 +19,7 @@ import javax.validation.Valid
 @Api("Comments API", description = "Операции с комментариями")
 @RequestMapping("api/comments", produces = ["application/json"])
 @CrossOrigin(origins = ["*"])
+@PreAuthorize("isAuthenticated()")
 class CommentController(
         @Autowired
         private val commentRepository: CommentRepository,
