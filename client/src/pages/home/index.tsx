@@ -7,18 +7,6 @@ const HomePage = () => {
     return (
         <div className="page page-home">
             <Header />
-            {/* <Jumbotron className="m-0 darken rounded-0">
-                ...
-            </Jumbotron>
-            <Jumbotron className="m-0 bg-white rounded-0">
-                ...
-            </Jumbotron>
-            <Jumbotron className="m-0">
-                ...
-            </Jumbotron>
-            <Jumbotron className="m-0 bg-white rounded-0">
-                ...
-            </Jumbotron> */}
             <div className="body">
                 {/* FIXME: slides as actions with funtional */}
                 <Carousel interval={3000}>
