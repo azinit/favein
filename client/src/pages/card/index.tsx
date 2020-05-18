@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import CardSheet from 'components/card/sheet'
@@ -20,6 +20,7 @@ const CardPage = (props: Props) => {
     const { params: { id } } = match;
     const { entities, loading = true } = useSelector((state: IGlobalState) => state.cards)
     const { setCurrent, setMutationState, resetDTODetails } = getActions('cards')
+    const [_loading, setLoading] = useState(true)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -27,6 +28,9 @@ const CardPage = (props: Props) => {
         dispatch(readEntities('labels'))
         dispatch(setMutationState('preview'))
         dispatch(resetDTODetails())
+        setTimeout(() => {
+            setLoading(false)
+        }, 100)
     }, [dispatch, resetDTODetails, setMutationState])
 
     const card = entities.find(e => e.id === +id)
@@ -34,7 +38,7 @@ const CardPage = (props: Props) => {
         dispatch(setCurrent(card as any))
     }
 
-    if (loading) {
+    if (loading || _loading) {
         return <Loader className='overlay' />
     }
     if (card === undefined) {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Dashboard from 'components/dashboard'
@@ -21,16 +21,21 @@ const DashboardPage = (props: Props) => {
     const { dashboards, lists, cards } = useSelector((state: IGlobalState) => state)
     const dispatch = useDispatch()
     const { loading = true } = dashboards
+    const [_loading, setLoading] = useState(true)
+
     useEffect(() => {
         dispatch(readEntities('dashboards'))
         dispatch(readEntities('lists'))
         dispatch(readEntities('cards'))
+        setTimeout(() => {
+            setLoading(false)
+        }, 100)
     }, [dispatch])
 
     // FIXME: load manually
     const dashboard = dashboards.entities.find(d => d.id === +id)
 
-    if (loading) {
+    if (loading || _loading) {
         return <Loader className='overlay' />
     }
     if (dashboard === undefined) {
