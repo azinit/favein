@@ -14,12 +14,14 @@ $primary: black;
 .page-home {
     position: relative;
     .header {
-        a.nav-link.text-secondary {
-            color: var(--light) !important;
-            opacity: 0.2;
-            transition: 0.1s;
-            &:hover {
-                opacity: 0.6;
+        a.nav-link {
+            transition: 0.2s;
+            &.text-secondary {
+                color: var(--light) !important;
+                opacity: 0.2;
+                &:hover {
+                    opacity: 0.6;
+                }
             }
         }
         a.navbar-brand {
