@@ -30,7 +30,6 @@ const ListForm = () => {
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
-        console.log(name, value)
         dispatch(updateDTODetails({ [name]: value }))
     }
 
@@ -40,10 +39,7 @@ const ListForm = () => {
                 block
                 variant="outline-success"
                 className='rounded-0'
-                onClick={() => {
-                    console.log('=> Add List')
-                    onOpen()
-                }}
+                onClick={() => onOpen()}
             >
                 <Plus />&nbsp;New list
             </Button>

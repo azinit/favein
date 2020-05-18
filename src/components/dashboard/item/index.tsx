@@ -51,7 +51,6 @@ const DashboardItem = (props: Props) => {
         dispatch(setMutationState('edit'))
         dispatch(setCurrent(dashboard as any))
         dispatch(resetDTODetails())
-        console.log('EDIT: impl')
     }
     const onCancel = () => {
         dispatch(setMutationState('preview'))

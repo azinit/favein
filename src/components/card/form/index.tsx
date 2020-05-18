@@ -12,7 +12,6 @@ const CardForm = () => {
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
-        console.log(name, value)
         dispatch(updateDTODetails({ [name]: value }))
     }
 

@@ -68,7 +68,6 @@ export const attachLabel = (cardId: number, labelId: number) => async (dispatch:
     const { entities } = getState().labels
     const relatedLabel = entities.find(e => e.id === labelId)
     const response = await API.cards.addLabel(cardId, labelId)
-    console.log('[DEBUG] [attach-label]', response)
     dispatch(addLinkedEntity({
         parentId: cardId,
         payload: relatedLabel,
@@ -79,7 +78,6 @@ export const attachLabel = (cardId: number, labelId: number) => async (dispatch:
 export const detachLabel = (cardId: number, labelId: number) => async (dispatch: Dispatch<any>) => {
     const { removeLinkedEntity } = getActions('cards')
     const response = await API.cards.deleteLabel(cardId, labelId)
-    console.log('[DEBUG] [detach-label]', response)
     dispatch(removeLinkedEntity({
         parentId: cardId,
         childId: labelId,
@@ -93,12 +91,10 @@ export const addComment = (cardId: number) => async (dispatch: Dispatch<any>, ge
             resolve(response.data)
         }))
     })
-    console.log('[DEBUG] [add-comment] create', responseEntity)
     const { addLinkedEntity } = getActions('cards')
     const { entities } = getState().comments
     const relatedComment = entities.find(e => e.id === responseEntity.id)!
     const response = await API.cards.addComment(cardId, relatedComment.id)
-    console.log('[DEBUG] [add-comment] attach', response)
     dispatch(addLinkedEntity({
         parentId: cardId,
         payload: relatedComment,
@@ -110,9 +106,7 @@ export const deleteComment = (cardId: number, commentId: number) => async (dispa
     if (confirmDelete()) {
         const { removeLinkedEntity } = getActions('cards')
         const responseDetach = await API.cards.deleteComment(cardId, commentId)
-        console.log('[DEBUG] [delete-comment] detach', responseDetach)
         const responseDelete = await API.comments.delete(commentId)
-        console.log('[DEBUG] [delete-comment] delete', responseDelete)
         dispatch(removeLinkedEntity({
             parentId: cardId,
             childId: commentId,

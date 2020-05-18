@@ -38,10 +38,7 @@ const Dashboard = (props: Props) => {
                                     block
                                     variant="outline-info"
                                     className='rounded-0'
-                                    onClick={() => {
-                                        console.log('=> EditMode')
-                                        dispatch(setMutationState('edit'))
-                                    }}
+                                    onClick={() => dispatch(setMutationState('edit'))}
                                 >
                                     <PencilSquare />&nbsp;Edit Mode
                                 </Button>
@@ -49,10 +46,7 @@ const Dashboard = (props: Props) => {
                                     block
                                     variant="outline-danger"
                                     className='rounded-0'
-                                    onClick={() => {
-                                        console.log('=> DeleteMode')
-                                        dispatch(setMutationState('delete'))
-                                    }}
+                                    onClick={() => dispatch(setMutationState('delete'))}
                                 >
                                     <Trash />&nbsp;Delete Mode
                                 </Button>
@@ -65,10 +59,7 @@ const Dashboard = (props: Props) => {
                                 block
                                 variant="outline-secondary"
                                 className='rounded-0'
-                                onClick={() => {
-                                    console.log('=> PreviewMode')
-                                    dispatch(setMutationState('preview'))
-                                }}
+                                onClick={() => dispatch(setMutationState('preview'))}
                             >
                                 <X />&nbsp;Preview Mode
                             </Button>

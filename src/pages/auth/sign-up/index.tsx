@@ -17,7 +17,6 @@ const SignUpPage = () => {
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
-        console.log('[DEBUG] ::', name, value)
         dispatch(updateAuthPayload({ [name]: value }))
     }
     const onSubmit = (e: FormEvent) => {
