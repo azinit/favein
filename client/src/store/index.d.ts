@@ -21,6 +21,7 @@ declare type IBLModel = IComment | IRate | ILabel | IDashboard | IList | ICard |
 declare type IBLModelDTO = ICommentDTO | IRateDTO | ILabelDTO | IDashboardDTO | IListDTO | ICardDTO | IUserDTO;
 declare type CardEntityState = EntityState<ICard>;
 declare type AuthDTO = {
+    username?: string;
     email: string;
     password: string;
 }

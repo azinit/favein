@@ -1,15 +1,20 @@
-import React, { ChangeEvent, FormEvent } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect } from 'react'
 import Header from 'components/header'
 import { useSelector, useDispatch } from 'react-redux'
 import TextField from 'components/text-field'
-import { updateAuthPayload } from 'store/auth/slice'
+import { updateAuthPayload, resetAuthPayload } from 'store/auth/slice'
 import { Button } from 'react-bootstrap'
-import { signIn } from 'store/auth/service'
+import { signUp } from 'store/auth/service'
 import './index.scss'
 
 const SignUpPage = () => {
     const dispatch = useDispatch()
-    const { email = "", password = "" } = useSelector((state: IGlobalState) => state.auth.authPayload)
+    const { email = "", password = "", username = "" } = useSelector((state: IGlobalState) => state.auth.authPayload)
+
+    useEffect(() => {
+        dispatch(resetAuthPayload())
+    }, [])
+
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         console.log('[DEBUG] ::', name, value)
@@ -17,7 +22,7 @@ const SignUpPage = () => {
     }
     const onSubmit = (e: FormEvent) => {
         e.preventDefault()
-        dispatch(signIn())
+        dispatch(signUp())
     }
 
     return (
@@ -31,7 +36,7 @@ const SignUpPage = () => {
                             label="Username"
                             name="username"
                             placeholder="user213132"
-                            value={""}
+                            value={username}
                             onChange={onChange}
                         />
                         <TextField

@@ -30,6 +30,9 @@ const API: APIService = {
         signIn(email, password) {
             return axios.post('/sign-in', { email, password })
         },
+        signUp(email, password, username) {
+            return axios.post('/sign-up', { email, password, username })
+        },
         addFave(userId, cardId) { 
             return axios.put(`/users/${userId}/faves/add/${cardId}`);
         },

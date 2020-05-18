@@ -21,7 +21,11 @@ export const authState: AuthState = {
             faves: processFaves(processedUser.faves)
         }
     })(),
-    authPayload: {},
+    authPayload: {
+        email: undefined,
+        password: undefined,
+        username: undefined
+    },
     isAuth: !!getSessionItem('favein_auth_jwt'),
     // FIXME: delete
     faves: []
@@ -47,6 +51,9 @@ const authSlice = createSlice({
                 ...state.authPayload,
                 ...action.payload
             }
+        },
+        resetAuthPayload(state: AuthState)  {
+            state.authPayload = {}
         },
         setUser(state: AuthState, action: PayloadAction<IUser>) {
             // @ts-ignore
@@ -77,6 +84,7 @@ const authSlice = createSlice({
 })
 
 export const {
+    resetAuthPayload,
     logout,
     setToken,
     updateAuthPayload,

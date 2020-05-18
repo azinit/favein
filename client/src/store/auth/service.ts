@@ -1,5 +1,5 @@
 import API from "api"
-import { setToken, setUser, addFave as addFaveStore, deleteFave as deleteFaveStore } from "./slice"
+import { setToken, setUser, addFave as addFaveStore, deleteFave as deleteFaveStore, resetAuthPayload } from "./slice"
 
 export const signIn = () => async (dispatch: any, getState: GlobalStateGetter) => {
     const { email, password } = getState().auth.authPayload
@@ -12,6 +12,16 @@ export const signIn = () => async (dispatch: any, getState: GlobalStateGetter) =
 
         dispatch(setUser(user))
         dispatch(setToken(token))
+        dispatch(resetAuthPayload())
+    }
+}
+
+export const signUp = () => async (dispatch: any, getState: GlobalStateGetter) => {
+    const { email, password, username } = getState().auth.authPayload
+    if (email && password && username) {
+        await API.users.signUp(email, password, username)
+        dispatch(resetAuthPayload())
+        window.location.href = "/auth/sign-in"
     }
 }
 

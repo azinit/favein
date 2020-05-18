@@ -26,6 +26,7 @@ declare type IUsersService = ICRUDService<IUser, IUserDTO> & {
         token: string;
         user: IUser;
     }>;
+    signUp: (email: stirng, password: string, username: string) => APIResponse<boolean>;
     addFave: (userId: number, cardId: number) => APIResponse<boolean>;
     deleteFave: (userId: number, cardId: number) => APIResponse<boolean>;
 };
