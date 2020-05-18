@@ -7,8 +7,8 @@ export const signIn = () => async (dispatch: any, getState: GlobalStateGetter) =
         const responseLogin = await API.users.signIn(email, password)
         const { token, user } = responseLogin.data
 
-        window.sessionStorage.setItem('favein_auth_jwt', token)
-        window.sessionStorage.setItem('favein_auth_user', JSON.stringify(user))
+        window.localStorage.setItem('favein_auth_jwt', token)
+        window.localStorage.setItem('favein_auth_user', JSON.stringify(user))
 
         dispatch(setUser(user))
         dispatch(setToken(token))

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const getSessionItem = (key: string) => window.sessionStorage.getItem(key) || undefined;
+const getSessionItem = (key: string) => window.localStorage.getItem(key) || undefined;
 
 const processFaves = (faves: string): number[] => faves ? faves.split(' ').map(f => +f) : []
 
@@ -39,8 +39,8 @@ const authSlice = createSlice({
             state.token = undefined
             state.isAuth = false
             state.current = undefined
-            window.sessionStorage.removeItem("favein_auth_jwt")
-            window.sessionStorage.removeItem("favein_auth_user")
+            window.localStorage.removeItem("favein_auth_jwt")
+            window.localStorage.removeItem("favein_auth_user")
         },
         setToken(state: AuthState, action: PayloadAction<string>) {
             state.token = action.payload
@@ -65,7 +65,7 @@ const authSlice = createSlice({
         addFave({ current }: AuthState, action: PayloadAction<number>) {
             if (current) {
                 current.faves.push(action.payload)
-                window.sessionStorage.setItem("favein_auth_user", JSON.stringify({
+                window.localStorage.setItem("favein_auth_user", JSON.stringify({
                     ...current,
                     faves: current.faves.join(' ')
                 }))
@@ -74,7 +74,7 @@ const authSlice = createSlice({
         deleteFave({ current }: AuthState, action: PayloadAction<number>) {
             if (current) {
                 current.faves = current.faves.filter(f => f !== action.payload)
-                window.sessionStorage.setItem("favein_auth_user", JSON.stringify({
+                window.localStorage.setItem("favein_auth_user", JSON.stringify({
                     ...current,
                     faves: current.faves.join(' ')
                 }))
