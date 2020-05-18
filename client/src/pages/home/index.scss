@@ -27,6 +27,14 @@ $primary: black;
         a.navbar-brand {
             @include colorize-text(var(--info));
         }
+
+        .auth-btn {
+            opacity: 0.2;
+            transition: 0.3s;
+            &:hover {
+                opacity: 1.0;
+            }
+        }
     }
 
     .body {

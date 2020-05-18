@@ -45,17 +45,17 @@ const Header = () => {
                             <Button
                                 variant="secondary"
                                 onClick={() => dispatch(logout())}
-                                className="ml-2"
+                                className="auth-btn ml-2"
                             >
                                 Выйти
                             </Button>
                         </>
                     ) : (
                         <>
-                            <Link to="/auth/sign-in" className="btn btn-info">
+                            <Link to="/auth/sign-in" className="auth-btn sign-in btn btn-info">
                                 Войти
                             </Link>
-                            <Link to="/auth/sign-up" className="btn btn-outline-secondary ml-2">
+                            <Link to="/auth/sign-up" className="auth-btn sign-up btn btn-outline-secondary ml-2">
                                 Создать аккаунт
                             </Link>
                         </>
