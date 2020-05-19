@@ -24,12 +24,11 @@ const DashboardPage = (props: Props) => {
     const [_loading, setLoading] = useState(true)
 
     useEffect(() => {
-        dispatch(readEntities('dashboards'))
+        dispatch(readEntities('dashboards', () => {
+            setLoading(false)
+        }))
         dispatch(readEntities('lists'))
         dispatch(readEntities('cards'))
-        setTimeout(() => {
-            setLoading(false)
-        }, 100)
     }, [dispatch])
 
     // FIXME: load manually

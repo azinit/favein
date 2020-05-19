@@ -27,10 +27,9 @@ const UserPage = (props: Props) => {
 
     useEffect(() => {
         dispatch(readEntities('dashboards'))
-        dispatch(readEntities('users'))
-        setTimeout(() => {
+        dispatch(readEntities('users', () => {
             setLoading(false)
-        }, 100)
+        }))
     }, [dispatch])
 
     const user = users.entities.find(u => u.id === +id)

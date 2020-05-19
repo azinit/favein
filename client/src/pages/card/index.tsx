@@ -24,13 +24,12 @@ const CardPage = (props: Props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(readEntities('cards'))
+        dispatch(readEntities('cards', () => {
+            setLoading(false)
+        }))
         dispatch(readEntities('labels'))
         dispatch(setMutationState('preview'))
         dispatch(resetDTODetails())
-        setTimeout(() => {
-            setLoading(false)
-        }, 100)
     }, [dispatch, resetDTODetails, setMutationState])
 
     const card = entities.find(e => e.id === +id)

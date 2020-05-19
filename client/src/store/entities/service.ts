@@ -12,12 +12,13 @@ export const readAllEntities = () => async (dispatch: Dispatch<any>) => {
         dispatch(readEntities(name as EntityName))
     })
 }
-export const readEntities = (name: EntityName) => async (dispatch: Dispatch<any>) => {
+export const readEntities = (name: EntityName, callback?: Function) => async (dispatch: Dispatch<any>) => {
     const { updateEntities, setLoading } = getActions(name)
     dispatch(setLoading(true))
     const response = await API[name].readList()
     dispatch(updateEntities(response.data as any))
     dispatch(setLoading(false))
+    callback?.()
 }
 
 export const createEntity = (name: EntityName, resolve?: (response: any) => void) => async (dispatch: Dispatch<any>, getState: GlobalStateGetter) => {
